@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>画面扩句训练器</title>
+  <style>
+    :root{
+      --bg1:#0f172a; --bg2:#1e293b; --card:rgba(255,255,255,.94);
+      --text:#0f172a; --muted:#64748b; --primary:#f97316; --primary2:#fb923c;
+      --blue:#2563eb; --green:#16a34a; --yellow:#ca8a04; --red:#dc2626;
+      --line:#e5e7eb; --soft:#f8fafc; --radius:22px;
+      --shadow:0 22px 55px rgba(15,23,42,.24);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; padding:28px 16px 48px;
+      font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 10%,rgba(249,115,22,.22),transparent 32%),
+        radial-gradient(circle at 85% 5%,rgba(37,99,235,.20),transparent 30%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+    }
+    .app{max-width:1220px;margin:0 auto}
+    .hero{color:white;padding:12px 8px 24px}
+    .hero h1{margin:0 0 10px;font-size:clamp(30px,4vw,46px);letter-spacing:.5px}
+    .hero p{margin:0;max-width:960px;color:rgba(255,255,255,.86);line-height:1.85;font-size:16px}
+    .layout{display:grid;grid-template-columns:330px 1fr;gap:22px;align-items:start}
+    .panel,.main{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+    .panel{padding:22px;position:sticky;top:16px}
+    .main{padding:24px;min-height:760px}
+    .section-title{font-size:19px;margin:0 0 14px;font-weight:800}
+    .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .meta{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:12px}
+    .meta .label{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}
+    .meta .value{font-weight:900;font-size:18px}
+    .progress-wrap{margin:18px 0}
+    .progress-text{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:8px}
+    .bar{height:12px;border-radius:999px;background:#e5e7eb;overflow:hidden}
+    .fill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--primary2));transition:.25s}
+    .note{background:linear-gradient(180deg,#fff7ed,#fff);border:1px solid #fed7aa;border-radius:18px;padding:16px;margin-top:16px;color:#475569;line-height:1.78;font-size:14px}
+    .note strong{color:#9a3412}
+    .hidden{display:none!important}
+    .start-hero{background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(37,99,235,.08));border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:16px}
+    .start-hero h2{margin:0 0 8px;font-size:28px}
+    .start-hero p{margin:0;color:#475569;line-height:1.85}
+    .start-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .start-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;text-align:left;cursor:pointer}
+    .start-card h4{margin:0 0 8px;font-size:19px}
+    .start-card p{margin:0;color:#64748b;line-height:1.7;font-size:14px}
+    button{border:none;border-radius:14px;padding:12px 18px;font-size:15px;font-weight:800;cursor:pointer;transition:.16s}
+    button:hover{transform:translateY(-1px)}
+    .primary{background:linear-gradient(90deg,var(--primary),var(--primary2));color:white;box-shadow:0 12px 24px rgba(249,115,22,.25)}
+    .ghost{background:#eef2ff;color:#3730a3}
+    .light{background:#f3f4f6;color:#111827}
+    .danger{background:#fef2f2;color:#b91c1c}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+    .badge{display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;font-size:13px;font-weight:900;border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8}
+    .badge.orange{background:#fff7ed;color:#c2410c;border-color:#fed7aa}
+    .badge.purple{background:#f5f3ff;color:#6d28d9;border-color:#ddd6fe}
+    .prompt-card{background:linear-gradient(135deg,#fff7ed,#fff 46%,#eff6ff);border:1px solid #fde68a;border-radius:20px;padding:18px 18px 20px;margin-bottom:18px}
+    .prompt-card .small{color:var(--muted);font-size:13px;margin-bottom:8px}
+    .prompt-card .core{font-size:clamp(26px,3vw,38px);font-weight:900;line-height:1.55;color:#111827}
+    .prompt-card .scene{margin-top:10px;color:#475569;line-height:1.75}
+    .steps{display:grid;gap:14px}
+    .step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px}
+    .step-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:10px}
+    .step-title{font-weight:900;font-size:17px}
+    .step-question{color:#64748b;font-size:14px;line-height:1.6;text-align:right;max-width:55%}
+    textarea,input{width:100%;border:1.5px solid #d1d5db;border-radius:14px;padding:12px 14px;font-size:16px;outline:none;font-family:inherit;background:#fcfcfd;line-height:1.75}
+    textarea{min-height:76px;resize:vertical}
+    textarea:focus,input:focus{border-color:#fb923c;box-shadow:0 0 0 4px rgba(251,146,60,.16);background:#fff}
+    .final-box textarea{min-height:145px}
+    .box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:18px}
+    .box h3{margin:0 0 12px;font-size:20px}
+    .hint-list{margin:0;padding-left:18px;color:#334155;line-height:1.85}
+    .feedback-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .feedback-item{border:1px solid var(--line);background:#f8fafc;border-radius:16px;padding:14px;line-height:1.75}
+    .status{display:inline-block;padding:4px 10px;border-radius:999px;font-weight:900;font-size:12px;margin-bottom:8px}
+    .good{background:#dcfce7;color:#166534}
+    .ok{background:#fef3c7;color:#92400e}
+    .bad{background:#fee2e2;color:#991b1b}
+    .report-text{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:14px;white-space:pre-wrap;line-height:1.85}
+    .teacher-note{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:18px;padding:16px;margin-top:16px;color:#166534;line-height:1.8}
+    .example-level{border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px;margin-top:10px;line-height:1.8}
+    .example-level strong{color:#c2410c}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.panel{position:static}.start-grid{grid-template-columns:1fr}}
+    @media(max-width:760px){body{padding:18px 10px}.main,.panel{padding:16px}.meta-grid,.feedback-grid{grid-template-columns:1fr}.step-head{display:block}.step-question{text-align:left;max-width:100%;margin-top:4px}.actions{flex-direction:column}button{width:100%}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="hero">
+    <h1>画面扩句训练器</h1>
+    <p>不是机械“加形容词”，而是从一个主干出发，按画面顺序逐层展开：时间、地点、样子、动作方式、人物反应、细节画面、感受意义。进度会自动保存在本机浏览器里。</p>
+  </header>
+
+  <div class="layout">
+    <aside class="panel">
+      <h2 class="section-title">训练仪表盘</h2>
+      <div class="meta-grid">
+        <div class="meta"><span class="label">当前阶段</span><span id="metaLevel" class="value">未开始</span></div>
+        <div class="meta"><span class="label">当前题号</span><span id="metaQ" class="value">0 / 18</span></div>
+        <div class="meta"><span class="label">累计得分</span><span id="metaScore" class="value">0</span></div>
+        <div class="meta"><span class="label">完成度</span><span id="metaDone" class="value">0%</span></div>
+        <div class="meta"><span class="label">提示次数</span><span id="metaHint" class="value">0</span></div>
+        <div class="meta"><span class="label">范文</span><span id="metaExample" class="value">需2次提交</span></div>
+        <div class="meta"><span class="label">保存状态</span><span id="metaSave" class="value">未开始</span></div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-text"><span>总进度</span><span id="progressText">0 / 18</span></div>
+        <div class="bar"><div id="progressFill" class="fill"></div></div>
+      </div>
+
+      <div class="note">
+        <strong>核心方法</strong><br>
+        先保留主干，再一层层加信息：<br>
+        什么时候 → 在哪里 → 什么样 → 怎么动 → 人/物反应 → 细节画面 → 感受意义。
+      </div>
+      <div class="note">
+        <strong>老师看什么</strong><br>
+        不只看字数。重点看：是否按顺序扩展、是否有具体画面、是否避免空泛词、最终句子是否通顺。
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="startScreen">
+        <div class="start-hero">
+          <h2>开始画面扩句</h2>
+          <p>一共 18 题，分为基础、进阶、挑战三组。每题都从一个短主干开始，学生一步步扩成有画面的句子。可以多次提交，最终按最后一次提交记录。</p>
+        </div>
+
+        <div id="resumeBox" class="box hidden">
+          <h3>发现上次进度</h3>
+          <p id="resumeText">检测到上次训练记录。</p>
+          <div class="actions">
+            <button class="primary" onclick="resumeSaved()">继续上次进度</button>
+            <button class="danger" onclick="clearSaved()">清空记录并重新开始</button>
+          </div>
+        </div>
+
+        <div class="start-grid">
+          <button class="start-card" onclick="startMode('all')">
+            <h4>完整训练</h4>
+            <p>按基础 → 进阶 → 挑战完成全部 18 题。</p>
+          </button>
+          <button class="start-card" onclick="startMode('basic')">
+            <h4>基础组</h4>
+            <p>从生活场景入手，练习把句子写具体。</p>
+          </button>
+          <button class="start-card" onclick="startMode('advanced')">
+            <h4>进阶/挑战组</h4>
+            <p>加入情绪、动作、环境变化和细节推进。</p>
+          </button>
+        </div>
+      </section>
+
+      <section id="quizScreen" class="hidden">
+        <div class="badge-row">
+          <span id="levelBadge" class="badge orange">阶段：基础</span>
+          <span id="qBadge" class="badge">题号：1 / 18</span>
+          <span class="badge purple">目标：把主干扩成画面</span>
+        </div>
+
+        <div class="prompt-card">
+          <div class="small">本题主干</div>
+          <div id="coreText" class="core"></div>
+          <div id="sceneText" class="scene"></div>
+        </div>
+
+        <div class="steps" id="stepsBox"></div>
+
+        <div class="step final-box">
+          <div class="step-head">
+            <div class="step-title">最终扩句</div>
+            <div class="step-question">把上面的信息整理成一段通顺、有画面的句子</div>
+          </div>
+          <textarea id="finalText" placeholder="把前面的内容连成一段完整表达。不要只堆词，要让画面自然展开。"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="primary" onclick="submitWork()">提交并获得反馈</button>
+          <button class="ghost" onclick="showNextHint()">给我一点提示</button>
+          <button class="light" onclick="showExample()">查看参考范文</button>
+          <button class="danger" onclick="nextQuestion()">下一题</button>
+        </div>
+
+        <div id="hintBox" class="box hidden">
+          <h3>分层提示</h3>
+          <ul id="hintList" class="hint-list"></ul>
+        </div>
+
+        <div id="exampleBox" class="box hidden">
+          <h3>参考范文</h3>
+          <div id="exampleContent"></div>
+        </div>
+
+        <div id="feedbackBox" class="box hidden">
+          <h3>本题反馈</h3>
+          <div id="feedbackGrid" class="feedback-grid"></div>
+          <div id="feedbackSummary" class="teacher-note"></div>
+        </div>
+      </section>
+
+      <section id="reportScreen" class="box hidden"></section>
+    </main>
+  </div>
+</div>
+
+<script>
+const SAVE_KEY = "lipei_picture_expansion_training_v1";
+
+const stepDefs = [
+  {key:"time", title:"第一步：加时间", q:"这件事发生在什么时候？"},
+  {key:"place", title:"第二步：加地点", q:"这件事发生在哪里？"},
+  {key:"feature", title:"第三步：加样子", q:"主角/事物是什么样的？"},
+  {key:"manner", title:"第四步：加动作方式", q:"动作是怎么发生的？"},
+  {key:"reaction", title:"第五步：加反应", q:"人、动物或周围事物有什么反应？"},
+  {key:"detail", title:"第六步：加细节画面", q:"有没有一个能看见、听见或感觉到的小细节？"},
+  {key:"feeling", title:"第七步：加感受/意义", q:"这个画面让人有什么感觉，或者说明了什么？"}
+];
+
+const bank = [
+  {
+    level:"basic", core:"雨下起来了", scene:"把“雨下起来了”扩成一个有操场画面的句子。",
+    refs:{time:["傍晚","放学后","下午"],place:["操场","校园","教学楼"],feature:["细细","小雨","密密"],manner:["斜斜","轻轻","落"],reaction:["同学","跑","抱着书包"],detail:["水洼","波纹","脚步"],feeling:["凉","匆忙","安静"]},
+    hints:["先别急着写漂亮词，先确定时间和地点。","让雨有动作：斜斜地落、轻轻地飘、密密地打。","最后加一个地面或人物的小细节，画面会立刻活起来。"],
+    examples:{
+      normal:"傍晚，操场上下起了小雨，同学们赶紧跑回教学楼。",
+      vivid:"傍晚，操场上细细的雨斜斜地落下来，同学们抱着书包往教学楼跑去。",
+      strong:"傍晚，操场上细细的雨斜斜地落下来，同学们抱着书包往教学楼跑去，地上的水洼被脚步踩出一圈圈小小的波纹。"
+    }
+  },
+  {
+    level:"basic", core:"风吹过来", scene:"把“风吹过来”扩成一个能让人感觉到风的句子。",
+    refs:{time:["早晨","傍晚","午后"],place:["窗边","操场","小路"],feature:["凉","轻","冷"],manner:["吹","钻","掠过"],reaction:["树叶","衣角","窗帘"],detail:["沙沙","晃动","发抖"],feeling:["清爽","有点冷","舒服"]},
+    hints:["风本身看不见，可以写被风吹动的东西。","窗帘、树叶、衣角都可以表现风。","最后加身体感觉，会更真实。"],
+    examples:{
+      normal:"傍晚，一阵风从窗边吹过来，窗帘轻轻动了动。",
+      vivid:"傍晚，一阵凉风从窗缝里钻进来，窗帘轻轻晃了几下。",
+      strong:"傍晚，一阵凉风从窗缝里钻进来，窗帘轻轻晃了几下，桌角的纸页也被吹得沙沙作响，我忍不住缩了缩脖子。"
+    }
+  },
+  {
+    level:"basic", core:"他走进教室", scene:"把“他走进教室”扩成一个有动作和心理的句子。",
+    refs:{time:["早读前","上课前","清晨"],place:["教室","门口"],feature:["低着头","背着书包","匆匆"],manner:["轻轻","慢慢","快步"],reaction:["同学","抬头","看"],detail:["作业本","桌角","黑板"],feeling:["紧张","安静","不好意思"]},
+    hints:["先写他什么时候走进来。","再写他怎么走：快步、慢慢、低着头。","加一个同学或物品的反应，会更像真实场景。"],
+    examples:{
+      normal:"早读前，他背着书包走进教室，把作业本放在桌上。",
+      vivid:"早读前，他低着头走进教室，轻轻把作业本放在桌角。",
+      strong:"早读前，他背着书包低着头走进教室，轻轻把作业本放在桌角，又偷偷看了一眼黑板上的通知。"
+    }
+  },
+  {
+    level:"basic", core:"阳光照进来", scene:"把“阳光照进来”扩成一个温暖的画面。",
+    refs:{time:["清晨","早上"],place:["窗外","房间","教室"],feature:["金色","柔和","一缕"],manner:["照","洒","落"],reaction:["桌面","脸上","窗帘"],detail:["灰尘","光点","影子"],feeling:["暖","安静","舒服"]},
+    hints:["阳光可以写颜色：金色、柔和、淡淡的。","不要只写照进来，可以写照到哪里。","尘埃、桌面、窗帘都能增加画面感。"],
+    examples:{
+      normal:"清晨，一缕阳光从窗外照进来，落在桌面上。",
+      vivid:"清晨，一缕金色的阳光从窗外照进来，轻轻落在我的书桌上。",
+      strong:"清晨，一缕金色的阳光从窗外照进来，轻轻落在我的书桌上，细小的尘埃在光里慢慢浮动。"
+    }
+  },
+  {
+    level:"basic", core:"小狗跑过来", scene:"把“小狗跑过来”扩成一个活泼的画面。",
+    refs:{time:["放学后","傍晚","下午"],place:["小区","门口","草地"],feature:["棕色","小小","毛茸茸"],manner:["飞快","摇着尾巴","蹦"],reaction:["我","蹲下","笑"],detail:["爪子","尾巴","草叶"],feeling:["开心","亲切","热闹"]},
+    hints:["小狗的动作要活：跑、蹦、摇尾巴。","让人也有反应，比如蹲下、招手、笑。","细节可以写爪子、草叶、尾巴。"],
+    examples:{
+      normal:"放学后，一只小狗从草地上跑过来，摇着尾巴看着我。",
+      vivid:"放学后，一只毛茸茸的小狗从草地上飞快地跑过来，尾巴摇得像小扇子。",
+      strong:"放学后，一只毛茸茸的小狗从草地上飞快地跑过来，尾巴摇得像小扇子，爪子踩得草叶轻轻晃动，我忍不住笑着蹲了下来。"
+    }
+  },
+  {
+    level:"basic", core:"灯亮了", scene:"把“灯亮了”扩成一个夜晚场景。",
+    refs:{time:["晚上","夜里","傍晚"],place:["房间","教室","走廊"],feature:["昏黄","明亮","柔和"],manner:["亮","照","闪"],reaction:["影子","人","桌子"],detail:["墙上","窗边","书本"],feeling:["安心","温暖","安静"]},
+    hints:["灯光可以有颜色和亮度。","灯亮后，周围东西会发生变化。","写影子或书本，会更具体。"],
+    examples:{
+      normal:"晚上，房间里的灯亮了，桌上的书本清楚起来。",
+      vivid:"晚上，房间里昏黄的灯亮了，光慢慢铺在桌上的书本上。",
+      strong:"晚上，房间里昏黄的灯亮了，光慢慢铺在桌上的书本上，墙角的影子也跟着轻轻缩短。"
+    }
+  },
+  {
+    level:"advanced", core:"妈妈笑了", scene:"把“妈妈笑了”扩成一个有原因和温度的句子。",
+    refs:{time:["晚上","吃饭时","放学后"],place:["厨房","餐桌","家里"],feature:["轻轻","温柔","开心"],manner:["笑","弯起嘴角","看着"],reaction:["我","低头","不好意思"],detail:["碗筷","灯光","热气"],feeling:["温暖","安心","幸福"]},
+    hints:["先写妈妈为什么笑，或者在什么情境里笑。","笑不一定只写“笑”，可以写嘴角、眼神。","加餐桌、灯光、热气，家庭画面就出来了。"],
+    examples:{
+      normal:"晚上，妈妈看到我主动收拾碗筷，开心地笑了。",
+      vivid:"晚上，餐桌上的热气还没散，妈妈看见我主动收拾碗筷，嘴角轻轻弯了起来。",
+      strong:"晚上，餐桌上的热气还没散，妈妈看见我主动收拾碗筷，嘴角轻轻弯了起来，灯光落在她的脸上，让整个厨房都显得暖暖的。"
+    }
+  },
+  {
+    level:"advanced", core:"他哭了", scene:"把“他哭了”扩成一个克制、不夸张的画面。",
+    refs:{time:["比赛后","放学后","傍晚"],place:["操场","教室","角落"],feature:["低着头","沉默","红着眼"],manner:["哭","掉眼泪","忍住"],reaction:["同学","老师","递纸"],detail:["纸巾","鞋尖","风"],feeling:["委屈","难过","安静"]},
+    hints:["不要直接写很夸张，可以写细节。","眼睛、手、纸巾、鞋尖都能表现情绪。","周围人的反应能让画面更真实。"],
+    examples:{
+      normal:"比赛结束后，他站在操场边，红着眼睛哭了。",
+      vivid:"比赛结束后，他低着头站在操场边，眼泪一滴一滴落在鞋尖旁。",
+      strong:"比赛结束后，他低着头站在操场边，眼泪一滴一滴落在鞋尖旁，旁边的同学没有说话，只是轻轻递过来一张纸巾。"
+    }
+  },
+  {
+    level:"advanced", core:"老师走进来", scene:"把“老师走进来”扩成一个课堂开始前的画面。",
+    refs:{time:["上课铃响后","早读时","上午"],place:["教室","门口"],feature:["抱着书","微笑","安静"],manner:["走","轻轻","快步"],reaction:["同学","坐好","抬头"],detail:["粉笔","黑板","书页"],feeling:["安静","紧张","期待"]},
+    hints:["写老师走进来之后，教室有什么变化。","同学们的反应很重要。","加粉笔、黑板、书页，课堂感会更强。"],
+    examples:{
+      normal:"上课铃响后，老师抱着书走进教室，同学们安静下来。",
+      vivid:"上课铃响后，老师抱着书走进教室，原本有些吵的教室慢慢安静下来。",
+      strong:"上课铃响后，老师抱着书走进教室，原本有些吵的教室慢慢安静下来，只剩下书页翻动和粉笔盒轻轻碰到讲台的声音。"
+    }
+  },
+  {
+    level:"advanced", core:"雪落下来", scene:"把“雪落下来”扩成一个冬天画面。",
+    refs:{time:["清晨","夜里","傍晚"],place:["窗外","操场","街道"],feature:["白","轻","细"],manner:["飘","落","打着旋"],reaction:["树枝","屋顶","孩子"],detail:["脚印","路灯","窗台"],feeling:["安静","寒冷","惊喜"]},
+    hints:["雪适合写轻、慢、安静。","可以写雪落到哪里。","加脚印、路灯、窗台，会更像画面。"],
+    examples:{
+      normal:"清晨，窗外的雪轻轻落下来，屋顶变白了。",
+      vivid:"清晨，细细的雪从灰白的天空里飘下来，轻轻落在窗台上。",
+      strong:"清晨，细细的雪从灰白的天空里飘下来，轻轻落在窗台上，路灯下还能看见几片雪花打着旋往下落。"
+    }
+  },
+  {
+    level:"advanced", core:"他赢了比赛", scene:"把“他赢了比赛”扩成一个有过程余味的画面。",
+    refs:{time:["最后一刻","下午","比赛结束时"],place:["操场","球场","赛道"],feature:["满头汗","紧张","兴奋"],manner:["冲过","举起","跳"],reaction:["同学","欢呼","拍手"],detail:["终点线","哨声","汗水"],feeling:["激动","自豪","难忘"]},
+    hints:["赢比赛不只写结果，要写最后一刻。","旁人的欢呼能增加现场感。","汗水、哨声、终点线都是细节。"],
+    examples:{
+      normal:"比赛结束时，他冲过终点线，赢得了比赛。",
+      vivid:"最后一刻，他满头是汗地冲过终点线，操场边的同学一下子欢呼起来。",
+      strong:"最后一刻，他满头是汗地冲过终点线，哨声刚响，操场边的同学就一下子欢呼起来，他弯着腰喘气，脸上却藏不住笑。"
+    }
+  },
+  {
+    level:"advanced", core:"书包掉了", scene:"把“书包掉了”扩成一个有小意外的场景。",
+    refs:{time:["放学时","早上","下楼时"],place:["楼梯口","教室门口","走廊"],feature:["沉","鼓鼓","旧"],manner:["掉","滑","砸"],reaction:["他","同学","回头"],detail:["本子","铅笔","拉链"],feeling:["尴尬","慌张","好笑"]},
+    hints:["意外场景要写动作发生的瞬间。","书包掉了以后里面东西可能散出来。","人物反应能让句子有生活感。"],
+    examples:{
+      normal:"放学时，他的书包掉在楼梯口，本子散了一地。",
+      vivid:"放学时，他鼓鼓的书包从肩上滑下来，砰的一声掉在楼梯口。",
+      strong:"放学时，他鼓鼓的书包从肩上滑下来，砰的一声掉在楼梯口，拉链里的本子和铅笔滚了一地，旁边的同学都忍不住回头看。"
+    }
+  },
+  {
+    level:"challenge", core:"我想家了", scene:"把“我想家了”扩成一个含蓄、有画面的句子。",
+    refs:{time:["夜里","晚上","放学后"],place:["宿舍","房间","窗边"],feature:["安静","空","昏暗"],manner:["想","看着","听"],reaction:["我","低头","拿起手机"],detail:["灯光","窗外","消息"],feeling:["想家","孤单","温暖"]},
+    hints:["不要直接喊“我很想家”，用环境和动作表现。","可以写手机、灯光、窗外的声音。","最后一点感受即可，不要过度煽情。"],
+    examples:{
+      normal:"晚上，我坐在房间里，看着手机，突然想家了。",
+      vivid:"晚上，房间里很安静，我看着手机里妈妈发来的消息，忽然有点想家。",
+      strong:"晚上，房间里很安静，窗外的灯光一动不动。我看着手机里妈妈发来的那句“早点睡”，忽然觉得鼻子有点酸。"
+    }
+  },
+  {
+    level:"challenge", core:"他迟到了", scene:"把“他迟到了”扩成一个有紧张感的句子。",
+    refs:{time:["早上","上课前","铃声响后"],place:["校门口","走廊","教室门口"],feature:["气喘吁吁","满头汗","慌张"],manner:["跑","冲","停"],reaction:["老师","同学","看"],detail:["书包带","铃声","门把手"],feeling:["紧张","尴尬","着急"]},
+    hints:["迟到可以写奔跑和停下的瞬间。","铃声、门口、老师的目光都能制造紧张。","细节不要太多，选一两个最有用的。"],
+    examples:{
+      normal:"早上，他气喘吁吁地跑到教室门口，还是迟到了。",
+      vivid:"上课铃响后，他背着书包冲到教室门口，手刚碰到门把手就停住了。",
+      strong:"上课铃响后，他背着书包冲到教室门口，手刚碰到门把手就停住了，教室里一下安静下来，几十双眼睛都看向了他。"
+    }
+  },
+  {
+    level:"challenge", core:"爷爷睡着了", scene:"把“爷爷睡着了”扩成一个安静温柔的画面。",
+    refs:{time:["午后","傍晚","下午"],place:["阳台","沙发","院子"],feature:["安静","疲惫","慢慢"],manner:["睡着","靠着","闭上"],reaction:["猫","风","我"],detail:["报纸","眼镜","阳光"],feeling:["安稳","温柔","宁静"]},
+    hints:["这个题适合写安静，不适合写热闹。","可以用物品表现状态：报纸、眼镜、阳光。","人物动作要轻，语气也要轻。"],
+    examples:{
+      normal:"午后，爷爷靠在沙发上，慢慢睡着了。",
+      vivid:"午后，爷爷靠在沙发上睡着了，手里的报纸轻轻滑到膝盖上。",
+      strong:"午后，爷爷靠在沙发上睡着了，手里的报纸轻轻滑到膝盖上，阳光落在他的眼镜边，连旁边的猫也安静地趴着。"
+    }
+  },
+  {
+    level:"challenge", core:"门开了", scene:"把“门开了”扩成一个带悬念或期待的画面。",
+    refs:{time:["夜里","傍晚","放学后"],place:["门口","走廊","房间"],feature:["轻轻","突然","慢慢"],manner:["开","推开","响"],reaction:["我","抬头","停住"],detail:["脚步声","门缝","灯光"],feeling:["紧张","期待","惊讶"]},
+    hints:["门开了之后，谁出现可以先不急着说。","脚步声、门缝、灯光能制造悬念。","注意不要写成流水账。"],
+    examples:{
+      normal:"夜里，门轻轻开了，我抬起头看过去。",
+      vivid:"夜里，门缝里先透进来一线光，接着门被人轻轻推开了。",
+      strong:"夜里，门缝里先透进来一线光，接着门被人轻轻推开了。我停下手里的笔，听见走廊里的脚步声越来越近。"
+    }
+  },
+  {
+    level:"challenge", core:"我明白了", scene:"把“我明白了”扩成一个学习中突然想通的画面。",
+    refs:{time:["晚上","课堂上","讲完以后"],place:["书桌前","教室","黑板前"],feature:["突然","终于","清楚"],manner:["明白","想通","看懂"],reaction:["我","抬头","点头"],detail:["草稿纸","箭头","红笔"],feeling:["轻松","兴奋","踏实"]},
+    hints:["明白是一种心理变化，要用动作和细节表现。","可以写草稿纸、红笔、黑板上的线索。","最后写一点轻松感，会很自然。"],
+    examples:{
+      normal:"晚上，我看着草稿纸上的步骤，终于明白了这道题。",
+      vivid:"晚上，我盯着草稿纸上那几个箭头看了很久，忽然明白了这道题的思路。",
+      strong:"晚上，我盯着草稿纸上那几个箭头看了很久，忽然明白了这道题的思路。原来卡住我的不是公式，而是第一步没看清楚。"
+    }
+  },
+  {
+    level:"challenge", core:"她停下脚步", scene:"把“她停下脚步”扩成一个有观察意味的画面。",
+    refs:{time:["放学后","傍晚","清晨"],place:["路边","校门口","花坛旁"],feature:["突然","轻轻","慢慢"],manner:["停下","看","弯腰"],reaction:["她","小猫","行人"],detail:["树叶","纸片","雨水"],feeling:["好奇","温柔","犹豫"]},
+    hints:["停下脚步的原因要通过画面表现。","可以写她看到什么，而不是直接解释。","动作要有先后：停下、看、弯腰。"],
+    examples:{
+      normal:"放学后，她在路边停下脚步，看见一只小猫躲在花坛旁。",
+      vivid:"放学后，她突然在路边停下脚步，低头看向花坛旁那只湿漉漉的小猫。",
+      strong:"放学后，她突然在路边停下脚步，低头看向花坛旁那只湿漉漉的小猫。几片树叶粘在小猫身上，它缩成一团，轻轻叫了一声。"
+    }
+  },
+  {
+    level:"challenge", core:"教室安静了", scene:"把“教室安静了”扩成一个声音逐渐消失的画面。",
+    refs:{time:["上课铃响后","老师进来后","考试前"],place:["教室","座位间"],feature:["慢慢","突然","安静"],manner:["安静","停下","放下"],reaction:["同学","抬头","坐好"],detail:["笔尖","书页","钟表"],feeling:["紧张","认真","平静"]},
+    hints:["安静可以通过声音减少来写。","笔尖、书页、钟表声都能表现安静。","不要只写“大家都不说话了”。"],
+    examples:{
+      normal:"上课铃响后，教室慢慢安静了，同学们都坐好看着老师。",
+      vivid:"上课铃响后，教室里的说话声一点点低下去，只剩下书页翻动的声音。",
+      strong:"上课铃响后，教室里的说话声一点点低下去，只剩下书页翻动的声音。几支笔尖在纸上轻轻滑动，墙上的钟表声忽然变得很清楚。"
+    }
+  }
+];
+
+const levelNames = {basic:"基础", advanced:"进阶", challenge:"挑战"};
+
+let active = [], mode = "all", idx = 0, records = [], hintCount = 0, totalScore = 0, attemptCount = 0, currentHint = 0, exampleCount = 0;
+
+function $(id){return document.getElementById(id);}
+function norm(s){return (s||"").replace(/\s/g,"").replace(/[，。！？；：、“”‘’（）()【】《》〈〉—…,.!?;:'"\-]/g,"");}
+function nowText(){const d=new Date(); const p=n=>String(n).padStart(2,"0"); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;}
+
+function getInputSnapshot(){
+  const data={steps:{}, final:$("finalText")?.value||""};
+  stepDefs.forEach(st=>data.steps[st.key] = $(st.key+"Input")?.value||"");
+  return data;
+}
+function restoreInputSnapshot(data){
+  if(!data) return;
+  stepDefs.forEach(st=>{const el=$(st.key+"Input"); if(el) el.value=data.steps?.[st.key]||"";});
+  if($("finalText")) $("finalText").value=data.final||"";
+}
+function saveProgress(){
+  if(!active.length) return;
+  const payload={mode, idx, records, hintCount,totalScore,attemptCount,currentHint,exampleCount, savedAt:nowText(), inputs:getInputSnapshot(), activeLevels:active.map(q=>q.level)};
+  try{localStorage.setItem(SAVE_KEY,JSON.stringify(payload)); if($("metaSave")) $("metaSave").textContent="已保存 "+payload.savedAt.slice(11);}
+  catch(e){if($("metaSave")) $("metaSave").textContent="保存失败";}
+}
+function getSaved(){try{const r=localStorage.getItem(SAVE_KEY); return r?JSON.parse(r):null;}catch(e){return null;}}
+function showSaved(){
+  const s=getSaved(); if(!s) return;
+  $("resumeBox").classList.remove("hidden");
+  const done=(s.records||[]).filter(Boolean).length;
+  const total=(s.activeLevels||[]).length || bank.length;
+  $("resumeText").innerHTML=`检测到上次训练记录：已完成 <strong>${done} / ${total}</strong> 题，保存时间：<strong>${s.savedAt||"未知"}</strong>。`;
+}
+function resumeSaved(){
+  const s=getSaved(); if(!s){alert("没有找到记录。"); return;}
+  mode=s.mode||"all"; idx=s.idx||0; records=s.records||[]; hintCount=s.hintCount||0; totalScore=s.totalScore||0; attemptCount=s.attemptCount||0; currentHint=s.currentHint||0; exampleCount=s.exampleCount||0;
+  active = mode==="all" ? [...bank] : bank.filter(q=> mode==="advanced" ? q.level!=="basic" : q.level===mode);
+  $("startScreen").classList.add("hidden"); $("quizScreen").classList.remove("hidden"); $("reportScreen").classList.add("hidden");
+  if(idx>=active.length){renderReport(); return;}
+  loadQ(); restoreInputSnapshot(s.inputs); updateMeta();
+}
+function clearSaved(){
+  if(!confirm("确定清空本机保存的扩句训练记录吗？")) return;
+  localStorage.removeItem(SAVE_KEY); $("resumeBox").classList.add("hidden"); if($("metaSave")) $("metaSave").textContent="已清空";
+}
+
+function startMode(m){
+  mode=m; idx=0; records=[]; hintCount=0; totalScore=0; attemptCount=0; currentHint=0; exampleCount=0;
+  localStorage.removeItem(SAVE_KEY);
+  active = mode==="all" ? [...bank] : bank.filter(q=> mode==="advanced" ? q.level!=="basic" : q.level===mode);
+  $("startScreen").classList.add("hidden"); $("quizScreen").classList.remove("hidden"); $("reportScreen").classList.add("hidden");
+  loadQ(); updateMeta(); saveProgress();
+}
+function loadQ(){
+  const q=active[idx]; currentHint=0;
+  $("levelBadge").textContent="阶段："+levelNames[q.level];
+  $("qBadge").textContent=`题号：${idx+1} / ${active.length}`;
+  $("coreText").textContent=q.core; $("sceneText").textContent=q.scene;
+  const box=$("stepsBox"); box.innerHTML="";
+  stepDefs.forEach(st=>{
+    const div=document.createElement("div"); div.className="step";
+    div.innerHTML=`<div class="step-head"><div class="step-title">${st.title}</div><div class="step-question">${st.q}</div></div><textarea id="${st.key}Input" placeholder="${st.q}"></textarea>`;
+    box.appendChild(div);
+  });
+  $("finalText").value="";
+  $("hintList").innerHTML=""; $("hintBox").classList.add("hidden"); $("exampleBox").classList.add("hidden"); $("feedbackBox").classList.add("hidden");
+  setTimeout(()=>{stepDefs.forEach(st=>$(st.key+"Input").addEventListener("input",saveProgress)); $("finalText").addEventListener("input",saveProgress);},0);
+  updateMeta();
+}
+
+function scoreStep(value, refWords){
+  const v=norm(value);
+  if(!v) return {score:0,status:"bad",label:"未填写",note:"这一层还没写。"};
+  let hit=0;
+  refWords.forEach(w=>{ if(v.includes(norm(w))) hit++; });
+  if(hit>=2 || (hit>=1 && v.length>=3)) return {score:1,status:"good",label:"有效",note:"这一层信息比较具体。"};
+  if(v.length>=2) return {score:.5,status:"ok",label:"可再具体",note:"有一点信息，但还可以更具体、更有画面。"};
+  return {score:0,status:"bad",label:"需要修改",note:"内容太少，读者很难看到画面。"};
+}
+function scoreFinal(text){
+  const n=norm(text); if(!n) return {score:0,status:"bad",label:"未填写",note:"最终扩句还没有写。"};
+  let score=0, notes=[];
+  if(n.length>=35){score+=1; notes.push("长度基本够，能展开画面。");} else if(n.length>=20){score+=.5; notes.push("有扩展，但还可以再加细节。");} else notes.push("最终句太短，还没形成完整画面。");
+  const punct = /[，。！？；]/.test(text); if(punct){score+=.5; notes.push("句子有基本停顿。");}
+  const concrete = ["水","光","风","脚","手","眼","声音","书","窗","灯","树","纸","脸","影","路","门","雨","雪","操场","教室"].some(w=>n.includes(w));
+  if(concrete){score+=1; notes.push("有具体可感的细节。");} else notes.push("还可以加入看得见、听得见或摸得着的细节。");
+  if(score>=2.2) return {score:2.5,status:"good",label:"画面较完整",note:notes.join("")};
+  if(score>=1.2) return {score:1.5,status:"ok",label:"基本成形",note:notes.join("")};
+  return {score:.5,status:"bad",label:"需要扩展",note:notes.join("")};
+}
+
+function submitWork(){
+  const q=active[idx]; let score=0; const results=[]; const inputs={steps:{},final:$("finalText").value};
+  stepDefs.forEach(st=>{
+    const val=$(st.key+"Input").value; inputs.steps[st.key]=val;
+    const r=scoreStep(val, q.refs[st.key]||[]); score+=r.score;
+    results.push({name:st.title.replace(/^第.步：/,""), answer:val, ...r});
+  });
+  const finalR=scoreFinal($("finalText").value); score+=finalR.score;
+  results.push({name:"最终扩句", answer:$("finalText").value, ...finalR});
+  const maxScore=stepDefs.length+2.5;
+
+  const old=records[idx]; if(old) totalScore-=old.score||0;
+  totalScore+=score; attemptCount++;
+  const rec={score,maxScore,results,attempts:old?(old.attempts||1)+1:1,inputs,level:q.level,core:q.core};
+  records[idx]=rec;
+
+  renderFeedback(rec); updateMeta(); saveProgress();
+}
+function renderFeedback(rec){
+  const grid=$("feedbackGrid"); grid.innerHTML="";
+  rec.results.forEach(r=>{
+    const div=document.createElement("div"); div.className="feedback-item";
+    div.innerHTML=`<span class="status ${r.status}">${r.label}</span><strong>${r.name}</strong><br><b>你的内容：</b>${r.answer||"未填写"}<br><b>反馈：</b>${r.note}`;
+    grid.appendChild(div);
+  });
+  const percent=Math.round(rec.score/rec.maxScore*100);
+  $("feedbackSummary").innerHTML=`本题得分：<strong>${rec.score.toFixed(1)} / ${rec.maxScore}</strong>（约 ${percent}%）<br>本题提交次数：<strong>${rec.attempts}</strong><br>${summaryAdvice(percent, rec)}`;
+  $("feedbackBox").classList.remove("hidden");
+}
+function summaryAdvice(p, rec){
+  if(p>=85) return "整体很好，已经不是简单堆词，而是能让画面一层一层展开。";
+  if(p>=65) return "方向是对的，但还可以加强细节画面，尤其是最后的动作反应和感受。";
+  return "建议先别追求长，按顺序补全：时间、地点、样子、动作方式、反应、细节。";
+}
+function showNextHint(){
+  const q=active[idx]; $("hintBox").classList.remove("hidden");
+  const li=document.createElement("li");
+  if(currentHint<q.hints.length){li.textContent=`提示 ${currentHint+1}：${q.hints[currentHint]}`; currentHint++; hintCount++;}
+  else li.textContent="提示已经全部显示。建议你回到主干，按“什么时候、在哪里、什么样、怎么动、谁反应、什么细节”的顺序再检查一遍。";
+  $("hintList").appendChild(li); updateMeta(); saveProgress();
+}
+function showExample(){
+  const rec=records[idx]; const attempts=rec?(rec.attempts||0):0;
+  $("exampleBox").classList.remove("hidden");
+  if(attempts<2){
+    $("exampleContent").innerHTML="<p>参考范文暂不开放。你需要先提交至少 2 次，系统才允许查看。先根据反馈自己改一版。</p>";
+    return;
+  }
+  exampleCount++; const ex=active[idx].examples;
+  $("exampleContent").innerHTML=`
+    <div class="example-level"><strong>普通版：</strong><br>${ex.normal}</div>
+    <div class="example-level"><strong>画面版：</strong><br>${ex.vivid}</div>
+    <div class="example-level"><strong>优秀版：</strong><br>${ex.strong}</div>
+    <div class="teacher-note">参考范文不是让你照抄，而是看它怎么按顺序加信息：先有场景，再有动作，再有细节。</div>`;
+  updateMeta(); saveProgress();
+}
+function nextQuestion(){
+  if(!records[idx]){
+    records[idx]={score:0,maxScore:stepDefs.length+2.5,results:[],attempts:0,inputs:getInputSnapshot(),level:active[idx].level,core:active[idx].core};
+  }
+  idx++;
+  if(idx>=active.length){renderReport(); saveProgress(); return;}
+  loadQ(); saveProgress();
+}
+function updateMeta(){
+  const done=records.filter(Boolean).length; const max=active.length || bank.length;
+  $("metaLevel").textContent=active[idx]?levelNames[active[idx].level]:"已完成";
+  $("metaQ").textContent=active.length?`${Math.min(idx+1,active.length)} / ${active.length}`:`0 / ${bank.length}`;
+  $("metaScore").textContent=totalScore.toFixed(1);
+  $("metaDone").textContent=max?Math.round(done/max*100)+"%":"0%";
+  $("metaHint").textContent=hintCount;
+  $("metaExample").textContent="需2次提交";
+  $("progressText").textContent=`${done} / ${max}`;
+  $("progressFill").style.width=max?(done/max*100)+"%":"0%";
+}
+function renderReport(){
+  $("quizScreen").classList.add("hidden"); $("startScreen").classList.add("hidden"); $("reportScreen").classList.remove("hidden");
+  const done=records.filter(Boolean); const possible=done.reduce((s,r)=>s+r.maxScore,0); const acc=possible?Math.round(totalScore/possible*100):0;
+  const avgAttempts=done.length?(done.reduce((s,r)=>s+(r.attempts||0),0)/done.length).toFixed(1):"0.0";
+  const weak = findWeak(done);
+  const text=`画面扩句训练报告
+完成题数：${done.length} / ${active.length}
+总得分：${totalScore.toFixed(1)} / ${possible.toFixed(1)}
+总体完成质量：${acc}%
+提示次数：${hintCount}
+查看范文次数：${exampleCount}
+平均每题提交次数：${avgAttempts}
+相对薄弱项：${weak}
+
+综合建议：${reportAdvice(acc, weak)}`;
+  $("reportScreen").innerHTML=`
+    <h3>训练报告</h3>
+    <div class="report-text" id="reportText">${text}</div>
+    <div class="actions">
+      <button class="primary" onclick="copyReport()">复制报告</button>
+      <button class="ghost" onclick="restart()">重新开始</button>
+      <button class="danger" onclick="clearSaved()">清空本机记录</button>
+    </div>
+    <div class="teacher-note"><strong>老师查看建议：</strong>不要只看字数。重点看孩子是否能按层次扩展，是否能加入具体细节，是否只是堆形容词。</div>`;
+  saveProgress();
+}
+function findWeak(done){
+  const names={time:"时间",place:"地点",feature:"样子",manner:"动作方式",reaction:"人物/事物反应",detail:"细节画面",feeling:"感受意义"};
+  const sums={}, counts={}; stepDefs.forEach(st=>{sums[st.key]=0;counts[st.key]=0;});
+  done.forEach(r=>{r.results.slice(0,7).forEach((it,i)=>{sums[stepDefs[i].key]+=it.score; counts[stepDefs[i].key]+=1;});});
+  let minKey="detail", min=999;
+  stepDefs.forEach(st=>{const avg=counts[st.key]?sums[st.key]/counts[st.key]:0; if(avg<min){min=avg;minKey=st.key;}});
+  return names[minKey];
+}
+function reportAdvice(acc, weak){
+  if(acc>=85) return `整体表现很好，已经能把短句扩成有画面的句子。下一步可以重点提高“${weak}”这一层，让文字更自然。`;
+  if(acc>=65) return `方向是对的，但还需要减少机械堆词。建议继续练“${weak}”，每题至少加入一个能看见或听见的细节。`;
+  return `目前还处在建立方法的阶段。建议先不追求写长，严格按顺序补：时间、地点、样子、动作方式、反应、细节、感受。`;
+}
+function copyReport(){
+  navigator.clipboard.writeText($("reportText").innerText).then(()=>alert("报告已复制。")).catch(()=>alert("复制失败，请手动复制。"));
+}
+function restart(){localStorage.removeItem(SAVE_KEY); location.reload();}
+document.addEventListener("DOMContentLoaded",()=>showSaved());
+window.addEventListener("beforeunload",()=>saveProgress());
+</script>
+</body>
+</html>
