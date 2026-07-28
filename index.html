@@ -6,6 +6,13 @@
 <title>Li Pei · The Operable Mechanism</title>
 <meta name="description" content="Li Pei — Psycholinguistics, L2 speech production, English Speaking Lab." />
 <style>
+@font-face{
+  font-family:"LiPei Serif SC";
+  src:url("assets/fonts/noto-serif-sc-site.woff2?v=1") format("woff2");
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+}
 :root {
   --bg:#050505;
   --panel:#0a0a0a;
@@ -34,7 +41,7 @@ body{
   overflow-x:hidden;
 }
 html[lang="zh-CN"] body{
-  font-family:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+  font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
 }
 html[lang="zh-CN"] .smallcaps,
 html[lang="zh-CN"] .section-title,
@@ -281,8 +288,11 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   .frame{width:calc(100% - 12px);margin:6px auto;border-radius:15px}
   header{height:68px;padding:0 16px}
   .brand{font-size:14px}.tools{gap:6px}.iconbtn{width:32px;height:32px}
-  .hero{min-height:calc(100svh - 80px);grid-template-columns:22% 56% 22%;gap:4px;padding:24px 8px 58px;align-items:center}
-  .coin,.handmark{width:100%;max-width:105px}
+  .hero{min-height:calc(100svh - 80px);grid-template-columns:minmax(0,22%) minmax(0,56%) minmax(0,22%);gap:4px;padding:24px 8px 58px;align-items:center}
+  .coin-wrap,.personal{width:100%;min-width:0;justify-self:stretch}
+  .coin-wrap{display:flex;justify-content:center}
+  .personal{justify-content:center}
+  .coin,.handmark{width:min(21vw,105px);max-width:105px;flex:0 0 auto}
   .hero-main .kicker{font-size:7px;letter-spacing:.12em}
   h1{
     width:calc(100vw - 40px);max-width:520px;margin-left:50%;
