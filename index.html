@@ -119,12 +119,8 @@ nav a:hover::after{left:0;right:0}
   display:grid;place-items:center;background:#070707;color:var(--orange);cursor:pointer;
 }
 .hero{
-  min-height:calc(100vh - 110px);padding:34px 54px 96px;
+  min-height:calc(100vh - 110px);padding:34px 54px 56px;
   display:block;position:relative;
-}
-.hero::after{
-  content:""; position:absolute; left:3%; right:3%; bottom:30px; height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
 }
 .coin-wrap{text-align:center;margin-bottom:13px}
 .coin{
@@ -144,6 +140,7 @@ h1{
   width:min(1040px,100%);margin:14px auto 0;color:#d8cfbe;
   font-size:clamp(13px,1.05vw,16px);line-height:1.55;letter-spacing:.015em;
 }
+.hero-line{display:block}
 .rule{display:flex;align-items:center;gap:15px;margin:25px auto;width:min(680px,100%)}
 .rule::before,.rule::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold))}
 .rule::after{transform:scaleX(-1)}
@@ -165,10 +162,6 @@ h1{
   font-size:42px;color:#f1eee6;transform:rotate(-5deg);text-shadow:0 0 15px rgba(255,255,255,.16)
 }
 .mantra{font-size:12px;letter-spacing:.17em;color:var(--muted);text-transform:uppercase}
-.scroll{position:absolute;bottom:45px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted);letter-spacing:.2em}
-.scroll span{display:block;margin:auto auto 8px;width:24px;height:38px;border:1px solid var(--gold);border-radius:14px;position:relative}
-.scroll span::after{content:"";position:absolute;top:8px;left:10px;width:3px;height:7px;background:var(--gold2);border-radius:3px;animation:wheel 1.8s infinite}
-@keyframes wheel{to{transform:translateY(14px);opacity:0}}
 .section{padding:70px 54px}
 .section-title{display:flex;align-items:center;gap:20px;color:var(--orange-soft);font-size:21px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:30px}
 .section-title::before,.section-title::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold3))}
@@ -422,7 +415,10 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   .frame{width:calc(100% - 12px);margin:6px auto;border-radius:15px}
   header{height:68px;padding:0 16px}
   .brand{font-size:14px}.tools{gap:6px}.iconbtn{width:32px;height:32px}
-  .hero{min-height:calc(100svh - 80px);padding:20px 12px 72px}
+  .hero{
+    min-height:calc(100svh - 80px);padding:20px 12px;
+    display:flex;align-items:center;justify-content:center;
+  }
   .coin-wrap,.personal{width:100%;min-width:0}
   .coin-wrap{display:flex;justify-content:center;margin-bottom:9px}
   .personal{justify-content:center;margin-top:12px}
@@ -431,10 +427,10 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   .hero-main .kicker{font-size:7px;letter-spacing:.12em}
   h1{width:100%;max-width:520px;margin:8px auto 5px;transform:none;text-align:center;font-size:clamp(25px,8vw,38px)}
   .subtitle{font-size:9px;line-height:1.35}
-  .hero-statement{font-size:7px;line-height:1.35;margin-top:7px}
+  .hero-statement{font-size:7px;line-height:1.45;margin-top:7px;width:100%}
   .rule{margin:13px auto}.name{font-size:19px;margin-top:10px}
   .identity{font-size:9px;line-height:1.45}.tags{font-size:7px;line-height:1.5;margin-top:9px}
-  .mantra{font-size:7px;line-height:1.4}.scroll{bottom:20px;font-size:8px}.scroll span{display:none}
+  .mantra{font-size:7px;line-height:1.4}
   .section{padding:38px 12px}.section-title{font-size:14px;gap:9px;margin-bottom:18px}
   .modules{grid-template-columns:repeat(2,1fr);gap:8px}
   .card{padding:15px 12px;min-height:170px}.card h3{font-size:14px}.card p,.card li{font-size:10px}
@@ -477,7 +473,7 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   html[lang="zh-CN"] h1{font-size:clamp(18px,5.3vw,22px);letter-spacing:.012em;position:relative;z-index:3}
   html[lang="zh-CN"] .subtitle{font-size:10px}
   html[lang="zh-CN"] .hero-statement{font-size:7.5px;line-height:1.55;width:100%}
-  html[lang="zh-CN"] .hero-line{display:block;white-space:nowrap}
+  html[lang="zh-CN"] .hero-line{white-space:nowrap}
   html[lang="zh-CN"] .card p{line-height:1.75}
   html[lang="zh-CN"] .event-body p{font-size:9.5px;line-height:1.68}
   html[lang="zh-CN"] .lab .cn{font-size:13px;letter-spacing:.08em}
@@ -515,7 +511,7 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
     </div>
     <h1>THE OPERABLE<br>MECHANISM</h1>
     <div class="subtitle">for Online Processing in L2 English Speech Production,</div>
-    <div class="hero-statement">to explain how declarative knowledge can be organized online through operable steps to support more fluent speech under real-time pressure.</div>
+    <div class="hero-statement"><span class="hero-line">to explain how declarative knowledge can be organized online</span><span class="hero-line">through operable steps to support more fluent speech under real-time pressure.</span></div>
     <div class="rule"><i class="diamond"></i></div>
     <div class="name">LI PEI</div>
     <div class="identity">
@@ -530,7 +526,6 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
       </div>
     </div>
   </div>
-  <div class="scroll"><span></span>SCROLL TO EXPLORE</div>
 </section>
 
 <section class="section" id="mechanism">
@@ -776,11 +771,10 @@ const bilingualContent={
     '.brand':'李 沛',
     '#home h1':'可操作性英语口语在线产出机制',
     '#home .subtitle':'',
-    '#home .hero-statement':'<span class="hero-line">本机制将开口前隐性的前语言心理加工显化为可操作步骤，</span><span class="hero-line">支持二语口语在实时压力下顺利启动、持续推进，</span><span class="hero-line">并实现更为流利的表达。</span>',
+    '#home .hero-statement':'<span class="hero-line">本机制将开口前隐性的前语言心理加工显化为可操作步骤，</span><span class="hero-line">支持二语口语在实时压力下顺利启动、持续推进并实现更为流利的表达。</span>',
     '#home .name':'李 沛',
     '#home .identity':'语言研究者&nbsp;&nbsp;|&nbsp;&nbsp;副教授<br>天津财经大学珠江学院<br>南开大学硕士',
     '#home .tags':'心理语言学 · 言语产出 · 在线加工',
-    '#home .scroll':'<span></span>向下探索',
     '#mechanism .section-title':'核心学术贡献',
     '#foundations .section-title':'理论根基',
     '#foundations .foundation-thesis':'可操作机制以心理语言学言语产出理论为总体架构，深入概念形成器内部，整合工作记忆、概念结构、认知语法、系统功能语言学与认知流利等理论资源，阐明交际意图如何经由宏计划、线性化与微计划形成可启动的前语言信息，并将这一隐性的心理加工过程组织为支持二语口语顺利启动与持续推进的可操作路径。',
