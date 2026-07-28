@@ -253,13 +253,28 @@ h1{
   content:"";position:absolute;inset:0;pointer-events:none;opacity:.24;
   background:linear-gradient(90deg,transparent 49.93%,rgba(216,170,79,.14) 50%,transparent 50.07%);
 }
-.foundation-intro{
-  position:relative;max-width:1040px;margin:0 auto 28px;text-align:center;
-  color:#bdb3a4;font-size:14px;line-height:1.75;letter-spacing:.015em;
+.foundation-prologue{
+  position:relative;max-width:1160px;margin:0 auto 34px;padding:20px 32px 19px;
+  text-align:center;border-top:1px solid rgba(247,148,29,.24);
+  border-bottom:1px solid rgba(247,148,29,.14);
+  background:linear-gradient(90deg,transparent,rgba(247,148,29,.038) 24%,rgba(247,148,29,.038) 76%,transparent);
+}
+.foundation-prologue::before{
+  content:"";position:absolute;top:-4px;left:50%;width:7px;height:7px;
+  background:var(--orange);transform:translateX(-50%) rotate(45deg);
+  box-shadow:0 0 14px rgba(247,148,29,.38);
+}
+.foundation-thesis{
+  margin:0;color:var(--orange-soft);font-size:clamp(17px,1.45vw,23px);
+  line-height:1.72;letter-spacing:.035em;font-weight:600;
+}
+.foundation-guide{
+  margin:9px 0 0;color:#82796c;font-size:10px;line-height:1.6;
+  letter-spacing:.16em;text-transform:uppercase;
 }
 .foundation-layout{
-  position:relative;display:grid;grid-template-columns:minmax(520px,.96fr) minmax(420px,1.04fr);
-  gap:30px;align-items:stretch;
+  position:relative;display:grid;grid-template-columns:minmax(650px,1.22fr) minmax(350px,.78fr);
+  gap:24px;align-items:stretch;
 }
 .scholar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .scholar{
@@ -279,7 +294,7 @@ h1{
 }
 .scholar:hover::after,.scholar:focus-visible::after,.scholar.is-active::after{left:10%;right:10%;opacity:1}
 .scholar-portrait{
-  display:block;width:min(112px,86%);aspect-ratio:1;margin:0 auto 9px;border-radius:50%;
+  display:block;width:min(146px,88%);aspect-ratio:1;margin:0 auto 11px;border-radius:50%;
   object-fit:cover;object-position:center;filter:grayscale(1) contrast(1.08) brightness(.9);
   border:1px solid rgba(216,170,79,.3);box-shadow:0 0 0 5px rgba(216,170,79,.025);
   transition:filter .3s,box-shadow .3s;
@@ -296,7 +311,9 @@ h1{
 .scholar[data-scholar="jackendoff"] .scholar-portrait{object-position:52% 38%}
 .scholar[data-scholar="baddeley"] .scholar-portrait{object-position:55% 40%}
 .scholar[data-scholar="lakoff"] .scholar-portrait{object-position:64% 36%}
-.scholar-name{display:block;color:#eadcc2;font-size:13px;line-height:1.2;letter-spacing:.035em}
+.scholar-name{display:block;line-height:1.18}
+.scholar-name-en{display:block;color:#eadcc2;font-size:12px;letter-spacing:.025em}
+.scholar-name-zh{display:block;margin-top:4px;color:#b4a99a;font-size:12px;letter-spacing:.035em}
 .scholar-field{display:block;margin-top:4px;color:#8f8678;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
 .foundation-detail{
   min-width:0;border:1px solid rgba(216,170,79,.3);border-radius:14px;padding:34px 36px;
@@ -309,7 +326,7 @@ h1{
 .foundation-status{
   margin-top:18px;color:var(--orange);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
 }
-.foundation-detail h2{margin:10px 0 3px;color:var(--gold2);font-size:clamp(30px,3vw,47px);font-weight:500}
+.foundation-detail h2{margin:10px 0 0;color:var(--gold2);font-size:clamp(34px,3.25vw,52px);font-weight:500;line-height:1.08}
 .foundation-detail h3{
   margin:0;color:var(--orange-soft);font-size:15px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
 }
@@ -406,16 +423,19 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   .card{padding:15px 12px;min-height:170px}.card h3{font-size:14px}.card p,.card li{font-size:10px}
   .number{font-size:30px}
   .foundations{padding:16px 9px;border-radius:13px}
-  .foundation-intro{font-size:9.5px;line-height:1.7;margin-bottom:15px;padding:0 5px}
+  .foundation-prologue{margin-bottom:18px;padding:14px 8px 13px}
+  .foundation-thesis{font-size:12px;line-height:1.65;letter-spacing:.02em}
+  .foundation-guide{font-size:6.5px;line-height:1.5;letter-spacing:.09em;margin-top:7px}
   .foundation-layout{gap:12px}
   .scholar-grid{gap:5px}
   .scholar{padding:7px 3px 6px;border-radius:9px}
-  .scholar-portrait{width:min(76px,82%);margin-bottom:6px;box-shadow:0 0 0 3px rgba(216,170,79,.025)}
-  .scholar-name{font-size:8.5px;letter-spacing:0}
+  .scholar-portrait{width:min(88px,86%);margin-bottom:7px;box-shadow:0 0 0 3px rgba(216,170,79,.025)}
+  .scholar-name-en,.scholar-name-zh{font-size:7.5px;letter-spacing:0}
+  .scholar-name-zh{margin-top:2px}
   .scholar-field{font-size:5.5px;letter-spacing:.05em;margin-top:3px}
   .foundation-detail{padding:20px 18px;min-height:270px}
   .foundation-index{font-size:26px}.foundation-status{font-size:7px;margin-top:12px}
-  .foundation-detail h2{font-size:25px;margin-top:7px}.foundation-detail h3{font-size:9px;line-height:1.45}
+  .foundation-detail h2{font-size:28px;margin:7px 0 8px}.foundation-detail h3{font-size:9px;line-height:1.45}
   .foundation-detail .mini-rule{margin:15px 0;width:52px}
   .foundation-detail p{font-size:10px;line-height:1.75}
   .foundation-disclaimer{font-size:7px;margin-top:13px;padding:0 7px}
@@ -506,7 +526,10 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 <section class="section" id="foundations">
   <div class="section-title">Intellectual Foundations</div>
   <div class="foundations">
-    <p class="foundation-intro">The operable mechanism has developed through sustained engagement with scholarship in speech production, conceptual representation, cognitive grammar, functional linguistics, working memory, cognitive fluency, and the philosophy of language. Select a scholar to see how that work enters the model.</p>
+    <div class="foundation-prologue">
+      <p class="foundation-thesis">The Operable Mechanism takes speech-production theory as its overarching architecture and brings conceptual structure, cognitive grammar, systemic functional linguistics, working memory, and cognitive fluency into a unified account that renders the otherwise hidden preverbal processes preceding speech observable, explicable, and operable.</p>
+      <p class="foundation-guide">Select a portrait to trace how each body of scholarship enters the model</p>
+    </div>
     <div class="foundation-layout">
       <div class="scholar-grid" role="list" aria-label="Scholars informing the operable mechanism">
         <button class="scholar" type="button" role="listitem" data-scholar="pinker" data-index="01"
@@ -519,7 +542,7 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
           <span class="scholar-name">Steven Pinker</span><span class="scholar-field">Language &amp; Mind</span>
         </button>
         <button class="scholar" type="button" role="listitem" data-scholar="halliday" data-index="02"
-          data-name-en="M. A. K. Halliday" data-name-zh="韩礼德"
+          data-name-en="M. A. K. Halliday" data-name-zh="迈克尔·韩礼德"
           data-field-en="Functional Organization · Information Structure" data-field-zh="功能组织 · 信息结构"
           data-status-en="Direct theoretical foundation" data-status-zh="直接理论基础"
           data-copy-en="Halliday’s systemic functional linguistics informs the model’s syntax, discourse organization, information progression, and functional orientation; his distinction between given and new information is further operationalized as a strategy for reducing processing load and buying planning time."
@@ -742,7 +765,8 @@ const bilingualContent={
     '#home .scroll':'<span></span>向下探索',
     '#mechanism .section-title':'核心学术贡献',
     '#foundations .section-title':'理论根基',
-    '#foundations .foundation-intro':'可操作机制建立在对言语产出、概念表征、认知语法、系统功能语言学、工作记忆、认知流利与语言哲学等研究传统的持续研读和整合之上。点击学者肖像，可查看相关理论如何进入本机制。',
+    '#foundations .foundation-thesis':'可操作机制以言语产出理论为总体架构，贯通概念结构、认知语法、系统功能语言学、工作记忆与认知流利等理论资源，将开口前难以观察的前语言心理加工显化并组织为可解释、可操作的在线过程。',
+    '#foundations .foundation-guide':'点击学者肖像，查看相关理论如何进入本机制',
     '#foundations .foundation-disclaimer':'本栏肖像仅用于标示构成本机制思想来源的学者；其呈现说明理论影响，不代表本人或相关机构对本研究的认可、合作或隶属关系。',
     '#research .section-title':'学术架构',
     '#lab .section-title':'英语口语研究室',
@@ -834,10 +858,17 @@ function setLanguage(language){
 }
 const foundationDetail=document.querySelector('.foundation-detail');
 function updateScholarLabels(){
-  const chinese=document.documentElement.lang==='zh-CN';
   document.querySelectorAll('.scholar').forEach(scholar=>{
-    scholar.querySelector('.scholar-name').textContent=scholar.dataset[chinese?'nameZh':'nameEn'];
-    scholar.querySelector('.scholar-field').textContent=scholar.dataset[chinese?'fieldZh':'fieldEn'];
+    const name=scholar.querySelector('.scholar-name');
+    name.replaceChildren();
+    const english=document.createElement('span');
+    const chineseName=document.createElement('span');
+    english.className='scholar-name-en';
+    chineseName.className='scholar-name-zh';
+    english.textContent=scholar.dataset.nameEn;
+    chineseName.textContent=scholar.dataset.nameZh;
+    name.append(english,chineseName);
+    scholar.querySelector('.scholar-field').textContent=scholar.dataset[document.documentElement.lang==='zh-CN'?'fieldZh':'fieldEn'];
   });
 }
 function renderScholar(scholar){
@@ -850,7 +881,7 @@ function renderScholar(scholar){
   const chinese=document.documentElement.lang==='zh-CN';
   foundationDetail.querySelector('.foundation-index').textContent=scholar.dataset.index;
   foundationDetail.querySelector('.foundation-status').textContent=scholar.dataset[chinese?'statusZh':'statusEn'];
-  foundationDetail.querySelector('h2').textContent=scholar.dataset[chinese?'nameZh':'nameEn'];
+  foundationDetail.querySelector('h2').textContent=scholar.dataset.nameEn;
   foundationDetail.querySelector('h3').textContent=scholar.dataset[chinese?'fieldZh':'fieldEn'];
   foundationDetail.querySelector('p').textContent=scholar.dataset[chinese?'copyZh':'copyEn'];
 }
