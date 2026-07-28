@@ -380,18 +380,22 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 }
 .enter.hidden{opacity:0;visibility:hidden}
 .enter-box{display:flex;flex-direction:column;align-items:center;text-align:center}
+.enter-trigger{
+  padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;
+  animation:enterFloat 5.8s ease-in-out infinite;
+  transition:filter .35s ease,transform .35s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.enter-trigger:hover{filter:drop-shadow(0 0 18px rgba(240,185,67,.24));transform:scale(1.018)}
+.enter-trigger:focus-visible{outline:1px solid var(--gold2);outline-offset:10px}
 .enter-logo{
+  display:block;
   width:min(290px,62vw);aspect-ratio:1;height:auto;max-height:58vh;border-radius:50%;object-fit:cover;
   border:1px solid rgba(216,170,79,.32);
   box-shadow:0 0 34px rgba(216,170,79,.16),inset 0 0 22px rgba(216,170,79,.05);
 }
-.enter h2{font-weight:500;letter-spacing:.16em;color:var(--orange-soft)}
-.enter p{color:var(--muted);letter-spacing:.12em}
-.enter button{
-  margin-top:14px;padding:13px 28px;border:1px solid var(--gold);color:var(--orange);
-  background:transparent;border-radius:30px;letter-spacing:.16em;cursor:pointer;
-}
-.enter button:hover{background:rgba(216,170,79,.1)}
+@keyframes enterFloat{50%{transform:translateY(-7px)}}
+@media(prefers-reduced-motion:reduce){.enter-trigger{animation:none}}
 @media(min-width:1250px){
   #foundations.section{padding-left:38px;padding-right:38px}
   .foundation-layout{grid-template-columns:minmax(720px,1.3fr) minmax(360px,.7fr)}
@@ -485,8 +489,9 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 
 <div class="enter" id="enter">
   <div class="enter-box">
-    <img class="enter-logo" src="assets/images/personal-logo.webp?v=3" alt="Academic logo">
-    <button id="enterBtn">ENTER</button>
+    <button class="enter-trigger" id="enterBtn" type="button" aria-label="Enter Li Pei's academic website">
+      <img class="enter-logo" src="assets/images/personal-logo.webp?v=3" alt="">
+    </button>
   </div>
 </div>
 
@@ -735,7 +740,6 @@ if(mechanismPoster){
 const enterLogo=document.querySelector('.enter-logo');
 if(enterLogo){
   enterLogo.src='assets/images/personal-logo.webp?v=3';
-  enterLogo.alt='PsylntSai hand signature logo';
 }
 const soundtrack=new Audio();
 soundtrack.preload='none';
