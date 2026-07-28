@@ -51,7 +51,7 @@ html[lang="zh-CN"] nav{letter-spacing:.08em;text-transform:none}
 html[lang="zh-CN"] h1{line-height:1.06;letter-spacing:.08em}
 html[lang="zh-CN"] .subtitle{letter-spacing:.06em}
 html[lang="zh-CN"] h1{
-  color:var(--orange-soft);font-size:clamp(23px,3.5vw,64px);
+  color:var(--orange-soft);font-size:clamp(23px,3vw,56px);
   font-weight:700;letter-spacing:.035em;white-space:nowrap;
 }
 html[lang="zh-CN"] .section-title,
@@ -108,7 +108,7 @@ nav a:hover::after{left:0;right:0}
 }
 .hero{
   min-height:calc(100vh - 110px); padding:48px 54px 30px;
-  display:grid; grid-template-columns:250px 1fr 250px; gap:34px; align-items:center;
+  display:grid; grid-template-columns:250px minmax(0,1fr) 250px; gap:34px; align-items:center;
   position:relative;
 }
 .hero::after{
@@ -122,7 +122,7 @@ nav a:hover::after{left:0;right:0}
   animation:float 6s ease-in-out infinite;
 }
 @keyframes float{50%{transform:translateY(-8px)}}
-.hero-main{text-align:center;align-self:center}
+.hero-main{text-align:center;align-self:center;min-width:0}
 .kicker{color:var(--orange);font-size:13px;letter-spacing:.26em;text-transform:uppercase}
 h1{
   margin:14px 0 6px;color:var(--gold2);font-size:clamp(42px,5vw,82px);
@@ -379,6 +379,7 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
     <div class="name">LI PEI</div>
     <div class="identity">
       Language Researcher &nbsp;|&nbsp; Associate Professor<br>
+      Tianjin University of Finance and Economics Pearl River College<br>
       M.A., Nankai University
     </div>
     <div class="tags">PSYCHOLINGUISTICS · SPEECH PRODUCTION · ONLINE PROCESSING</div>
@@ -530,7 +531,7 @@ const bilingualContent={
     '#home .subtitle':'',
     '#home .hero-statement':'旨在阐明：陈述性知识如何经由一系列可操作步骤得到在线组织，从而支持二语说话者在实时压力下实现更为流利的言语产出。',
     '#home .name':'李 沛',
-    '#home .identity':'语言研究者&nbsp;&nbsp;|&nbsp;&nbsp;副教授<br>天津财经大学珠江学院<br>南开大学硕士&nbsp;&nbsp;|&nbsp;&nbsp;英语口译方向',
+    '#home .identity':'语言研究者&nbsp;&nbsp;|&nbsp;&nbsp;副教授<br>天津财经大学珠江学院<br>南开大学硕士（英语）',
     '#home .tags':'心理语言学 · 言语产出 · 在线加工',
     '#home .scroll':'<span></span>向下探索',
     '#mechanism .section-title':'核心学术贡献',
