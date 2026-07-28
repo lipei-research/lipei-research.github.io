@@ -387,6 +387,10 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   -webkit-tap-highlight-color:transparent;
 }
 .enter-trigger:hover{filter:drop-shadow(0 0 18px rgba(240,185,67,.24));transform:scale(1.018)}
+.enter-trigger.is-activating{
+  animation:none;transform:scale(.985);
+  filter:drop-shadow(0 0 17px rgba(255,207,105,.72)) drop-shadow(0 0 44px rgba(216,170,79,.5));
+}
 .enter-trigger:focus-visible{outline:1px solid var(--gold2);outline-offset:10px}
 .enter-logo{
   display:block;
@@ -396,6 +400,14 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 }
 @keyframes enterFloat{50%{transform:translateY(-7px)}}
 @media(prefers-reduced-motion:reduce){.enter-trigger{animation:none}}
+@media(hover:none),(pointer:coarse){
+  .enter-trigger{
+    filter:drop-shadow(0 0 20px rgba(240,185,67,.26)) drop-shadow(0 0 46px rgba(216,170,79,.2));
+  }
+  .enter-trigger.is-activating{
+    filter:drop-shadow(0 0 18px rgba(255,214,123,.82)) drop-shadow(0 0 56px rgba(216,170,79,.58));
+  }
+}
 @media(min-width:1250px){
   #foundations.section{padding-left:38px;padding-right:38px}
   .foundation-layout{grid-template-columns:minmax(720px,1.3fr) minmax(360px,.7fr)}
@@ -764,9 +776,13 @@ soundtrack.addEventListener('ended',()=>{
   playing=false;
   document.getElementById('soundBtn').textContent='♪';
 });
-document.getElementById('enterBtn').addEventListener('click',()=>{
-  document.getElementById('enter').classList.add('hidden');
+let entering=false;
+document.getElementById('enterBtn').addEventListener('click',event=>{
+  if(entering) return;
+  entering=true;
+  event.currentTarget.classList.add('is-activating');
   startMusic();
+  window.setTimeout(()=>document.getElementById('enter').classList.add('hidden'),240);
 });
 document.getElementById('soundBtn').addEventListener('click',()=>playing?stopMusic():startMusic());
 
