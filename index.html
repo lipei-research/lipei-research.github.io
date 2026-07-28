@@ -33,6 +33,23 @@ body{
   font-family: Georgia, "Times New Roman", serif;
   overflow-x:hidden;
 }
+html[lang="zh-CN"] body{
+  font-family:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+}
+html[lang="zh-CN"] .smallcaps,
+html[lang="zh-CN"] .section-title,
+html[lang="zh-CN"] .kicker,
+html[lang="zh-CN"] .tags,
+html[lang="zh-CN"] nav{letter-spacing:.08em;text-transform:none}
+html[lang="zh-CN"] h1{line-height:1.06;letter-spacing:.08em}
+html[lang="zh-CN"] .subtitle{letter-spacing:.06em}
+html[lang="zh-CN"] .card p,
+html[lang="zh-CN"] .event-body p{
+  text-align:left;text-align-last:auto;text-justify:auto;
+  line-break:strict;word-break:normal;hyphens:none;
+}
+html[lang="zh-CN"] .card p{line-height:1.82}
+html[lang="zh-CN"] .event-body p{line-height:1.75}
 body::before{
   content:"";
   position:fixed; inset:0; pointer-events:none; opacity:.23;
@@ -297,6 +314,11 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   .timeline::before{left:70px}.event{grid-template-columns:56px 1fr;gap:30px;margin-bottom:12px}
   .year{font-size:11px}.event-body{padding:10px 12px}.event-body h4{font-size:12px}
   .event-body p{font-size:9px}.event-body::before{left:-36px;top:15px}
+  html[lang="zh-CN"] h1{font-size:clamp(27px,8.4vw,40px)}
+  html[lang="zh-CN"] .subtitle{font-size:10px}
+  html[lang="zh-CN"] .hero-statement{font-size:8px;line-height:1.55}
+  html[lang="zh-CN"] .card p{line-height:1.75}
+  html[lang="zh-CN"] .event-body p{font-size:9.5px;line-height:1.68}
 }
 </style>
 </head>
@@ -479,8 +501,107 @@ document.getElementById('enterBtn').addEventListener('click',()=>{
   startMusic();
 });
 document.getElementById('soundBtn').addEventListener('click',()=>playing?stopMusic():startMusic());
+
+const bilingualContent={
+  single:{
+    '.brand':'李 沛',
+    '#home h1':'可操作机制',
+    '#home .subtitle':'二语英语口语产出的在线加工',
+    '#home .hero-statement':'旨在阐明：陈述性知识如何经由一系列可操作步骤得到在线组织，从而支持二语说话者在实时压力下实现更为流利的言语产出。',
+    '#home .name':'李 沛',
+    '#home .identity':'语言研究者&nbsp;&nbsp;|&nbsp;&nbsp;副教授<br>南开大学翻译硕士',
+    '#home .tags':'心理语言学 · 言语产出 · 在线加工',
+    '#home .scroll':'<span></span>向下探索',
+    '#mechanism .section-title':'核心学术贡献',
+    '#research .section-title':'学术架构',
+    '#lab .section-title':'英语口语研究室',
+    '#lab .kicker':'研究驱动的英语口语教学',
+    '#lab h2':'英语口语研究室',
+    '#lab .cn':'English Speaking Lab',
+    '#lab .lab-panel:nth-child(2)>p':'以美语正音、美式语流、句构框架与流利机制为相互贯通的四个层次，将语音实现、连续语流、句法生成与在线加工整合为一套结构化的口语学习体系。',
+    '#timeline .section-title':'学术历程',
+    'footer strong':'李 沛'
+  },
+  lists:{
+    'header nav a':['首页','机制','研究','口语研究室','学术历程','联系'],
+    '#research .card h3':['研究','论著','项目','学术报告','获奖'],
+    '#research .card p':[
+      '聚焦二语英语口语产出中“知识可得而表达不畅”的核心矛盾，考察陈述性知识如何由交际意图出发，依次经由宏计划、线性化、微计划与言语启动阈限而进入递增式编码，由此解释学习者如何在实时压力下将既有语言知识转化为可启动、可延展的流利言语。',
+      '围绕加工时间支持、宏计划线性化、人机语音互动与可操作性在线产出机制持续展开理论和实证研究，已发表《提升英语即兴演讲流利度：语速降低及停顿延长策略研究》《英语口语宏计划的线性化理论及策略研究》《ChatGPT语音对话与可操作性英语口语在线产出机制的融合研究》《可操作性英语口语在线产出机制研究》，并独著《高校英语口语能力培养与提升研究》。',
+      '以“语速降低及停顿延长对中国英语学习者口语流利度的影响研究”为时间资源研究起点，经天津市教委“可操作性英语口语在线产出机制研究”，推进至第十二批中国外语教育基金项目“可操作性英语口语在线加工机制模型构建研究”，逐步完成从教学现象、加工条件到理论模型的累积式建构。',
+      '通过论文报告、专题讲座与教学展示阐释可操作机制，并在中国认知科学学会生物语言学专业委员会成立会议暨2026年第5届生物语言学·语言习得国际研讨会上系统呈现从交际意图到发音启动的在线加工路径，以言语启动阈限连接概念准备与外显言语。',
+      '获外研社2015“教学之星”全国总决赛一等奖、第二届中国外语微课大赛全国总决赛一等奖、第十届全国高等院校英语教师教学基本功大赛国家级特等奖，以及第十六届“外教社杯”全国高校外语教学大赛天津赛区决赛一等奖，四项个人奖项共同体现了研究、教学与表达设计的持续贯通。'
+    ],
+    '#lab .course b':['01 · 美语正音','02 · 美式语流','03 · 句构框架','04 · 流利机制'],
+    '#lab .course span':[
+      '以KK音标、发音器官控制与音位对立为基础，通过可感知、可诊断、可自我校正的训练建立准确而稳定的语音实现。',
+      '围绕重音、节奏、连读、弱化与音变规律重构连续语流，使音段准确性进一步转化为自然、连贯且具有时间组织的口语表达。',
+      '融汇主流语言学理论所揭示的从句结构、论元关系与信息组织原则，建立可分析、可扩展、可迁移的英语句法生成体系。',
+      '训练交际意图、宏计划、线性化、微计划、言语启动与递增式编码的在线协同，使学习者能够在注意与工作记忆限制下更有效地组织并推进实时表达。'
+    ],
+    '#timeline .event-body h4':[
+      '问题的起点：从形式准确到生成表达',
+      '从语言结构进入言语产出',
+      '将语言知识转化为教学系统',
+      '流利度困境与注意资源转向',
+      '为在线加工争取时间',
+      '从时间支持走向可操作机制',
+      '重返概念化器并重构加工路径',
+      '模型建构与人工智能支持的应用',
+      '研究与教学的双向贯通',
+      '言语启动阈限的提出'
+    ],
+    '#timeline .event-body p':[
+      '2008年本科毕业后，持续的美语语音训练使发音动作逐渐自动化，但传统语法学习并未同步带来灵活的句子生成能力；这一反差由此确立了此后长期追问的起点：已经掌握的语言知识，何以在实时交际中仍难以转化为可用的言语。',
+      '在语言哲学与多种语法理论的研习中逐步搭建个人句构框架，并因接触Levelt的《从意图到发音》而将关注点由语言形式转向言语生成的认知过程；2011至2013年在南开大学攻读英语口译硕士，则进一步把语法、系统功能语言学与口译实践纳入同一问题域。',
+      '2014年进入高校后，早期积累的语音、音变、句法与口语表达经验被系统化为可讲授、可训练的课程结构；2015年外研社“教学之星”全国总决赛一等奖与2016年第二届中国外语微课大赛全国总决赛一等奖，验证了将复杂语言知识转化为清晰操作路径的教学价值。',
+      '在语言知识已相当充足的情况下，自发言语仍会受到句法监控与表达压力的制约，这一持续存在的瓶颈促使研究问题由“还缺少什么知识”转向“有限注意如何在实时加工中分配”，并逐渐聚焦监控负荷、工作记忆与在线可用性之间的关系。',
+      '受Segalowitz二语流利度认知研究启发，2021年主持院级重点教改项目“语速降低及停顿延长对中国英语学习者口语流利度的影响研究”，由此检验降低语速、延长停顿能否释放注意资源，为概念组织与语言编码提供必要的加工时间。',
+      '2022年获批天津市教委科研计划专项任务项目“可操作性英语口语在线产出机制研究”，研究由“如何争取加工时间”进一步推进到“争取到的时间内究竟发生什么”，并通过宏计划线性化解释复杂交际意图如何被分解为可依次推进的子目标。',
+      '2023至2024年间，对认知科学、概念语义学、认知语法、工作记忆与二语产出模型的综合考察，使研究重新进入Levelt的概念化器内部，并逐步形成一条可说明陈述性知识如何被选择、组织并在线转换为言前信息的加工路径。',
+      '2024年获批第十二批中国外语教育基金项目“可操作性英语口语在线加工机制模型构建研究”，推动机制的形式化建构；同期对ChatGPT语音对话的研究，则进一步考察该机制如何进入口语练习、即时反馈与教学设计。',
+      '《可操作性英语口语在线产出机制研究》的发表与2025年两项重要教学赛事获奖，标志着心理语言学建模、视觉化阐释与课堂实践开始汇聚为研究驱动的口语教学体系，使理论建构与教学验证形成双向反馈。',
+      '2026年的会议模型将功能定向、概念焦点与最小关系构型界定为言语得以启动的最低可用状态，并以递增式编码、递归再触发及注意资源支持说明言语如何在实时压力下由局部准备持续推进为连续产出。'
+    ],
+    'footer>div':[
+      '心理语言学 · 言语产出 · 在线加工',
+      '“进步，而非完美。”',
+      '© 2026 李沛 · 个人学术网站'
+    ]
+  }
+};
+
+const originalContent=new Map();
+function rememberElement(element){
+  if(element&&!originalContent.has(element)) originalContent.set(element,element.innerHTML);
+}
+Object.keys(bilingualContent.single).forEach(selector=>rememberElement(document.querySelector(selector)));
+Object.keys(bilingualContent.lists).forEach(selector=>document.querySelectorAll(selector).forEach(rememberElement));
+
+function setLanguage(language){
+  const chinese=language==='zh-CN';
+  document.documentElement.lang=chinese?'zh-CN':'en';
+  document.title=chinese?'李沛 · 二语英语口语产出的在线加工可操作机制':'Li Pei · The Operable Mechanism';
+  document.querySelector('meta[name="description"]').content=chinese
+    ?'李沛个人学术网站：心理语言学、二语英语口语产出、在线加工与英语口语研究室。'
+    :'Li Pei — Psycholinguistics, L2 speech production, English Speaking Lab.';
+  Object.entries(bilingualContent.single).forEach(([selector,chineseHTML])=>{
+    const element=document.querySelector(selector);
+    if(element) element.innerHTML=chinese?chineseHTML:originalContent.get(element);
+  });
+  Object.entries(bilingualContent.lists).forEach(([selector,chineseItems])=>{
+    document.querySelectorAll(selector).forEach((element,index)=>{
+      element.innerHTML=chinese?(chineseItems[index]??originalContent.get(element)):originalContent.get(element);
+    });
+  });
+  document.getElementById('langBtn').textContent=chinese?'EN':'中';
+  document.getElementById('langBtn').title=chinese?'Switch to English':'切换至中文';
+  localStorage.setItem('siteLanguage',chinese?'zh-CN':'en');
+}
+const savedLanguage=localStorage.getItem('siteLanguage');
+if(savedLanguage==='zh-CN') setLanguage('zh-CN');
 document.getElementById('langBtn').addEventListener('click',()=>{
-  alert('中英文切换接口已预留。当前原型以英文国际学术主页为主。');
+  setLanguage(document.documentElement.lang==='zh-CN'?'en':'zh-CN');
 });
 </script>
 </body>
