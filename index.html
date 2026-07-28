@@ -119,22 +119,21 @@ nav a:hover::after{left:0;right:0}
   display:grid;place-items:center;background:#070707;color:var(--orange);cursor:pointer;
 }
 .hero{
-  min-height:calc(100vh - 110px); padding:48px 54px 30px;
-  display:grid; grid-template-columns:250px minmax(0,1fr) 250px; gap:34px; align-items:center;
-  position:relative;
+  min-height:calc(100vh - 110px);padding:34px 54px 96px;
+  display:block;position:relative;
 }
 .hero::after{
   content:""; position:absolute; left:3%; right:3%; bottom:30px; height:1px;
   background:linear-gradient(90deg,transparent,var(--gold),transparent);
 }
-.coin-wrap{text-align:center}
+.coin-wrap{text-align:center;margin-bottom:13px}
 .coin{
-  width:225px;aspect-ratio:1;object-fit:cover;border-radius:50%;
+  width:142px;aspect-ratio:1;object-fit:cover;border-radius:50%;
   filter:drop-shadow(0 0 24px rgba(240,185,67,.27));
   animation:float 6s ease-in-out infinite;
 }
 @keyframes float{50%{transform:translateY(-8px)}}
-.hero-main{text-align:center;align-self:center;min-width:0;position:relative;z-index:2}
+.hero-main{width:min(1120px,100%);margin:0 auto;text-align:center;min-width:0;position:relative;z-index:2}
 .kicker{color:var(--orange);font-size:13px;letter-spacing:.26em;text-transform:uppercase}
 h1{
   margin:14px 0 6px;color:var(--gold2);font-size:clamp(42px,5vw,82px);
@@ -142,7 +141,7 @@ h1{
 }
 .subtitle{font-size:clamp(16px,1.6vw,24px);letter-spacing:.08em;color:var(--orange-soft)}
 .hero-statement{
-  width:min(820px,100%);margin:14px auto 0;color:#d8cfbe;
+  width:min(1040px,100%);margin:14px auto 0;color:#d8cfbe;
   font-size:clamp(13px,1.05vw,16px);line-height:1.55;letter-spacing:.015em;
 }
 .rule{display:flex;align-items:center;gap:15px;margin:25px auto;width:min(680px,100%)}
@@ -152,9 +151,9 @@ h1{
 .name{font-size:38px;letter-spacing:.15em;color:var(--orange-soft);margin-top:20px}
 .identity{color:#d7cdb8;line-height:1.7;font-size:16px}
 .tags{margin-top:20px;color:var(--orange);font-size:13px;letter-spacing:.12em}
-.personal{display:flex;flex-direction:column;align-items:center;gap:14px}
+.personal{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:19px}
 .handmark{
-  width:225px;aspect-ratio:1;position:relative;display:grid;place-items:center;
+  width:92px;aspect-ratio:1;position:relative;display:grid;place-items:center;
   border-radius:50%;overflow:hidden;
   border:1px solid rgba(216,170,79,.32);
   box-shadow:0 0 24px rgba(240,185,67,.18),inset 0 0 18px rgba(216,170,79,.04);
@@ -410,8 +409,8 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 }
 @media(max-width:1000px){
   header{grid-template-columns:1fr auto} nav{display:none}
-  .hero{grid-template-columns:180px 1fr 180px;gap:18px;padding:42px 24px 74px;text-align:center}
-  .coin,.handmark{width:165px}.signature{display:none}
+  .hero{padding:32px 24px 84px;text-align:center}
+  .coin{width:128px}.handmark{width:84px}.signature{display:none}
   .modules{grid-template-columns:repeat(2,1fr)}
   .modules .card,.modules .card:nth-child(4){grid-column:auto}
   .modules .card:nth-child(5){grid-column:1 / -1}
@@ -423,16 +422,14 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   .frame{width:calc(100% - 12px);margin:6px auto;border-radius:15px}
   header{height:68px;padding:0 16px}
   .brand{font-size:14px}.tools{gap:6px}.iconbtn{width:32px;height:32px}
-  .hero{min-height:calc(100svh - 80px);grid-template-columns:minmax(0,22%) minmax(0,56%) minmax(0,22%);gap:4px;padding:24px 8px 58px;align-items:center}
-  .coin-wrap,.personal{width:100%;min-width:0;justify-self:stretch}
-  .coin-wrap{display:flex;justify-content:center}
-  .personal{justify-content:center}
-  .coin,.handmark{width:min(21vw,105px);max-width:105px;flex:0 0 auto}
+  .hero{min-height:calc(100svh - 80px);padding:20px 12px 72px}
+  .coin-wrap,.personal{width:100%;min-width:0}
+  .coin-wrap{display:flex;justify-content:center;margin-bottom:9px}
+  .personal{justify-content:center;margin-top:12px}
+  .coin{width:82px;max-width:82px;flex:0 0 auto}
+  .handmark{width:58px;max-width:58px;flex:0 0 auto}
   .hero-main .kicker{font-size:7px;letter-spacing:.12em}
-  h1{
-    width:calc(100vw - 40px);max-width:520px;margin-left:50%;
-    transform:translateX(-50%);text-align:center;font-size:clamp(25px,8vw,38px);
-  }
+  h1{width:100%;max-width:520px;margin:8px auto 5px;transform:none;text-align:center;font-size:clamp(25px,8vw,38px)}
   .subtitle{font-size:9px;line-height:1.35}
   .hero-statement{font-size:7px;line-height:1.35;margin-top:7px}
   .rule{margin:13px auto}.name{font-size:19px;margin-top:10px}
@@ -512,11 +509,10 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 
 <main>
 <section class="hero" id="home">
-  <div class="coin-wrap">
-    <img class="coin" src="assets/images/academic-logo.webp?v=1" alt="The Operable Mechanism logo">
-  </div>
-
   <div class="hero-main">
+    <div class="coin-wrap">
+      <img class="coin" src="assets/images/academic-logo.webp?v=1" alt="The Operable Mechanism logo">
+    </div>
     <h1>THE OPERABLE<br>MECHANISM</h1>
     <div class="subtitle">for Online Processing in L2 English Speech Production,</div>
     <div class="hero-statement">to explain how declarative knowledge can be organized online through operable steps to support more fluent speech under real-time pressure.</div>
@@ -528,11 +524,10 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
       M.A., Nankai University
     </div>
     <div class="tags">PSYCHOLINGUISTICS · SPEECH PRODUCTION · ONLINE PROCESSING</div>
-  </div>
-
-  <div class="personal">
-    <div class="handmark" aria-label="Personal hand mark">
-      <img src="assets/images/personal-logo.webp?v=3" alt="PsylntSai personal hand mark and signature" decoding="async">
+    <div class="personal">
+      <div class="handmark" aria-label="Personal hand mark">
+        <img src="assets/images/personal-logo.webp?v=3" alt="PsylntSai personal hand mark and signature" decoding="async">
+      </div>
     </div>
   </div>
   <div class="scroll"><span></span>SCROLL TO EXPLORE</div>
