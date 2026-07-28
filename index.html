@@ -75,6 +75,10 @@ html[lang="zh-CN"] .event-body p{
 }
 html[lang="zh-CN"] .card p{line-height:1.82}
 html[lang="zh-CN"] .event-body p{line-height:1.75}
+html[lang="en"] .scholar-name-zh,
+html[lang="en"] .foundation-name-zh{display:none}
+html[lang="en"] .scholar-name{min-height:18px}
+html[lang="en"] .foundation-detail h2{margin-bottom:14px}
 body::before{
   content:"";
   position:fixed; inset:0; pointer-events:none; opacity:.23;
@@ -129,7 +133,7 @@ nav a:hover::after{left:0;right:0}
   animation:float 6s ease-in-out infinite;
 }
 @keyframes float{50%{transform:translateY(-8px)}}
-.hero-main{text-align:center;align-self:center;min-width:0}
+.hero-main{text-align:center;align-self:center;min-width:0;position:relative;z-index:2}
 .kicker{color:var(--orange);font-size:13px;letter-spacing:.26em;text-transform:uppercase}
 h1{
   margin:14px 0 6px;color:var(--gold2);font-size:clamp(42px,5vw,82px);
@@ -472,9 +476,10 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   .timeline::before{left:70px}.event{grid-template-columns:56px 1fr;gap:30px;margin-bottom:12px}
   .year{font-size:11px}.event-body{padding:10px 12px}.event-body h4{font-size:12px}
   .event-body p{font-size:9px}.event-body::before{left:-36px;top:15px}
-  html[lang="zh-CN"] h1{font-size:clamp(21px,6.15vw,25px);letter-spacing:.02em}
+  html[lang="zh-CN"] h1{font-size:clamp(18px,5.3vw,22px);letter-spacing:.012em;position:relative;z-index:3}
   html[lang="zh-CN"] .subtitle{font-size:10px}
-  html[lang="zh-CN"] .hero-statement{font-size:8px;line-height:1.55}
+  html[lang="zh-CN"] .hero-statement{font-size:7.5px;line-height:1.55;width:100%}
+  html[lang="zh-CN"] .hero-line{display:block;white-space:nowrap}
   html[lang="zh-CN"] .card p{line-height:1.75}
   html[lang="zh-CN"] .event-body p{font-size:9.5px;line-height:1.68}
   html[lang="zh-CN"] .lab .cn{font-size:13px;letter-spacing:.08em}
@@ -775,14 +780,14 @@ const bilingualContent={
     '.brand':'李 沛',
     '#home h1':'可操作性英语口语在线产出机制',
     '#home .subtitle':'',
-    '#home .hero-statement':'本机制将开口前难以观察的前语言心理加工显化并组织为可操作步骤，支持二语说话者在实时压力下<span class="keep-phrase">顺利启动、持续推进</span>并实现更为流利的表达。',
+    '#home .hero-statement':'<span class="hero-line">本机制将开口前隐性的前语言心理加工显化为可操作步骤，</span><span class="hero-line">支持二语口语在实时压力下顺利启动、持续推进，</span><span class="hero-line">并实现更为流利的表达。</span>',
     '#home .name':'李 沛',
     '#home .identity':'语言研究者&nbsp;&nbsp;|&nbsp;&nbsp;副教授<br>天津财经大学珠江学院<br>南开大学硕士',
     '#home .tags':'心理语言学 · 言语产出 · 在线加工',
     '#home .scroll':'<span></span>向下探索',
     '#mechanism .section-title':'核心学术贡献',
     '#foundations .section-title':'理论根基',
-    '#foundations .foundation-thesis':'可操作机制以心理语言学言语产出理论为总体架构，深入概念形成器内部，整合工作记忆、概念结构、认知语法、系统功能语言学与认知流利等理论资源，阐明交际意图如何在心智表征与注意调控的共同作用下完成前语言组织，并转化为可顺利启动、持续推进的言语产出。',
+    '#foundations .foundation-thesis':'可操作机制以心理语言学言语产出理论为总体架构，深入概念形成器内部，整合工作记忆、概念结构、认知语法、系统功能语言学与认知流利等理论资源，阐明交际意图如何经由宏计划、线性化与微计划形成可启动的前语言信息，并将这一隐性的心理加工过程组织为支持二语口语顺利启动与持续推进的可操作路径。',
     '#foundations .foundation-guide':'点击学者肖像，查看相关理论如何进入本机制',
     '#foundations .foundation-disclaimer':'本栏肖像仅用于标示构成本机制思想来源的学者；其呈现说明理论影响，不代表本人或相关机构对本研究的认可、合作或隶属关系。',
     '#research .section-title':'学术架构',
@@ -837,7 +842,7 @@ const bilingualContent={
     ],
     'footer>div':[
       '心理语言学 · 言语产出 · 在线加工',
-      '“进步，而非完美。”',
+      '“Progress, not perfection.”',
       '© 2026 李沛 · 个人学术网站'
     ]
   }
