@@ -63,6 +63,11 @@ html[lang="zh-CN"] .course b,
 html[lang="zh-CN"] .event-body h4,
 html[lang="zh-CN"] footer strong{font-weight:700}
 html[lang="zh-CN"] .kicker{font-weight:600}
+html[lang="zh-CN"] .lab .cn{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:24px;font-weight:700;letter-spacing:.1em;color:#e4d5b5;
+}
+html[lang="zh-CN"] #lab .lab-panel:nth-child(2)>p{max-width:1280px!important}
 html[lang="zh-CN"] .card p,
 html[lang="zh-CN"] .event-body p{
   text-align:left;text-align-last:auto;text-justify:auto;
@@ -342,6 +347,8 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   html[lang="zh-CN"] .hero-statement{font-size:8px;line-height:1.55}
   html[lang="zh-CN"] .card p{line-height:1.75}
   html[lang="zh-CN"] .event-body p{font-size:9.5px;line-height:1.68}
+  html[lang="zh-CN"] .lab .cn{font-size:13px;letter-spacing:.08em}
+  html[lang="zh-CN"] #lab .lab-panel:nth-child(2)>p{max-width:none!important}
 }
 </style>
 </head>
@@ -542,7 +549,7 @@ const bilingualContent={
     '#lab .kicker':'研究驱动的英语口语教学',
     '#lab h2':'英语口语研究室',
     '#lab .cn':'English Speaking Lab',
-    '#lab .lab-panel:nth-child(2)>p':'以美语正音、美式语流、句构框架与流利机制为相互贯通的四个层次，将语音实现、连续语流、句法生成与在线加工整合为一套结构化的口语学习体系。',
+    '#lab .lab-panel:nth-child(2)>p':'研究室以美语正音、美式语流、句构框架与流利机制为四个相互衔接的训练模块，形成从发音准确、语流自然、句构清晰到表达顺利启动并持续推进的系统化口语学习路径。',
     '#timeline .section-title':'学术历程',
     'footer strong':'李 沛'
   },
