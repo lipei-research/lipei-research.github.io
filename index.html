@@ -243,6 +243,82 @@ h1{
 }
 .card ul{padding-left:18px}
 .number{font-size:44px;color:rgba(216,170,79,.18);position:absolute;right:18px;top:12px}
+.foundations{
+  position:relative;overflow:hidden;border:1px solid rgba(216,170,79,.28);border-radius:18px;
+  padding:30px;background:
+    radial-gradient(circle at 19% 46%,rgba(247,148,29,.075),transparent 36%),
+    linear-gradient(145deg,rgba(216,170,79,.035),rgba(255,255,255,.006));
+}
+.foundations::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.24;
+  background:linear-gradient(90deg,transparent 49.93%,rgba(216,170,79,.14) 50%,transparent 50.07%);
+}
+.foundation-intro{
+  position:relative;max-width:1040px;margin:0 auto 28px;text-align:center;
+  color:#bdb3a4;font-size:14px;line-height:1.75;letter-spacing:.015em;
+}
+.foundation-layout{
+  position:relative;display:grid;grid-template-columns:minmax(520px,.96fr) minmax(420px,1.04fr);
+  gap:30px;align-items:stretch;
+}
+.scholar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.scholar{
+  appearance:none;border:1px solid rgba(216,170,79,.2);border-radius:13px;
+  min-width:0;padding:12px 8px 10px;background:rgba(3,3,3,.78);color:inherit;
+  font-family:inherit;text-align:center;cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .25s,border-color .25s,background .25s,box-shadow .25s;
+}
+.scholar::after{
+  content:"";position:absolute;left:24%;right:24%;bottom:0;height:1px;
+  background:var(--orange);opacity:0;transition:.25s;
+}
+.scholar:hover,.scholar:focus-visible,.scholar.is-active{
+  transform:translateY(-3px);border-color:rgba(247,148,29,.78);
+  background:linear-gradient(180deg,rgba(247,148,29,.065),rgba(5,5,5,.92));
+  box-shadow:0 10px 28px rgba(0,0,0,.28),0 0 18px rgba(247,148,29,.08);outline:none;
+}
+.scholar:hover::after,.scholar:focus-visible::after,.scholar.is-active::after{left:10%;right:10%;opacity:1}
+.scholar-portrait{
+  display:block;width:min(112px,86%);aspect-ratio:1;margin:0 auto 9px;border-radius:50%;
+  object-fit:cover;object-position:center;filter:grayscale(1) contrast(1.08) brightness(.9);
+  border:1px solid rgba(216,170,79,.3);box-shadow:0 0 0 5px rgba(216,170,79,.025);
+  transition:filter .3s,box-shadow .3s;
+}
+.scholar:hover .scholar-portrait,.scholar.is-active .scholar-portrait{
+  filter:grayscale(1) contrast(1.1) brightness(1.02);
+  box-shadow:0 0 0 5px rgba(247,148,29,.05),0 0 20px rgba(247,148,29,.15);
+}
+.scholar[data-scholar="pinker"] .scholar-portrait{object-position:57% 38%}
+.scholar[data-scholar="levelt"] .scholar-portrait{object-position:57% 25%}
+.scholar[data-scholar="wittgenstein"] .scholar-portrait{object-position:50% 47%}
+.scholar[data-scholar="halliday"] .scholar-portrait{object-position:50% 42%}
+.scholar[data-scholar="langacker"] .scholar-portrait{object-position:54% 30%}
+.scholar[data-scholar="jackendoff"] .scholar-portrait{object-position:52% 38%}
+.scholar[data-scholar="baddeley"] .scholar-portrait{object-position:55% 40%}
+.scholar[data-scholar="lakoff"] .scholar-portrait{object-position:64% 36%}
+.scholar-name{display:block;color:#eadcc2;font-size:13px;line-height:1.2;letter-spacing:.035em}
+.scholar-field{display:block;margin-top:4px;color:#8f8678;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.foundation-detail{
+  min-width:0;border:1px solid rgba(216,170,79,.3);border-radius:14px;padding:34px 36px;
+  background:
+    linear-gradient(135deg,rgba(247,148,29,.055),transparent 32%),
+    rgba(3,3,3,.88);display:flex;flex-direction:column;justify-content:center;
+  box-shadow:inset 0 0 38px rgba(216,170,79,.025);
+}
+.foundation-index{color:rgba(216,170,79,.45);font-size:42px;line-height:1;letter-spacing:.08em}
+.foundation-status{
+  margin-top:18px;color:var(--orange);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+}
+.foundation-detail h2{margin:10px 0 3px;color:var(--gold2);font-size:clamp(30px,3vw,47px);font-weight:500}
+.foundation-detail h3{
+  margin:0;color:var(--orange-soft);font-size:15px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+}
+.foundation-detail .mini-rule{width:76px;height:1px;margin:24px 0;background:var(--orange)}
+.foundation-detail p{margin:0;color:#c8beaf;font-size:15px;line-height:1.82}
+.foundation-disclaimer{
+  position:relative;margin:22px 0 0;text-align:center;color:#756d62;font-size:10px;
+  letter-spacing:.055em;line-height:1.55;
+}
 .lab{
   display:flex;flex-direction:column;gap:18px;
 }
@@ -302,6 +378,8 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   .modules{grid-template-columns:repeat(2,1fr)}
   .modules .card,.modules .card:nth-child(4){grid-column:auto}
   .modules .card:nth-child(5){grid-column:1 / -1}
+  .foundation-layout{grid-template-columns:1fr;max-width:720px;margin:auto}
+  .scholar-portrait{width:min(128px,80%)}
   .lab{display:flex;flex-direction:column}
 }
 @media(max-width:620px){
@@ -327,6 +405,20 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   .modules{grid-template-columns:repeat(2,1fr);gap:8px}
   .card{padding:15px 12px;min-height:170px}.card h3{font-size:14px}.card p,.card li{font-size:10px}
   .number{font-size:30px}
+  .foundations{padding:16px 9px;border-radius:13px}
+  .foundation-intro{font-size:9.5px;line-height:1.7;margin-bottom:15px;padding:0 5px}
+  .foundation-layout{gap:12px}
+  .scholar-grid{gap:5px}
+  .scholar{padding:7px 3px 6px;border-radius:9px}
+  .scholar-portrait{width:min(76px,82%);margin-bottom:6px;box-shadow:0 0 0 3px rgba(216,170,79,.025)}
+  .scholar-name{font-size:8.5px;letter-spacing:0}
+  .scholar-field{font-size:5.5px;letter-spacing:.05em;margin-top:3px}
+  .foundation-detail{padding:20px 18px;min-height:270px}
+  .foundation-index{font-size:26px}.foundation-status{font-size:7px;margin-top:12px}
+  .foundation-detail h2{font-size:25px;margin-top:7px}.foundation-detail h3{font-size:9px;line-height:1.45}
+  .foundation-detail .mini-rule{margin:15px 0;width:52px}
+  .foundation-detail p{font-size:10px;line-height:1.75}
+  .foundation-disclaimer{font-size:7px;margin-top:13px;padding:0 7px}
   .lab{display:flex;flex-direction:column;gap:8px}.lab-panel{padding:15px 12px}
   .lab .kicker{font-size:9px;line-height:1.45;letter-spacing:.18em}
   .lab h2{font-size:22px}.lab .cn{font-size:11px}.lab-panel p{font-size:10px}
@@ -367,7 +459,7 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 <header>
   <div class="brand">LI PEI</div>
   <nav>
-    <a href="#home">Home</a><a href="#mechanism">Mechanism</a><a href="#research">Research</a>
+    <a href="#home">Home</a><a href="#mechanism">Mechanism</a><a href="#foundations">Foundations</a><a href="#research">Research</a>
     <a href="#lab">English Speaking Lab</a><a href="#timeline">Journey</a><a href="#contact">Contact</a>
   </nav>
   <div class="tools">
@@ -408,6 +500,107 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   <div class="section-title">The Central Contribution</div>
   <div class="mechanism-shell">
     <img class="mechanism-img" src="assets/images/mechanism-poster-orange.webp?v=1" alt="The Operable Mechanism model">
+  </div>
+</section>
+
+<section class="section" id="foundations">
+  <div class="section-title">Intellectual Foundations</div>
+  <div class="foundations">
+    <p class="foundation-intro">The operable mechanism has developed through sustained engagement with scholarship in speech production, conceptual representation, cognitive grammar, functional linguistics, working memory, cognitive fluency, and the philosophy of language. Select a scholar to see how that work enters the model.</p>
+    <div class="foundation-layout">
+      <div class="scholar-grid" role="list" aria-label="Scholars informing the operable mechanism">
+        <button class="scholar" type="button" role="listitem" data-scholar="pinker" data-index="01"
+          data-name-en="Steven Pinker" data-name-zh="史蒂文·平克"
+          data-field-en="Language · Mind · Generativity" data-field-zh="语言 · 心智 · 生成能力"
+          data-status-en="Direct theoretical foundation" data-status-zh="直接理论基础"
+          data-copy-en="Pinker’s account of language as a system of mind provides a broad cognitive foundation for understanding the mental and cognitive resources involved in the formation of communicative intention."
+          data-copy-zh="平克关于语言作为心智系统及其生成能力的论述，为本研究理解交际意图形成所涉及的心智基础与认知资源提供了宏观理论支撑。">
+          <img class="scholar-portrait" src="assets/images/scholars/steven-pinker.webp" alt="Steven Pinker" loading="lazy" decoding="async">
+          <span class="scholar-name">Steven Pinker</span><span class="scholar-field">Language &amp; Mind</span>
+        </button>
+        <button class="scholar" type="button" role="listitem" data-scholar="halliday" data-index="02"
+          data-name-en="M. A. K. Halliday" data-name-zh="韩礼德"
+          data-field-en="Functional Organization · Information Structure" data-field-zh="功能组织 · 信息结构"
+          data-status-en="Direct theoretical foundation" data-status-zh="直接理论基础"
+          data-copy-en="Halliday’s systemic functional linguistics informs the model’s syntax, discourse organization, information progression, and functional orientation; his distinction between given and new information is further operationalized as a strategy for reducing processing load and buying planning time."
+          data-copy-zh="韩礼德的系统功能语言学为句法体系、语篇组织、信息递推及开口启动阈值中的功能定向提供理论基础；其已知信息与新信息的区分，又被进一步转化为降低实时加工负荷、为后续规划争取时间的操作策略。">
+          <img class="scholar-portrait" src="assets/images/scholars/mak-halliday.webp" alt="M. A. K. Halliday" loading="lazy" decoding="async">
+          <span class="scholar-name">M. A. K. Halliday</span><span class="scholar-field">Functional Linguistics</span>
+        </button>
+        <button class="scholar" type="button" role="listitem" data-scholar="jackendoff" data-index="03"
+          data-name-en="Ray Jackendoff" data-name-zh="雷·杰肯道夫"
+          data-field-en="Conceptual Structure · Preverbal Representation" data-field-zh="概念结构 · 前语言表征"
+          data-status-en="Direct theoretical foundation" data-status-zh="直接理论基础"
+          data-copy-en="Jackendoff’s theory of conceptual structure provides a basis for explaining how declarative knowledge can assume a nonlinguistic organization within the preverbal message, allowing entities, events, roles, and relations to be structured before linguistic encoding begins."
+          data-copy-zh="杰肯道夫的概念结构理论为解释陈述性知识如何在前语言信息中形成非语言概念表征提供了基础，使实体、事件、角色与关系能够在进入语言编码之前获得结构化呈现。">
+          <img class="scholar-portrait" src="assets/images/scholars/ray-jackendoff.webp" alt="Ray Jackendoff" loading="lazy" decoding="async">
+          <span class="scholar-name">Ray Jackendoff</span><span class="scholar-field">Conceptual Structure</span>
+        </button>
+        <button class="scholar" type="button" role="listitem" data-scholar="langacker" data-index="04"
+          data-name-en="Ronald W. Langacker" data-name-zh="罗纳德·兰盖克"
+          data-field-en="Conceptual Focus · Relational Configuration" data-field-zh="概念焦点 · 关系配置"
+          data-status-en="Direct theoretical foundation" data-status-zh="直接理论基础"
+          data-copy-en="Langacker’s cognitive grammar supplies theoretical resources for the formation, profiling, and expansion of conceptual focus and for the configuration of entities and relations—processes closely connected to the conceptual and relational conditions of the Speech Launch Threshold."
+          data-copy-zh="兰盖克的认知语法为概念焦点的形成、侧显与扩展，以及实体与关系的配置提供了理论资源，并由此参与界定前语言信息达到开口启动阈值所需要的概念聚焦与最低关系结构。">
+          <img class="scholar-portrait" src="assets/images/scholars/ronald-langacker.webp" alt="Ronald W. Langacker" loading="lazy" decoding="async">
+          <span class="scholar-name">Ronald W. Langacker</span><span class="scholar-field">Cognitive Grammar</span>
+        </button>
+        <button class="scholar is-active" type="button" role="listitem" aria-current="true" data-scholar="levelt" data-index="05"
+          data-name-en="Willem J. M. Levelt" data-name-zh="威廉·莱维特"
+          data-field-en="Speech Production · Conceptualization" data-field-zh="言语产出 · 概念化"
+          data-status-en="Principal theoretical foundation" data-status-zh="核心理论底座"
+          data-copy-en="Levelt’s architecture of speech production is the principal foundation of the operable mechanism. Building on the pathway from intention and conceptualization to formulation and articulation, the present model moves further inside the Conceptualizer to explain how a preverbal message is organized online and prepared for speech launch."
+          data-copy-zh="莱维特的言语产出架构构成本机制的总体理论底座；本研究承接其从交际意图、概念化、形成到发音的加工路径，并进一步进入概念形成器内部，解释前语言信息如何在线组织并走向开口启动。">
+          <img class="scholar-portrait" src="assets/images/scholars/willem-levelt.webp" alt="Willem J. M. Levelt" loading="lazy" decoding="async">
+          <span class="scholar-name">Willem J. M. Levelt</span><span class="scholar-field">Speech Production</span>
+        </button>
+        <button class="scholar" type="button" role="listitem" data-scholar="segalowitz" data-index="06"
+          data-name-en="Norman Segalowitz" data-name-zh="诺曼·西格洛维茨"
+          data-field-en="Cognitive Fluency · Processing Efficiency" data-field-zh="认知流利 · 加工效率"
+          data-status-en="Direct theoretical foundation" data-status-zh="直接理论基础"
+          data-copy-en="Segalowitz’s account of cognitive fluency provides theoretical grounds for positing an optimizable online processing mechanism beneath observable speech. Together with Levelt’s production architecture, it motivates the question of how internal processing efficiency becomes more fluent L2 performance."
+          data-copy-zh="西格洛维茨对认知流利的论述，为假设二语口语背后存在一个可以优化的在线加工机制提供了重要理论依据；认知流利所指向的内部加工效率，与莱维特的言语产出架构共同构成提出可操作机制的重要出发点。">
+          <img class="scholar-portrait" src="assets/images/scholars/norman-segalowitz.webp" alt="Norman Segalowitz" loading="lazy" decoding="async">
+          <span class="scholar-name">Norman Segalowitz</span><span class="scholar-field">Cognitive Fluency</span>
+        </button>
+        <button class="scholar" type="button" role="listitem" data-scholar="lakoff" data-index="07"
+          data-name-en="George Lakoff" data-name-zh="乔治·莱考夫"
+          data-field-en="Embodied Cognition · Image Schemas" data-field-zh="体验认知 · 意象图式"
+          data-status-en="Direct theoretical foundation" data-status-zh="直接理论基础"
+          data-copy-en="Lakoff’s work on embodied cognition, image schemas, and categorization informs the convergence and classification of declarative knowledge, extending the contents available for online organization beyond propositional meaning to imagery, experiential patterns, and other conceptual representations."
+          data-copy-zh="莱考夫关于体验认知、意象图式和范畴化的研究，为陈述性知识的收敛和分类提供了重要启发，使进入在线组织的内容不再局限于命题语义，还可以包括意象、体验结构及其他概念表征。">
+          <img class="scholar-portrait" src="assets/images/scholars/george-lakoff.webp" alt="George Lakoff" loading="lazy" decoding="async">
+          <span class="scholar-name">George Lakoff</span><span class="scholar-field">Embodied Cognition</span>
+        </button>
+        <button class="scholar" type="button" role="listitem" data-scholar="baddeley" data-index="08"
+          data-name-en="Alan Baddeley" data-name-zh="艾伦·巴德利"
+          data-field-en="Working Memory · Executive Control" data-field-zh="工作记忆 · 执行控制"
+          data-status-en="Direct theoretical foundation" data-status-zh="直接理论基础"
+          data-copy-en="Baddeley’s working-memory model helps explain how internal knowledge and external contextual information are temporarily maintained, integrated, and coordinated during intention formation, and how executive control mobilizes attentional resources to support a well-specified communicative intention."
+          data-copy-zh="巴德利的工作记忆模型用于解释意图形成过程中内部知识与外部情境信息如何被暂时保持、整合和调度，以及注意资源如何在中央执行系统协调下得到有效配置，从而支持内容充分、方向明确的交际意图。">
+          <img class="scholar-portrait" src="assets/images/scholars/alan-baddeley.webp" alt="Alan Baddeley" loading="lazy" decoding="async">
+          <span class="scholar-name">Alan Baddeley</span><span class="scholar-field">Working Memory</span>
+        </button>
+        <button class="scholar" type="button" role="listitem" data-scholar="wittgenstein" data-index="09"
+          data-name-en="Ludwig Wittgenstein" data-name-zh="路德维希·维特根斯坦"
+          data-field-en="Language · World · Philosophical Context" data-field-zh="语言 · 世界 · 哲学背景"
+          data-status-en="Broader intellectual context" data-status-zh="间接思想背景"
+          data-copy-en="The philosophy-of-language tradition associated with Wittgenstein forms an indirect background to the framework’s concern with relations among language, world, and mind. This influence entered primarily through Chinese scholarship and earlier linguistic training rather than through direct exegesis of Wittgenstein’s texts."
+          data-copy-zh="维特根斯坦所代表的语言哲学传统，构成本研究思考语言、世界与心智关系的间接思想背景；这一影响主要经由中文学术著作与既有语言学训练进入本人的理论视野，而非来自对其原著的直接阐释。">
+          <img class="scholar-portrait" src="assets/images/scholars/ludwig-wittgenstein.webp" alt="Ludwig Wittgenstein" loading="lazy" decoding="async">
+          <span class="scholar-name">Ludwig Wittgenstein</span><span class="scholar-field">Philosophical Context</span>
+        </button>
+      </div>
+      <article class="foundation-detail" aria-live="polite">
+        <div class="foundation-index">05</div>
+        <div class="foundation-status">Principal theoretical foundation</div>
+        <h2>Willem J. M. Levelt</h2>
+        <h3>Speech Production · Conceptualization</h3>
+        <div class="mini-rule"></div>
+        <p>Levelt’s architecture of speech production is the principal foundation of the operable mechanism. Building on the pathway from intention and conceptualization to formulation and articulation, the present model moves further inside the Conceptualizer to explain how a preverbal message is organized online and prepared for speech launch.</p>
+      </article>
+    </div>
+    <p class="foundation-disclaimer">The portraits identify scholars whose work informs the framework; inclusion indicates intellectual influence, not endorsement, collaboration, or institutional affiliation.</p>
   </div>
 </section>
 
@@ -548,6 +741,9 @@ const bilingualContent={
     '#home .tags':'心理语言学 · 言语产出 · 在线加工',
     '#home .scroll':'<span></span>向下探索',
     '#mechanism .section-title':'核心学术贡献',
+    '#foundations .section-title':'理论根基',
+    '#foundations .foundation-intro':'可操作机制建立在对言语产出、概念表征、认知语法、系统功能语言学、工作记忆、认知流利与语言哲学等研究传统的持续研读和整合之上。点击学者肖像，可查看相关理论如何进入本机制。',
+    '#foundations .foundation-disclaimer':'本栏肖像仅用于标示构成本机制思想来源的学者；其呈现说明理论影响，不代表本人或相关机构对本研究的认可、合作或隶属关系。',
     '#research .section-title':'学术架构',
     '#lab .section-title':'英语口语研究室',
     '#lab .kicker':'研究驱动的英语口语教学',
@@ -558,7 +754,7 @@ const bilingualContent={
     'footer strong':'李 沛'
   },
   lists:{
-    'header nav a':['首页','机制','研究','口语研究室','学术历程','联系'],
+    'header nav a':['首页','机制','理论根基','研究','口语研究室','学术历程','联系'],
     '#research .card h3':['研究','论著','项目','学术报告','获奖'],
     '#research .card p':[
       '聚焦二语英语口语产出中“知识可得而表达不畅”的核心矛盾，考察陈述性知识如何由交际意图出发，依次经由宏观内容规划、线性化、微计划组织与开口启动阈值而进入语言编码，由此解释学习者如何在实时压力下将既有语言知识转化为可顺利启动并持续推进的流利言语。',
@@ -632,7 +828,37 @@ function setLanguage(language){
   document.getElementById('langBtn').textContent=chinese?'EN':'中';
   document.getElementById('langBtn').title=chinese?'Switch to English':'切换至中文';
   localStorage.setItem('siteLanguage',chinese?'zh-CN':'en');
+  updateScholarLabels();
+  const activeScholar=document.querySelector('.scholar.is-active')||document.querySelector('.scholar');
+  if(activeScholar) renderScholar(activeScholar);
 }
+const foundationDetail=document.querySelector('.foundation-detail');
+function updateScholarLabels(){
+  const chinese=document.documentElement.lang==='zh-CN';
+  document.querySelectorAll('.scholar').forEach(scholar=>{
+    scholar.querySelector('.scholar-name').textContent=scholar.dataset[chinese?'nameZh':'nameEn'];
+    scholar.querySelector('.scholar-field').textContent=scholar.dataset[chinese?'fieldZh':'fieldEn'];
+  });
+}
+function renderScholar(scholar){
+  if(!scholar||!foundationDetail) return;
+  document.querySelectorAll('.scholar').forEach(item=>{
+    const active=item===scholar;
+    item.classList.toggle('is-active',active);
+    if(active) item.setAttribute('aria-current','true'); else item.removeAttribute('aria-current');
+  });
+  const chinese=document.documentElement.lang==='zh-CN';
+  foundationDetail.querySelector('.foundation-index').textContent=scholar.dataset.index;
+  foundationDetail.querySelector('.foundation-status').textContent=scholar.dataset[chinese?'statusZh':'statusEn'];
+  foundationDetail.querySelector('h2').textContent=scholar.dataset[chinese?'nameZh':'nameEn'];
+  foundationDetail.querySelector('h3').textContent=scholar.dataset[chinese?'fieldZh':'fieldEn'];
+  foundationDetail.querySelector('p').textContent=scholar.dataset[chinese?'copyZh':'copyEn'];
+}
+document.querySelectorAll('.scholar').forEach(scholar=>{
+  scholar.addEventListener('click',()=>renderScholar(scholar));
+  scholar.addEventListener('mouseenter',()=>renderScholar(scholar));
+  scholar.addEventListener('focus',()=>renderScholar(scholar));
+});
 const savedLanguage=localStorage.getItem('siteLanguage');
 if(savedLanguage==='zh-CN') setLanguage('zh-CN');
 document.getElementById('langBtn').addEventListener('click',()=>{
