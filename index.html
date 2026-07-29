@@ -416,6 +416,9 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
   border:1px solid rgba(243,210,122,0);opacity:0;
 }
 .enter-trigger:hover{filter:drop-shadow(0 0 18px rgba(240,185,67,.24));transform:scale(1.018)}
+.enter-trigger.is-primed{
+  filter:drop-shadow(0 0 15px rgba(255,214,123,.54)) drop-shadow(0 0 34px rgba(216,170,79,.34));
+}
 .enter-trigger.is-activating{
   animation:none;transform:scale(.985);
   filter:drop-shadow(0 0 17px rgba(255,207,105,.72)) drop-shadow(0 0 44px rgba(216,170,79,.5));
@@ -789,8 +792,10 @@ if(enterLogo){
   enterLogo.src='assets/images/personal-logo.webp?v=3';
 }
 const soundtrack=new Audio();
-soundtrack.preload='none';
+soundtrack.preload='auto';
+soundtrack.src='assets/audio/alone.mp3';
 soundtrack.volume=.45;
+window.setTimeout(()=>soundtrack.load(),300);
 let playing=false;
 const soundBtn=document.getElementById('soundBtn');
 const soundGlyph=soundBtn.querySelector('.sound-glyph');
@@ -807,7 +812,6 @@ function renderSoundState(isPlaying){
   soundBtn.setAttribute('aria-label',status);
 }
 function startMusic(){
-  if(!soundtrack.src) soundtrack.src='assets/audio/alone.mp3';
   soundtrack.play().then(()=>{
     playing=true;
     renderSoundState(true);
@@ -848,84 +852,90 @@ function playThresholdStone(){
   thresholdAudioContext=thresholdAudioContext||new AudioContextClass();
   const context=thresholdAudioContext;
   if(context.state==='suspended') context.resume();
-  const now=context.currentTime+.012;
+  const now=context.currentTime+.008;
+
+  const compressor=context.createDynamicsCompressor();
+  compressor.threshold.value=-12;
+  compressor.knee.value=12;
+  compressor.ratio.value=4;
+  compressor.attack.value=.001;
+  compressor.release.value=.18;
+  compressor.connect(context.destination);
 
   const master=context.createGain();
-  master.gain.setValueAtTime(.0001,now);
-  master.gain.linearRampToValueAtTime(.28,now+.012);
-  master.gain.exponentialRampToValueAtTime(.0001,now+1.45);
-  master.connect(context.destination);
+  master.gain.setValueAtTime(.62,now);
+  master.gain.exponentialRampToValueAtTime(.0001,now+.92);
+  master.connect(compressor);
 
+  const impactBus=context.createGain();
   const dry=context.createGain();
-  dry.gain.value=.58;
-  dry.connect(master);
+  dry.gain.value=.84;
+  impactBus.connect(dry).connect(master);
 
-  const impulse=context.createBuffer(2,Math.floor(context.sampleRate*1.35),context.sampleRate);
-  for(let channel=0;channel<impulse.numberOfChannels;channel++){
-    const data=impulse.getChannelData(channel);
-    for(let index=0;index<data.length;index++){
-      const decay=Math.pow(1-index/data.length,3.4);
-      data[index]=(Math.random()*2-1)*decay*(index<2400?.8:.32);
+  [[.066,.27,-.34],[.128,.17,.28],[.204,.105,-.18],[.296,.06,.22],[.398,.032,-.12]].forEach(([delayTime,level,pan])=>{
+    const delay=context.createDelay(.5);
+    delay.delayTime.value=delayTime;
+    const reflectionFilter=context.createBiquadFilter();
+    reflectionFilter.type='lowpass';
+    reflectionFilter.frequency.value=4200-delayTime*5200;
+    const echoGain=context.createGain();
+    echoGain.gain.value=level;
+    impactBus.connect(delay).connect(reflectionFilter).connect(echoGain);
+    if(context.createStereoPanner){
+      const panner=context.createStereoPanner();
+      panner.pan.value=pan;
+      echoGain.connect(panner).connect(master);
+    }else{
+      echoGain.connect(master);
     }
-  }
-  const reverb=context.createConvolver();
-  reverb.buffer=impulse;
-  const wet=context.createGain();
-  wet.gain.value=.19;
-  reverb.connect(wet).connect(master);
+  });
 
-  const connectSource=source=>{
-    source.connect(dry);
-    source.connect(reverb);
-  };
-
-  const noiseBuffer=context.createBuffer(1,Math.floor(context.sampleRate*.085),context.sampleRate);
+  const noiseBuffer=context.createBuffer(1,Math.floor(context.sampleRate*.052),context.sampleRate);
   const noiseData=noiseBuffer.getChannelData(0);
   for(let index=0;index<noiseData.length;index++){
-    noiseData[index]=(Math.random()*2-1)*Math.pow(1-index/noiseData.length,4.8);
+    const envelope=Math.pow(1-index/noiseData.length,7.2);
+    noiseData[index]=(Math.random()*2-1)*envelope;
   }
   const noise=context.createBufferSource();
   noise.buffer=noiseBuffer;
+  const highPass=context.createBiquadFilter();
+  highPass.type='highpass';
+  highPass.frequency.value=720;
   const strikeFilter=context.createBiquadFilter();
   strikeFilter.type='bandpass';
-  strikeFilter.frequency.value=1280;
-  strikeFilter.Q.value=.72;
+  strikeFilter.frequency.value=2380;
+  strikeFilter.Q.value=.62;
   const strikeGain=context.createGain();
-  strikeGain.gain.setValueAtTime(.38,now);
-  strikeGain.gain.exponentialRampToValueAtTime(.0001,now+.09);
-  noise.connect(strikeFilter).connect(strikeGain);
-  connectSource(strikeGain);
+  strikeGain.gain.setValueAtTime(.92,now);
+  strikeGain.gain.exponentialRampToValueAtTime(.0001,now+.055);
+  noise.connect(highPass).connect(strikeFilter).connect(strikeGain).connect(impactBus);
   noise.start(now);
 
-  const stone=context.createOscillator();
-  stone.type='triangle';
-  stone.frequency.setValueAtTime(215,now);
-  stone.frequency.exponentialRampToValueAtTime(82,now+.19);
-  const stoneGain=context.createGain();
-  stoneGain.gain.setValueAtTime(.21,now);
-  stoneGain.gain.exponentialRampToValueAtTime(.0001,now+.26);
-  stone.connect(stoneGain);
-  connectSource(stoneGain);
-  stone.start(now);
-  stone.stop(now+.28);
-
-  [[326,.055,1.18],[487,.032,1.34],[731,.014,.96]].forEach(([frequency,level,duration])=>{
+  [[610,.23,.16],[1040,.15,.13],[1820,.105,.095],[3180,.055,.07]].forEach(([frequency,level,duration])=>{
     const resonance=context.createOscillator();
     resonance.type='sine';
-    resonance.frequency.setValueAtTime(frequency,now+.018);
+    resonance.frequency.setValueAtTime(frequency,now);
+    resonance.frequency.exponentialRampToValueAtTime(frequency*.94,now+duration);
     const resonanceGain=context.createGain();
-    resonanceGain.gain.setValueAtTime(level,now+.018);
+    resonanceGain.gain.setValueAtTime(level,now);
     resonanceGain.gain.exponentialRampToValueAtTime(.0001,now+duration);
-    resonance.connect(resonanceGain);
-    connectSource(resonanceGain);
-    resonance.start(now+.018);
-    resonance.stop(now+duration+.04);
+    resonance.connect(resonanceGain).connect(impactBus);
+    resonance.start(now);
+    resonance.stop(now+duration+.025);
   });
 }
 let entering=false;
-document.getElementById('enterBtn').addEventListener('click',event=>{
+const enterBtn=document.getElementById('enterBtn');
+enterBtn.addEventListener('pointerdown',event=>{
+  event.currentTarget.classList.add('is-primed');
+},{passive:true});
+enterBtn.addEventListener('pointercancel',event=>{
+  event.currentTarget.classList.remove('is-primed');
+},{passive:true});
+enterBtn.addEventListener('click',event=>{
   if(entering) return;
   entering=true;
+  event.currentTarget.classList.remove('is-primed');
   event.currentTarget.classList.add('is-activating');
   playThresholdStone();
   soundtrack.volume=0;
