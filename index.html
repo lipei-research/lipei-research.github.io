@@ -7,6 +7,7 @@
 <meta name="description" content="Li Pei — Psycholinguistics, L2 speech production, English Speaking Lab." />
 <meta name="theme-color" content="#050505" />
 <link rel="icon" href="assets/images/personal-logo.webp?v=3" />
+<link rel="preload" href="assets/audio/threshold-stone.mp3?v=2" as="audio" type="audio/mpeg" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Li Pei Academic Website" />
 <meta property="og:locale" content="zh_CN" />
@@ -847,7 +848,7 @@ soundtrack.addEventListener('ended',()=>{
 renderSoundState(false);
 const thresholdStone=new Audio();
 thresholdStone.preload='auto';
-thresholdStone.src='assets/audio/threshold-stone.mp3?v=1';
+thresholdStone.src='assets/audio/threshold-stone.mp3?v=2';
 thresholdStone.volume=.38;
 thresholdStone.load();
 function playThresholdStone(){
@@ -855,9 +856,14 @@ function playThresholdStone(){
   thresholdStone.play().catch(()=>{});
 }
 let entering=false;
+let stoneTriggered=false;
 const enterBtn=document.getElementById('enterBtn');
 enterBtn.addEventListener('pointerdown',event=>{
   event.currentTarget.classList.add('is-primed');
+  if(event.isPrimary&&event.button===0&&!stoneTriggered){
+    stoneTriggered=true;
+    playThresholdStone();
+  }
 },{passive:true});
 enterBtn.addEventListener('pointercancel',event=>{
   event.currentTarget.classList.remove('is-primed');
@@ -867,7 +873,10 @@ enterBtn.addEventListener('click',event=>{
   entering=true;
   event.currentTarget.classList.remove('is-primed');
   event.currentTarget.classList.add('is-activating');
-  playThresholdStone();
+  if(!stoneTriggered){
+    stoneTriggered=true;
+    playThresholdStone();
+  }
   soundtrack.volume=0;
   startMusic();
   window.setTimeout(fadeMusicIn,210);
