@@ -7,6 +7,8 @@
 <meta name="description" content="Li Pei — Psycholinguistics, L2 speech production, English Speaking Lab." />
 <meta name="theme-color" content="#050505" />
 <link rel="icon" href="assets/images/personal-logo.webp?v=3" />
+<link rel="preload" href="assets/images/personal-logo.webp?v=3" as="image" type="image/webp" fetchpriority="high" />
+<link rel="preload" href="assets/fonts/noto-serif-sc-site.woff2?v=2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/audio/threshold-stone.mp3?v=2" as="audio" type="audio/mpeg" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Li Pei Academic Website" />
@@ -541,7 +543,7 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 <div class="enter" id="enter">
   <div class="enter-box">
     <button class="enter-trigger" id="enterBtn" type="button" aria-label="Enter Li Pei's academic website">
-      <img class="enter-logo" src="assets/images/personal-logo.webp?v=3" alt="">
+      <img class="enter-logo" src="assets/images/personal-logo.webp?v=3" alt="" fetchpriority="high">
     </button>
   </div>
 </div>
@@ -563,7 +565,7 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 <section class="hero" id="home">
   <div class="hero-main">
     <div class="coin-wrap">
-      <img class="coin" src="assets/images/academic-logo.webp?v=1" alt="The Operable Mechanism logo">
+      <img class="coin" src="assets/images/academic-logo.webp?v=1" alt="The Operable Mechanism logo" fetchpriority="high">
     </div>
     <h1>THE OPERABLE<br>MECHANISM</h1>
     <div class="subtitle">for Online Processing in L2 English Speech Production</div>
@@ -793,11 +795,10 @@ if(enterLogo){
   enterLogo.src='assets/images/personal-logo.webp?v=3';
 }
 const soundtrack=new Audio();
-soundtrack.preload='auto';
-soundtrack.src='assets/audio/alone.mp3';
+soundtrack.preload='none';
 soundtrack.volume=.45;
-window.setTimeout(()=>soundtrack.load(),300);
 let playing=false;
+let soundtrackReady=false;
 const soundBtn=document.getElementById('soundBtn');
 const soundGlyph=soundBtn.querySelector('.sound-glyph');
 function renderSoundState(isPlaying){
@@ -813,6 +814,11 @@ function renderSoundState(isPlaying){
   soundBtn.setAttribute('aria-label',status);
 }
 function startMusic(){
+  if(!soundtrackReady){
+    soundtrack.src='assets/audio/alone-web-96k.mp3?v=1';
+    soundtrack.load();
+    soundtrackReady=true;
+  }
   soundtrack.play().then(()=>{
     playing=true;
     renderSoundState(true);
@@ -821,20 +827,6 @@ function startMusic(){
     soundtrack.volume=.45;
     renderSoundState(false);
   });
-}
-function fadeMusicIn(){
-  const targetVolume=.45;
-  const steps=14;
-  let step=0;
-  const fadeTimer=window.setInterval(()=>{
-    if(!playing){
-      window.clearInterval(fadeTimer);
-      return;
-    }
-    step++;
-    soundtrack.volume=targetVolume*(step/steps);
-    if(step>=steps) window.clearInterval(fadeTimer);
-  },32);
 }
 function stopMusic(){
   soundtrack.pause();
@@ -854,6 +846,19 @@ thresholdStone.load();
 function playThresholdStone(){
   thresholdStone.currentTime=0;
   thresholdStone.play().catch(()=>{});
+}
+const scholarWarmers=[];
+function warmScholarPortraits(){
+  document.querySelectorAll('.scholar-portrait').forEach(portrait=>{
+    portrait.loading='eager';
+    portrait.fetchPriority='low';
+    if(portrait.complete) return;
+    const warmer=new Image();
+    warmer.decoding='async';
+    warmer.fetchPriority='low';
+    warmer.src=portrait.currentSrc||portrait.src;
+    scholarWarmers.push(warmer);
+  });
 }
 let entering=false;
 let stoneTriggered=false;
@@ -877,10 +882,8 @@ enterBtn.addEventListener('click',event=>{
     stoneTriggered=true;
     playThresholdStone();
   }
-  soundtrack.volume=0;
-  startMusic();
-  window.setTimeout(fadeMusicIn,210);
   window.setTimeout(()=>document.getElementById('enter').classList.add('hidden'),520);
+  window.setTimeout(warmScholarPortraits,650);
 });
 document.getElementById('soundBtn').addEventListener('click',()=>playing?stopMusic():startMusic());
 
