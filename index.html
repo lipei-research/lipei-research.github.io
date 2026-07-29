@@ -136,6 +136,13 @@ nav a:hover::after{left:0;right:0}
   width:36px;height:36px;border-radius:50%;border:1px solid var(--line);
   display:grid;place-items:center;background:#070707;color:var(--orange);cursor:pointer;
 }
+.sound-glyph{display:inline-block;line-height:1;transform-origin:50% 50%}
+#soundBtn.is-playing .sound-glyph{
+  animation:soundOrbit 2.8s linear infinite;
+  text-shadow:0 0 8px rgba(247,148,29,.72),0 0 16px rgba(216,170,79,.38);
+}
+@keyframes soundOrbit{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){#soundBtn.is-playing .sound-glyph{animation:none}}
 .hero{
   min-height:calc(100vh - 110px);padding:34px 54px 56px;
   display:block;position:relative;
@@ -533,7 +540,7 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
     <a href="#lab">English Speaking Lab</a><a href="#timeline">Journey</a><a href="#contact">Contact</a>
   </nav>
   <div class="tools">
-    <button class="iconbtn" id="soundBtn" title="Sound">♪</button>
+    <button class="iconbtn is-paused" id="soundBtn" title="Music paused — tap to play" aria-label="Music paused — tap to play" aria-pressed="false"><span class="sound-glyph" aria-hidden="true">Ⅱ</span></button>
     <button class="iconbtn" id="langBtn" title="Language">中</button>
   </div>
 </header>
@@ -775,25 +782,40 @@ const soundtrack=new Audio();
 soundtrack.preload='none';
 soundtrack.volume=.45;
 let playing=false;
+const soundBtn=document.getElementById('soundBtn');
+const soundGlyph=soundBtn.querySelector('.sound-glyph');
+function renderSoundState(isPlaying){
+  const chinese=document.documentElement.lang==='zh-CN';
+  soundBtn.classList.toggle('is-playing',isPlaying);
+  soundBtn.classList.toggle('is-paused',!isPlaying);
+  soundGlyph.textContent=isPlaying?'♪':'Ⅱ';
+  soundBtn.setAttribute('aria-pressed',String(isPlaying));
+  const status=isPlaying
+    ?(chinese?'音乐播放中，点击暂停':'Music playing — tap to pause')
+    :(chinese?'音乐已暂停，点击播放':'Music paused — tap to play');
+  soundBtn.title=status;
+  soundBtn.setAttribute('aria-label',status);
+}
 function startMusic(){
   if(!soundtrack.src) soundtrack.src='assets/audio/alone.mp3';
   soundtrack.play().then(()=>{
     playing=true;
-    document.getElementById('soundBtn').textContent='Ⅱ';
+    renderSoundState(true);
   }).catch(()=>{
     playing=false;
-    document.getElementById('soundBtn').textContent='♪';
+    renderSoundState(false);
   });
 }
 function stopMusic(){
   soundtrack.pause();
   playing=false;
-  document.getElementById('soundBtn').textContent='♪';
+  renderSoundState(false);
 }
 soundtrack.addEventListener('ended',()=>{
   playing=false;
-  document.getElementById('soundBtn').textContent='♪';
+  renderSoundState(false);
 });
+renderSoundState(false);
 let entering=false;
 document.getElementById('enterBtn').addEventListener('click',event=>{
   if(entering) return;
@@ -902,6 +924,7 @@ function setLanguage(language){
   document.getElementById('langBtn').textContent=chinese?'EN':'中';
   document.getElementById('langBtn').title=chinese?'Switch to English':'切换至中文';
   localStorage.setItem('siteLanguage',chinese?'zh-CN':'en');
+  renderSoundState(playing);
   updateScholarLabels();
   const activeScholar=document.querySelector('.scholar.is-active')||document.querySelector('.scholar');
   if(activeScholar) renderScholar(activeScholar);
