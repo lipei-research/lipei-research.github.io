@@ -556,7 +556,7 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
     <a href="#lab">English Speaking Lab</a><a href="#timeline">Journey</a><a href="#contact">Contact</a>
   </nav>
   <div class="tools">
-    <button class="iconbtn is-paused" id="soundBtn" title="Music paused — tap to play" aria-label="Music paused — tap to play" aria-pressed="false"><span class="sound-glyph" aria-hidden="true">Ⅱ</span></button>
+    <button class="iconbtn is-paused" id="soundBtn" title="Music paused — tap to play" aria-label="Music paused — tap to play" aria-pressed="false"><span class="sound-glyph" aria-hidden="true">♪</span></button>
     <button class="iconbtn" id="langBtn" title="Language">中</button>
   </div>
 </header>
@@ -805,7 +805,7 @@ function renderSoundState(isPlaying){
   const chinese=document.documentElement.lang==='zh-CN';
   soundBtn.classList.toggle('is-playing',isPlaying);
   soundBtn.classList.toggle('is-paused',!isPlaying);
-  soundGlyph.textContent=isPlaying?'♪':'Ⅱ';
+  soundGlyph.textContent='♪';
   soundBtn.setAttribute('aria-pressed',String(isPlaying));
   const status=isPlaying
     ?(chinese?'音乐播放中，点击暂停':'Music playing — tap to pause')
