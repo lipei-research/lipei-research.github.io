@@ -27,7 +27,7 @@
 <style>
 @font-face{
   font-family:"LiPei Serif SC";
-  src:url("assets/fonts/noto-serif-sc-site.woff2?v=1") format("woff2");
+  src:url("assets/fonts/noto-serif-sc-site.woff2?v=2") format("woff2");
   font-weight:100 900;
   font-style:normal;
   font-display:swap;
@@ -351,11 +351,11 @@ h1{
 }
 .foundation-detail h2{
   margin:12px 0 0;color:var(--gold2);font-size:clamp(31px,2.75vw,46px);
-  font-weight:500;line-height:1.08;overflow-wrap:normal;word-break:normal;
+  font-weight:500;line-height:1.08;overflow-wrap:normal;word-break:normal;white-space:nowrap;
 }
 .foundation-name-zh{
   margin:12px 0 10px;color:var(--orange-soft);font-size:clamp(17px,1.35vw,22px);
-  line-height:1.25;letter-spacing:.09em;font-family:"Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif;
+  line-height:1.25;letter-spacing:.09em;font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif;
 }
 .foundation-detail h3{
   margin:0;color:var(--orange-soft);font-size:15px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
@@ -1012,11 +1012,27 @@ function renderScholar(scholar){
   const chinese=document.documentElement.lang==='zh-CN';
   foundationDetail.querySelector('.foundation-index').textContent=scholar.dataset.index;
   foundationDetail.querySelector('.foundation-status').textContent=scholar.dataset[chinese?'statusZh':'statusEn'];
-  foundationDetail.querySelector('h2').textContent=scholar.dataset.nameEn;
+  const detailName=foundationDetail.querySelector('h2');
+  detailName.textContent=scholar.dataset.nameEn;
+  fitFoundationName(detailName);
   foundationDetail.querySelector('.foundation-name-zh').textContent=scholar.dataset.nameZh;
   foundationDetail.querySelector('h3').textContent=scholar.dataset[chinese?'fieldZh':'fieldEn'];
   foundationDetail.querySelector('p').textContent=scholar.dataset[chinese?'copyZh':'copyEn'];
 }
+function fitFoundationName(name){
+  if(!name) return;
+  name.style.fontSize='';
+  const available=name.clientWidth;
+  if(!available||name.scrollWidth<=available) return;
+  const natural=parseFloat(getComputedStyle(name).fontSize);
+  const fitted=Math.max(26,natural*(available/name.scrollWidth)*.97);
+  name.style.fontSize=`${fitted}px`;
+}
+let foundationResizeTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(foundationResizeTimer);
+  foundationResizeTimer=setTimeout(()=>fitFoundationName(foundationDetail?.querySelector('h2')),100);
+});
 document.querySelectorAll('.scholar').forEach(scholar=>{
   scholar.addEventListener('click',()=>renderScholar(scholar));
   scholar.addEventListener('mouseenter',()=>renderScholar(scholar));
