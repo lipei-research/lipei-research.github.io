@@ -845,84 +845,14 @@ soundtrack.addEventListener('ended',()=>{
   renderSoundState(false);
 });
 renderSoundState(false);
-let thresholdAudioContext;
+const thresholdStone=new Audio();
+thresholdStone.preload='auto';
+thresholdStone.src='assets/audio/threshold-stone.mp3?v=1';
+thresholdStone.volume=.38;
+thresholdStone.load();
 function playThresholdStone(){
-  const AudioContextClass=window.AudioContext||window.webkitAudioContext;
-  if(!AudioContextClass) return;
-  thresholdAudioContext=thresholdAudioContext||new AudioContextClass();
-  const context=thresholdAudioContext;
-  if(context.state==='suspended') context.resume();
-  const now=context.currentTime+.008;
-
-  const compressor=context.createDynamicsCompressor();
-  compressor.threshold.value=-12;
-  compressor.knee.value=12;
-  compressor.ratio.value=4;
-  compressor.attack.value=.001;
-  compressor.release.value=.18;
-  compressor.connect(context.destination);
-
-  const master=context.createGain();
-  master.gain.setValueAtTime(.62,now);
-  master.gain.exponentialRampToValueAtTime(.0001,now+.92);
-  master.connect(compressor);
-
-  const impactBus=context.createGain();
-  const dry=context.createGain();
-  dry.gain.value=.84;
-  impactBus.connect(dry).connect(master);
-
-  [[.066,.27,-.34],[.128,.17,.28],[.204,.105,-.18],[.296,.06,.22],[.398,.032,-.12]].forEach(([delayTime,level,pan])=>{
-    const delay=context.createDelay(.5);
-    delay.delayTime.value=delayTime;
-    const reflectionFilter=context.createBiquadFilter();
-    reflectionFilter.type='lowpass';
-    reflectionFilter.frequency.value=4200-delayTime*5200;
-    const echoGain=context.createGain();
-    echoGain.gain.value=level;
-    impactBus.connect(delay).connect(reflectionFilter).connect(echoGain);
-    if(context.createStereoPanner){
-      const panner=context.createStereoPanner();
-      panner.pan.value=pan;
-      echoGain.connect(panner).connect(master);
-    }else{
-      echoGain.connect(master);
-    }
-  });
-
-  const noiseBuffer=context.createBuffer(1,Math.floor(context.sampleRate*.052),context.sampleRate);
-  const noiseData=noiseBuffer.getChannelData(0);
-  for(let index=0;index<noiseData.length;index++){
-    const envelope=Math.pow(1-index/noiseData.length,7.2);
-    noiseData[index]=(Math.random()*2-1)*envelope;
-  }
-  const noise=context.createBufferSource();
-  noise.buffer=noiseBuffer;
-  const highPass=context.createBiquadFilter();
-  highPass.type='highpass';
-  highPass.frequency.value=720;
-  const strikeFilter=context.createBiquadFilter();
-  strikeFilter.type='bandpass';
-  strikeFilter.frequency.value=2380;
-  strikeFilter.Q.value=.62;
-  const strikeGain=context.createGain();
-  strikeGain.gain.setValueAtTime(.92,now);
-  strikeGain.gain.exponentialRampToValueAtTime(.0001,now+.055);
-  noise.connect(highPass).connect(strikeFilter).connect(strikeGain).connect(impactBus);
-  noise.start(now);
-
-  [[610,.23,.16],[1040,.15,.13],[1820,.105,.095],[3180,.055,.07]].forEach(([frequency,level,duration])=>{
-    const resonance=context.createOscillator();
-    resonance.type='sine';
-    resonance.frequency.setValueAtTime(frequency,now);
-    resonance.frequency.exponentialRampToValueAtTime(frequency*.94,now+duration);
-    const resonanceGain=context.createGain();
-    resonanceGain.gain.setValueAtTime(level,now);
-    resonanceGain.gain.exponentialRampToValueAtTime(.0001,now+duration);
-    resonance.connect(resonanceGain).connect(impactBus);
-    resonance.start(now);
-    resonance.stop(now+duration+.025);
-  });
+  thresholdStone.currentTime=0;
+  thresholdStone.play().catch(()=>{});
 }
 let entering=false;
 const enterBtn=document.getElementById('enterBtn');
