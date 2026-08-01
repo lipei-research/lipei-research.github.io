@@ -806,7 +806,7 @@ function renderSoundState(isPlaying){
   const chinese=document.documentElement.lang==='zh-CN';
   soundBtn.classList.toggle('is-playing',isPlaying);
   soundBtn.classList.toggle('is-paused',!isPlaying);
-  soundGlyph.textContent='♪';
+  soundGlyph.textContent=isPlaying?'♪':'Ⅱ';
   soundBtn.setAttribute('aria-pressed',String(isPlaying));
   const status=isPlaying
     ?(chinese?'音乐播放中，点击暂停':'Music playing — tap to pause')
@@ -883,6 +883,7 @@ enterBtn.addEventListener('click',event=>{
     stoneTriggered=true;
     playThresholdStone();
   }
+  startMusic();
   window.setTimeout(()=>document.getElementById('enter').classList.add('hidden'),520);
   window.setTimeout(warmScholarPortraits,650);
 });
