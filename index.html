@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Li Pei · The Operable Mechanism</title>
+<title>Li Pei Research · The Operable Mechanism</title>
 <meta name="description" content="Li Pei — Psycholinguistics, L2 speech production, English Speaking Lab." />
 <meta name="theme-color" content="#050505" />
 <meta name="deployment-version" content="2026-07-29-stone-volume-01" />
@@ -12,7 +12,7 @@
 <link rel="preload" href="assets/fonts/noto-serif-sc-site.woff2?v=2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/audio/threshold-stone.mp3?v=2" as="audio" type="audio/mpeg" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Li Pei Academic Website" />
+<meta property="og:site_name" content="Li Pei Research" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:url" content="https://lipei-research.github.io/" />
 <meta property="og:title" content="李沛｜可操作性英语口语在线产出机制" />
@@ -83,7 +83,6 @@ html[lang="zh-CN"] .card h3,
 html[lang="zh-CN"] .lab h2,
 html[lang="zh-CN"] .course b,
 html[lang="zh-CN"] .event-body h4,
-html[lang="zh-CN"] footer strong{font-weight:700}
 html[lang="zh-CN"] .kicker{font-weight:600}
 html[lang="zh-CN"] .lab .cn{
   font-family:Georgia,"Times New Roman",serif;
@@ -130,7 +129,9 @@ header{
   position:sticky; top:0; z-index:30;
   backdrop-filter:blur(14px); background:rgba(3,3,3,.84);
 }
-.brand{font-size:20px;letter-spacing:.16em;color:var(--orange)}
+.brand{display:flex;flex-direction:column;align-items:flex-start;line-height:1}
+.brand-name{font-size:20px;letter-spacing:.16em;color:var(--orange)}
+.brand-field{margin-top:7px;font-size:9px;letter-spacing:.34em;color:#a79a83;text-transform:uppercase}
 nav{display:flex;gap:28px;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
 nav a{color:#d9d2c5;position:relative}
 nav a::after{content:"";position:absolute;left:50%;right:50%;bottom:-12px;height:1px;background:var(--gold2);transition:.25s}
@@ -401,7 +402,15 @@ h1{
 .event-body h4{margin:0 0 6px;color:var(--orange-soft)}
 .event-body p{margin:0;color:#bcb3a5;line-height:1.55}
 footer{padding:34px;text-align:center;border-top:1px solid var(--line);color:#9c9487}
-footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-bottom:12px}
+footer strong{
+  display:block;margin-bottom:14px;color:var(--orange-soft);font-size:14px;
+  font-weight:500;letter-spacing:.24em;text-transform:uppercase
+}
+.contact-email{
+  display:inline-block;margin-top:14px;color:#b9aa92;font-size:13px;letter-spacing:.06em;
+  border-bottom:1px solid rgba(216,170,79,.28);transition:color .2s,border-color .2s
+}
+.contact-email:hover,.contact-email:focus-visible{color:var(--orange-soft);border-color:var(--gold2)}
 .enter{
   position:fixed;inset:0;z-index:100;background:
   radial-gradient(circle at 50% 45%,rgba(216,170,79,.12),transparent 28%),#020202;
@@ -472,7 +481,7 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 @media(max-width:620px){
   .frame{width:calc(100% - 12px);margin:6px auto;border-radius:15px}
   header{height:68px;padding:0 16px}
-  .brand{font-size:14px}.tools{gap:6px}.iconbtn{width:32px;height:32px}
+  .brand-name{font-size:14px}.brand-field{margin-top:5px;font-size:7px;letter-spacing:.28em}.tools{gap:6px}.iconbtn{width:32px;height:32px}
   .hero{
     min-height:calc(100svh - 80px);padding:20px 12px;
     display:flex;align-items:center;justify-content:center;
@@ -551,7 +560,10 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 
 <div class="frame">
 <header>
-  <div class="brand">LI PEI</div>
+  <div class="brand" aria-label="Li Pei Research">
+    <span class="brand-name">LI PEI</span>
+    <span class="brand-field">RESEARCH</span>
+  </div>
   <nav>
     <a href="#home">Home</a><a href="#mechanism">Mechanism</a><a href="#foundations">Foundations</a><a href="#research">Research</a>
     <a href="#lab">English Speaking Lab</a><a href="#timeline">Journey</a><a href="#contact">Contact</a>
@@ -762,10 +774,11 @@ footer strong{display:block;color:var(--orange-soft);font-size:24px;margin-botto
 </main>
 
 <footer id="contact">
-  <strong>LI PEI</strong>
+  <strong>LI PEI RESEARCH</strong>
   <div>Psycholinguistics · Speech Production · Online Processing</div>
   <div style="margin-top:12px">“Progress, not perfection.”</div>
-  <div style="margin-top:15px;font-size:12px">© 2026 Li Pei. Personal academic website.</div>
+  <a class="contact-email" href="mailto:alexanderlp@qq.com">alexanderlp@qq.com</a>
+  <div style="margin-top:15px;font-size:12px">© 2026 Li Pei Research. Personal academic website.</div>
 </footer>
 </div>
 
@@ -891,7 +904,6 @@ document.getElementById('soundBtn').addEventListener('click',()=>playing?stopMus
 
 const bilingualContent={
   single:{
-    '.brand':'李 沛',
     '#home h1':'可操作性英语口语在线产出机制',
     '#home .subtitle':'',
     '#home .hero-statement':'<span class="hero-line">本机制将开口前隐性的前语言心理加工显化为可操作步骤，</span><span class="hero-line">支持二语口语在实时压力下顺利启动、持续推进并实现更为流利的表达。</span>',
@@ -910,7 +922,6 @@ const bilingualContent={
     '#lab .cn':'English Speaking Lab',
     '#lab .lab-panel:nth-child(2)>p':'研究室以美语正音、美式语流、句构框架与流利机制为四个相互衔接的训练模块，形成从发音准确、语流自然、句构清晰到表达顺利启动并持续推进的系统化口语学习路径。',
     '#timeline .section-title':'学术历程',
-    'footer strong':'李 沛'
   },
   lists:{
     'header nav a':['首页','机制','理论根基','研究','口语研究室','学术历程','联系'],
@@ -956,7 +967,7 @@ const bilingualContent={
     'footer>div':[
       '心理语言学 · 言语产出 · 在线加工',
       '“Progress, not perfection.”',
-      '© 2026 李沛 · 个人学术网站'
+      '© 2026 Li Pei Research · 个人学术网站'
     ]
   }
 };
@@ -971,7 +982,7 @@ Object.keys(bilingualContent.lists).forEach(selector=>document.querySelectorAll(
 function setLanguage(language){
   const chinese=language==='zh-CN';
   document.documentElement.lang=chinese?'zh-CN':'en';
-  document.title=chinese?'李沛 · 二语英语口语产出的在线加工可操作机制':'Li Pei · The Operable Mechanism';
+  document.title=chinese?'李沛学术研究 · 二语英语口语产出的在线加工机制':'Li Pei Research · The Operable Mechanism';
   document.querySelector('meta[name="description"]').content=chinese
     ?'李沛个人学术网站：心理语言学、二语英语口语产出、在线加工与英语口语研究室。'
     :'Li Pei — Psycholinguistics, L2 speech production, English Speaking Lab.';
