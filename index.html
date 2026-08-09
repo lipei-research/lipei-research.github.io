@@ -129,9 +129,11 @@ header{
   position:sticky; top:0; z-index:30;
   backdrop-filter:blur(14px); background:rgba(3,3,3,.84);
 }
-.brand{display:flex;flex-direction:column;align-items:flex-start;line-height:1}
-.brand-name{font-size:20px;letter-spacing:.06em;color:var(--orange)}
-.brand-field{margin-top:7px;font-size:9px;letter-spacing:.18em;color:#a79a83}
+.brand{display:flex;align-items:center;line-height:1}
+.brand-wordmark{
+  color:var(--orange);font-family:"Times New Roman",Times,serif;
+  font-size:20px;font-weight:700;letter-spacing:.015em;white-space:nowrap
+}
 nav{display:flex;gap:28px;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
 nav a{color:#d9d2c5;position:relative}
 nav a::after{content:"";position:absolute;left:50%;right:50%;bottom:-12px;height:1px;background:var(--gold2);transition:.25s}
@@ -403,14 +405,17 @@ h1{
 .event-body p{margin:0;color:#bcb3a5;line-height:1.55}
 footer{padding:34px;text-align:center;border-top:1px solid var(--line);color:#9c9487}
 footer strong{
-  display:block;margin-bottom:14px;color:var(--orange-soft);font-size:14px;
-  font-weight:500;letter-spacing:.08em
+  display:block;margin-bottom:11px;color:var(--orange-soft);font-size:18px;
+  font-family:"Times New Roman",Times,serif;font-weight:700;letter-spacing:.015em
 }
+.footer-fields{font-size:11px;line-height:1.5;letter-spacing:.055em;color:#928a7e}
+.footer-mantra{margin-top:9px;font-size:10.5px;line-height:1.4;letter-spacing:.035em;color:#857e73}
 .contact-email{
-  display:inline-block;margin-top:14px;color:#968d7f;font-size:12px;letter-spacing:.045em;
+  display:inline-block;margin-top:12px;color:#8e867a;font-size:11px;letter-spacing:.045em;
   border-bottom:1px solid transparent;transition:color .2s,border-color .2s
 }
 .contact-email:hover,.contact-email:focus-visible{color:#c7b89f;border-color:rgba(216,170,79,.45)}
+.footer-copyright{margin-top:12px;font-size:10px;letter-spacing:.035em;color:#6f695f}
 .enter{
   position:fixed;inset:0;z-index:100;background:
   radial-gradient(circle at 50% 45%,rgba(216,170,79,.12),transparent 28%),#020202;
@@ -481,7 +486,8 @@ footer strong{
 @media(max-width:620px){
   .frame{width:calc(100% - 12px);margin:6px auto;border-radius:15px}
   header{height:68px;padding:0 16px}
-  .brand-name{font-size:14px}.brand-field{margin-top:5px;font-size:7px;letter-spacing:.28em}.tools{gap:6px}.iconbtn{width:32px;height:32px}
+  footer{padding:28px 16px}
+  .brand-wordmark{font-size:15px}.tools{gap:6px}.iconbtn{width:32px;height:32px}
   .hero{
     min-height:calc(100svh - 80px);padding:20px 12px;
     display:flex;align-items:center;justify-content:center;
@@ -561,8 +567,7 @@ footer strong{
 <div class="frame">
 <header>
   <div class="brand" aria-label="LiPei Research">
-    <span class="brand-name">LiPei</span>
-    <span class="brand-field">Research</span>
+    <span class="brand-wordmark">LiPei Research</span>
   </div>
   <nav>
     <a href="#home">Home</a><a href="#mechanism">Mechanism</a><a href="#foundations">Foundations</a><a href="#research">Research</a>
@@ -775,10 +780,10 @@ footer strong{
 
 <footer id="contact">
   <strong>LiPei Research</strong>
-  <div>Psycholinguistics · Speech Production · Online Processing</div>
-  <div style="margin-top:12px">“Progress, not perfection.”</div>
+  <div class="footer-fields">Psycholinguistics · Speech Production · Online Processing</div>
+  <div class="footer-mantra">“Progress, not perfection.”</div>
   <a class="contact-email" href="mailto:alexanderlp@qq.com">alexanderlp@qq.com</a>
-  <div style="margin-top:15px;font-size:12px">© 2026 LiPei Research</div>
+  <div class="footer-copyright">© 2026 LiPei Research</div>
 </footer>
 </div>
 
