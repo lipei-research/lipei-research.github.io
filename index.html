@@ -123,7 +123,7 @@ a{color:inherit;text-decoration:none}
   overflow:hidden;
   background:rgba(0,0,0,.62);
 }
-header{
+.site-header{
   height:84px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
   padding:0 30px; border-bottom:1px solid rgba(216,170,79,.22);
   position:sticky; top:0; z-index:30;
@@ -254,6 +254,158 @@ h1{
 .copy-intention{left:9%;top:43%}.copy-macro{left:27%;top:43%}.copy-micro{left:51%;top:43%}.copy-formulation{left:78%;top:43%}
 .copy-support{left:34%;top:70%}
 .caption{text-align:center;color:var(--muted);margin:16px 0 0;font-size:13px;letter-spacing:.08em}
+.notes-section{
+  position:relative;overflow:hidden;
+  padding-top:46px;padding-bottom:48px;
+  background:
+    radial-gradient(circle at 18% 26%,rgba(247,148,29,.055),transparent 30%),
+    linear-gradient(180deg,rgba(216,170,79,.018),transparent 72%);
+}
+.notes-section>.section-title{margin-bottom:22px}
+.notes-heading{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.9fr) auto;
+  gap:28px;align-items:center;margin:0 0 18px;
+}
+.notes-heading h2{
+  margin:5px 0 0;color:var(--gold2);font-size:clamp(25px,2.25vw,35px);
+  line-height:1.12;font-weight:500;letter-spacing:.012em;
+}
+.notes-heading>p{
+  margin:0;color:#9b9285;font-size:12px;line-height:1.55;max-width:520px;
+}
+.notes-controls{display:flex;gap:9px;justify-self:end}
+.notes-control{
+  width:34px;height:34px;border:1px solid rgba(216,170,79,.3);border-radius:50%;
+  display:grid;place-items:center;background:#070707;color:var(--orange-soft);
+  font:20px/1 Georgia,"Times New Roman",serif;cursor:pointer;transition:.22s;
+}
+.notes-control:hover,.notes-control:focus-visible{
+  border-color:var(--gold);color:var(--gold2);box-shadow:0 0 18px rgba(216,170,79,.12);outline:none;
+}
+.notes-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 10px}
+.notes-filters{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.notes-filter{
+  appearance:none;border:1px solid rgba(216,170,79,.15);border-radius:999px;padding:5px 9px;
+  background:rgba(4,4,4,.72);color:#7f766a;font:8px/1.2 Georgia,"Times New Roman",serif;
+  letter-spacing:.09em;text-transform:uppercase;cursor:pointer;transition:.2s;
+}
+.notes-filter-count{margin-left:5px;color:#514b43;font-size:.86em}
+.notes-filter:hover,.notes-filter:focus-visible,.notes-filter[aria-pressed="true"]{
+  color:var(--orange-soft);border-color:rgba(247,148,29,.48);outline:none;
+  background:rgba(247,148,29,.035);
+}
+.notes-filter[aria-pressed="true"] .notes-filter-count{color:#9c7541}
+.notes-browse-hint{color:#655e54;font-size:8px;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}
+.notes-rail{
+  display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;padding:4px 1px 14px;
+  scroll-snap-type:x mandatory;scroll-padding-inline:2px;overscroll-behavior-inline:contain;
+  scrollbar-width:none;
+  cursor:grab;user-select:none;-webkit-overflow-scrolling:touch;
+}
+.notes-rail:active{cursor:grabbing}
+.notes-rail::-webkit-scrollbar{display:none}
+.note-card{
+  flex:0 0 calc((100% - 14px)/2);min-width:0;height:252px;scroll-snap-align:start;
+  position:relative;overflow:hidden;border:1px solid rgba(216,170,79,.27);border-radius:14px;
+  padding:24px 22px 21px;background:
+    linear-gradient(145deg,rgba(216,170,79,.055),rgba(255,255,255,.007) 50%,rgba(247,148,29,.022));
+  display:flex;flex-direction:column;transition:transform .28s,border-color .28s,box-shadow .28s;
+}
+.notes-rail[data-columns="1"] .note-card{flex-basis:100%}
+.notes-rail[data-columns="3"] .note-card{flex-basis:calc((100% - 28px)/3)}
+.note-card[hidden]{display:none}
+.note-card::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold2),transparent);opacity:.62;
+}
+a.note-card:hover,a.note-card:focus-visible{
+  transform:translateY(-3px);border-color:rgba(247,148,29,.68);
+  box-shadow:0 16px 38px rgba(0,0,0,.34),0 0 24px rgba(216,170,79,.07);outline:none;
+}
+.note-card.is-thread{background:rgba(6,6,6,.78)}
+.note-index{
+  position:absolute;right:18px;top:13px;color:rgba(216,170,79,.1);
+  font-size:54px;line-height:1;font-variant-numeric:lining-nums;
+}
+.note-meta{display:flex;align-items:center;gap:10px;position:relative;z-index:1}
+.note-status{
+  color:var(--orange);font-size:7px;letter-spacing:.18em;text-transform:uppercase;
+}
+.note-meta time{color:#716a60;font-size:8px;letter-spacing:.08em}
+.note-card h3{
+  position:relative;z-index:1;margin:19px 42px 0 0;color:var(--gold2);
+  font-size:clamp(20px,1.65vw,27px);font-weight:500;line-height:1.16;
+}
+.note-card.is-thread h3{font-size:clamp(18px,1.5vw,24px);margin-right:34px}
+.note-title-zh{
+  margin-top:7px;color:var(--orange-soft);font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif;
+  font-size:12px;line-height:1.35;letter-spacing:.055em;
+}
+.note-card>p{
+  position:relative;z-index:1;margin:13px 0 0;color:#aaa093;
+  font-size:10px;line-height:1.58;
+}
+.note-card.is-thread>p{font-size:10px;color:#958c80}
+.note-footer{margin-top:auto;padding-top:14px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.note-tags{display:flex;flex-wrap:wrap;gap:7px}
+.note-tags span{
+  border:1px solid rgba(216,170,79,.16);border-radius:999px;padding:4px 7px;
+  color:#81786c;font-size:6px;letter-spacing:.08em;text-transform:uppercase;
+}
+.note-read{color:var(--orange-soft);font-size:8px;letter-spacing:.1em;white-space:nowrap}
+.thread-pulse{color:#70685e;font-size:6px;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap}
+.thread-pulse i{
+  display:inline-block;width:4px;height:4px;margin:0 6px 1px 0;border-radius:50%;
+  background:var(--orange);box-shadow:0 0 12px rgba(247,148,29,.65);
+}
+.notes-progress{height:1px;background:rgba(216,170,79,.1);margin-top:1px;overflow:hidden}
+.notes-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--gold3),var(--orange));transition:width .16s}
+.notes-inline{
+  display:grid;grid-template-rows:0fr;opacity:0;margin-top:0;
+  transition:grid-template-rows .46s cubic-bezier(.22,.8,.24,1),opacity .28s,margin-top .46s;
+  scroll-margin-top:92px;
+}
+.notes-inline.is-open{grid-template-rows:1fr;opacity:1;margin-top:20px}
+.notes-inline-clip{min-height:0;overflow:hidden}
+.notes-inline-shell{
+  position:relative;width:100%;max-width:none;margin:0;padding:34px 42px 38px;
+  border:1px solid rgba(216,170,79,.28);border-radius:15px;
+  background:
+    radial-gradient(circle at 15% 8%,rgba(247,148,29,.06),transparent 32%),
+    linear-gradient(145deg,rgba(216,170,79,.035),rgba(255,255,255,.006));
+  box-shadow:0 22px 55px rgba(0,0,0,.28);
+}
+.notes-inline-header{
+  position:relative;display:block;min-height:66px;padding:2px 118px 10px 0;
+}
+.notes-inline-kicker{color:var(--orange);font-size:7px;letter-spacing:.2em;text-transform:uppercase}
+.notes-inline-title{margin:9px 0 0;color:var(--gold2);font-size:clamp(25px,2.7vw,39px);line-height:1.14;font-weight:600}
+.notes-inline-subtitle{margin-top:7px;color:var(--orange-soft);font-size:12px;line-height:1.4;letter-spacing:.035em}
+.notes-inline-close{
+  position:absolute;top:0;right:0;
+  appearance:none;border:1px solid rgba(216,170,79,.3);border-radius:999px;padding:7px 11px;
+  background:#070707;color:#8d8376;font:8px/1 Georgia,"Times New Roman",serif;
+  letter-spacing:.1em;cursor:pointer;transition:.2s;white-space:nowrap;
+}
+.notes-inline-close:hover,.notes-inline-close:focus-visible{color:var(--gold2);border-color:var(--gold);outline:none}
+.notes-inline-body{width:100%;max-width:none;margin:17px 0 0;color:#c1b7aa;font-size:14px;line-height:1.88}
+.notes-inline-body h2{margin:34px 0 10px;color:var(--gold2);font-size:19px;line-height:1.35;font-weight:600}
+.notes-inline-body p{margin:0 0 16px;text-align:justify;text-align-last:left}
+.notes-inline-body .lead{color:#ded3c3;font-size:16px;line-height:1.82}
+.notes-inline-body em{color:#d4a957;font-style:normal}
+.notes-inline-body blockquote{
+  margin:30px 0 5px;padding:18px 22px;border-left:2px solid var(--orange);
+  background:rgba(216,170,79,.025);color:var(--gold2);font-size:16px;line-height:1.72;
+}
+.note-card.is-open{border-color:rgba(247,148,29,.76);box-shadow:0 14px 36px rgba(0,0,0,.28),0 0 22px rgba(216,170,79,.08)}
+html[lang="zh-CN"] .notes-inline-title,
+html[lang="zh-CN"] .notes-inline-body h2{font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif}
+html[lang="zh-CN"] .notes-heading h2,
+html[lang="zh-CN"] .note-card h3{
+  font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif;
+  font-weight:600;
+}
+html[lang="zh-CN"] .note-title-zh{font-family:Georgia,"Times New Roman",serif;font-size:11px;letter-spacing:.035em}
 .modules{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
 .modules .card{grid-column:span 2}
 .modules .card:nth-child(4){grid-column:2 / span 2}
@@ -473,7 +625,7 @@ footer strong{
   .scholar-name{min-height:38px}
 }
 @media(max-width:1000px){
-  header{grid-template-columns:1fr auto} nav{display:none}
+  .site-header{grid-template-columns:1fr auto} nav{display:none}
   .hero{padding:32px 24px 84px;text-align:center}
   .coin{width:128px}.handmark{width:84px}.signature{display:none}
   .modules{grid-template-columns:repeat(2,1fr)}
@@ -482,10 +634,12 @@ footer strong{
   .foundation-layout{grid-template-columns:1fr;max-width:720px;margin:auto}
   .scholar-portrait{width:min(128px,80%)}
   .lab{display:flex;flex-direction:column}
+  .notes-heading{grid-template-columns:1fr auto;gap:13px}.notes-heading>p{grid-column:1 / -1;grid-row:2}
+  .notes-rail[data-columns="3"] .note-card{flex-basis:calc((100% - 14px)/2)}
 }
 @media(max-width:620px){
   .frame{width:calc(100% - 12px);margin:6px auto;border-radius:15px}
-  header{height:68px;padding:0 16px}
+  .site-header{height:68px;padding:0 16px}
   footer{padding:28px 16px}
   .brand-wordmark{font-size:15px}.tools{gap:6px}.iconbtn{width:32px;height:32px}
   .hero{
@@ -505,6 +659,26 @@ footer strong{
   .identity{font-size:9px;line-height:1.45}.tags{font-size:7px;line-height:1.5;margin-top:9px}
   .mantra{font-size:7px;line-height:1.4}
   .section{padding:38px 12px}.section-title{font-size:14px;gap:9px;margin-bottom:18px}
+  .notes-section{padding-top:32px;padding-bottom:34px}.notes-section>.section-title{margin-bottom:15px}
+  .notes-heading{grid-template-columns:1fr auto;gap:9px;margin-bottom:12px}
+  .notes-heading h2{font-size:21px;margin-top:4px;line-height:1.14}.notes-heading>p{font-size:8px;line-height:1.5}
+  .notes-controls{gap:5px}.notes-control{width:29px;height:29px;font-size:17px}
+  .notes-toolbar{margin-bottom:7px}.notes-filters{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:2px;scrollbar-width:none}.notes-filters::-webkit-scrollbar{display:none}
+  .notes-filter{flex:0 0 auto;padding:4px 7px;font-size:6px}.notes-browse-hint{display:none}
+  .notes-rail{gap:10px;padding:3px 1px 11px}
+  .notes-rail[data-columns] .note-card,.note-card.is-thread{flex-basis:calc(100vw - 50px);height:250px;padding:19px 17px 17px;border-radius:12px}
+  .note-index{right:14px;top:12px;font-size:42px}
+  .note-status{font-size:6.5px}.note-meta time{font-size:7px}
+  .note-card h3,.note-card.is-thread h3{font-size:19px;margin:17px 34px 0 0;line-height:1.17}
+  .note-title-zh{font-size:10px;margin-top:6px}.note-card>p,.note-card.is-thread>p{font-size:8px;line-height:1.55;margin-top:11px}
+  .note-footer{padding-top:11px;align-items:flex-end}.note-tags{gap:4px}.note-tags span{font-size:5px;padding:3px 5px}
+  .note-read{font-size:6px}.thread-pulse{font-size:5px}
+  .notes-inline.is-open{margin-top:13px}.notes-inline{scroll-margin-top:72px}
+  .notes-inline-shell{padding:24px 17px 28px;border-radius:12px}
+  .notes-inline-header{min-height:0;padding:0 0 10px}.notes-inline-title{font-size:24px;margin-top:7px}.notes-inline-subtitle{font-size:9px}
+  .notes-inline-close{position:static;margin-top:14px;padding:6px 8px;font-size:6px}.notes-inline-body{margin-top:16px;font-size:12px;line-height:1.78}
+  .notes-inline-body .lead{font-size:13px;line-height:1.75}.notes-inline-body h2{font-size:16px;margin-top:27px}
+  .notes-inline-body blockquote{margin-top:23px;padding:15px 16px;font-size:13px}
   .modules{grid-template-columns:repeat(2,1fr);gap:8px}
   .card{padding:15px 12px;min-height:170px}.card h3{font-size:14px}.card p,.card li{font-size:10px}
   .number{font-size:30px}
@@ -565,12 +739,12 @@ footer strong{
 </div>
 
 <div class="frame">
-<header>
+<header class="site-header">
   <div class="brand" aria-label="LiPei Research">
     <span class="brand-wordmark">LiPei Research</span>
   </div>
   <nav>
-    <a href="#home">Home</a><a href="#mechanism">Mechanism</a><a href="#foundations">Foundations</a><a href="#research">Research</a>
+    <a href="#home">Home</a><a href="#mechanism">Mechanism</a><a href="#notes">Notes</a><a href="#foundations">Foundations</a><a href="#research">Research</a>
     <a href="#lab">English Speaking Lab</a><a href="#timeline">Journey</a><a href="#contact">Contact</a>
   </nav>
   <div class="tools">
@@ -609,6 +783,128 @@ footer strong{
   <div class="mechanism-shell">
     <img class="mechanism-img" src="assets/images/mechanism-poster-orange.webp?v=1" alt="The Operable Mechanism model">
   </div>
+</section>
+
+<section class="section notes-section" id="notes">
+  <div class="section-title">Research Notes</div>
+  <div class="notes-heading">
+    <div>
+      <div class="kicker">Ideas in Motion</div>
+      <h2>Thoughts Along the Way</h2>
+    </div>
+    <p>Working notes on metaphors, questions, and revisions that arise during research. They record an open process of thought rather than settled theoretical claims.</p>
+    <div class="notes-controls" aria-label="Research note navigation">
+      <button class="notes-control" id="notesPrev" type="button" aria-label="Previous research note">‹</button>
+      <button class="notes-control" id="notesNext" type="button" aria-label="Next research note">›</button>
+    </div>
+  </div>
+  <div class="notes-toolbar">
+    <div class="notes-filters" role="group" aria-label="Filter research notes by tag">
+      <button class="notes-filter" type="button" data-note-filter="all" aria-pressed="true"><span class="notes-filter-label">All</span><span class="notes-filter-count">2</span></button>
+      <button class="notes-filter" type="button" data-note-filter="speech-launch" aria-pressed="false"><span class="notes-filter-label">Speech Launch</span><span class="notes-filter-count">2</span></button>
+      <button class="notes-filter" type="button" data-note-filter="metaphor" aria-pressed="false"><span class="notes-filter-label">Metaphor</span><span class="notes-filter-count">1</span></button>
+      <button class="notes-filter" type="button" data-note-filter="conceptualization" aria-pressed="false"><span class="notes-filter-label">Conceptualization</span><span class="notes-filter-count">2</span></button>
+      <button class="notes-filter" type="button" data-note-filter="online-processing" aria-pressed="false"><span class="notes-filter-label">Online Processing</span><span class="notes-filter-count">2</span></button>
+    </div>
+    <div class="notes-browse-hint">Move to browse · drag on touch</div>
+  </div>
+  <div class="notes-rail" id="notesRail" tabindex="0" aria-label="Research notes">
+    <a class="note-card" href="./notes/tree-as-growth.html" data-note-link data-note-id="tree" data-tags="speech-launch metaphor conceptualization online-processing" aria-expanded="false" aria-controls="noteInline">
+      <span class="note-index">01</span>
+      <div class="note-meta"><span class="note-status">Theory Note</span><time datetime="2026-08-09">2026.08.09</time></div>
+      <h3>The Tree Metaphor</h3>
+      <div class="note-title-zh">大树隐喻：言语的阈值启动与递归生长</div>
+      <p>A theoretical account of how macroplanning, microplanning, threshold crossing, incrementality, and recursion jointly sustain the open-ended growth of speech.</p>
+      <div class="note-footer">
+        <div class="note-tags"><span>Generative Growth</span><span>Incrementality</span><span>Recursion</span></div>
+        <span class="note-read">Open note&nbsp; ↓</span>
+      </div>
+    </a>
+    <a class="note-card" href="./notes/preverbal-generative-trunk.html" data-note-link data-note-id="trunk" data-tags="speech-launch conceptualization online-processing" aria-expanded="false" aria-controls="noteInline">
+      <span class="note-index">02</span>
+      <div class="note-meta"><span class="note-status">Theory Note</span><time datetime="2026-08-09">2026.08.09</time></div>
+      <h3>From the Syntactic Backbone to the Generative Trunk</h3>
+      <div class="note-title-zh">从结果性主干到生成性主干</div>
+      <p>A distinction between the core formal structure identified in a completed sentence and the preverbal structure that first enables an utterance to launch and grow.</p>
+      <div class="note-footer">
+        <div class="note-tags"><span>Generative Trunk</span><span>Speech Launch</span><span>Conceptualization</span></div>
+        <span class="note-read">Open note&nbsp; ↓</span>
+      </div>
+    </a>
+  </div>
+  <div class="notes-progress" aria-hidden="true"><span id="notesProgress"></span></div>
+  <div class="notes-inline" id="noteInline" aria-hidden="true">
+    <div class="notes-inline-clip">
+      <article class="notes-inline-shell" aria-live="polite">
+        <header class="notes-inline-header">
+          <div><div class="notes-inline-kicker">Research Note</div><h2 class="notes-inline-title"></h2><div class="notes-inline-subtitle"></div></div>
+          <button class="notes-inline-close" id="noteInlineClose" type="button">Collapse ↑</button>
+        </header>
+        <div class="notes-inline-body" id="noteInlineBody"></div>
+      </article>
+    </div>
+  </div>
+
+  <template id="note-tree-en">
+    <p class="lead">The tree metaphor represents speech production as open-ended generation: an utterance is not globally completed before speech begins, but launches when a local structure crosses a threshold under the constraint of an overarching intention, and then develops through incrementality and recursion.</p>
+    <h2>Macroplanning: the branch network</h2>
+    <p>Through macroplanning, the overarching intention diffuses into a <em>Subgoal Network</em>. Linearization establishes relations and an order of advance among subgoals, forming the macroscopic trunk-and-branch organization of discourse growth. When processing enters the current subgoal, functional orientation specifies the local direction of growth, conceptual focus becomes the organizing center, and relevant conceptual nodes form a <em>Local Conceptual Network</em>.</p>
+    <h2>Microplanning: the local bud</h2>
+    <p>The local conceptual network is analogous to a bud at a node. Although not yet extended into a branch, a bud already possesses a growth center, an internal configuration, an initial axis, and a connection to the parent branch. Correspondingly, a microplan is not yet a complete utterance, but it has organized the conceptual elements required around the current focus, established a minimal relational configuration, and retained a functional connection to the current subgoal and the discourse already produced.</p>
+    <h2>Threshold: the onset of growth</h2>
+    <p>The threshold marks the critical transition from potential organization to linguistic realization. When the minimal relational configuration centered on the conceptual focus acquires the capacity for linguistic encoding, the bud begins to sprout and the local structure enters formulation. The threshold is therefore not the completion of planning, but the moment at which a local network with a minimally sufficient generative configuration acquires the capacity for actual growth.</p>
+    <h2>Incrementality and recursion</h2>
+    <p>Formulation initiates the extension of the branch. Incrementality incorporates new conceptual nodes into the current local network; recursion allows a newly incorporated node to become a new organizing center and trigger another local network. Each newly formed structure is both the outcome of current processing and a condition for subsequent processing.</p>
+    <p>Macroplanning and microplanning thus instantiate the same network-generating logic at different scales. Macroplanning generates and develops the subgoal network; microplanning generates and develops the local conceptual network. Both sustain speech through node formation, threshold crossing, incremental expansion, and recursive reorganization.</p>
+    <blockquote>Macroplanning generates the branch network; microplanning forms the local bud; the threshold initiates sprouting; incrementality drives extension; recursion produces new buds.</blockquote>
+  </template>
+  <template id="note-tree-zh">
+    <p class="lead">大树隐喻表征言语产出的开放性生成：话语并非在开口之前整体完成，而是在总意图约束下，由局部结构越过阈值后启动，并通过增量与递归逐步形成。</p>
+    <h2>宏计划：枝干网络</h2>
+    <p>总意图经宏计划扩散为 <em>Subgoal Network</em>；线性化使子目标获得可推进的关系与次序，构成话语生长的宏观枝干结构。当前子目标进入微计划后，功能定向规定局部生长方向，概念焦点成为组织中心，相关概念节点围绕其形成 <em>Local Conceptual Network</em>。</p>
+    <h2>微计划：局部芽体</h2>
+    <p>局部概念网络如同节点处尚未萌发的芽。芽虽未展开为枝条，却已具有生长中心、内部构型、初始生长轴及其与母枝的连接；相应地，微计划虽未形成完整话语，却已围绕当前概念焦点组织必要概念成分，建立最低关系配置，并与当前子目标及既有话语保持功能联系。</p>
+    <h2>阈值：现实生长的启动</h2>
+    <p>阈值标记局部网络由潜在组织转入语言化的临界状态。当以概念焦点为中心的最低关系配置获得语言化能力，芽便开始萌发，局部结构进入语言编码。阈值因此不是计划完成，而是一个已经形成最低生成构型的局部网络获得现实生长能力。</p>
+    <h2>增量与递归</h2>
+    <p>语言编码使枝条开始延伸；增量使新的概念节点持续进入当前局部网络；递归使新节点成为新的组织中心，触发下一轮局部网络生成。新形成的结构既是当前加工的结果，也是后续加工的条件。</p>
+    <p>宏计划与微计划由此表现为同一网络生成逻辑在不同尺度上的运行：宏计划生成并展开子目标网络，微计划生成并展开局部概念网络；二者都通过节点形成、阈值越过、增量扩展与递归再组织实现持续生长。</p>
+    <blockquote>宏计划生成枝干网络，微计划形成局部芽体，阈值启动萌发，增量推动延伸，递归产生新芽。</blockquote>
+  </template>
+  <template id="note-trunk-en">
+    <h2>The product-oriented backbone</h2>
+    <p class="lead">Traditional grammar identifies the backbone of a sentence as the subject–predicate, subject–verb–object, or subject–linking verb–complement structure that remains analytically central once modifying elements are set aside. This is a product-oriented backbone: it identifies the core syntactic constituents and formal dependencies of an already formed sentence.</p>
+    <p>Because the everyday meaning of “backbone” also evokes primacy and centrality, early or non-specialist interpretations may extend syntactic centrality into informational centrality, treating the backbone as the deepest or most information-bearing part of the sentence and all other structures as secondary additions. This is not a necessary claim of traditional grammar, but a possible conflation of formal, informational, and generative centrality.</p>
+    <h2>Generative centrality</h2>
+    <p>Syntactic center, informational center, and generative point of departure are distinct dimensions. The syntactic backbone occupies a central position in the formal organization of a completed sentence, but need not carry its most consequential information. Likewise, the structure that forms first and initiates linguistic encoding need not contain the entire propositional content. Complex or important information may enter later, while the earlier structure establishes contextual linkage, functional direction, perspective, or an open relational interface.</p>
+    <p>Within the tree metaphor, the generative trunk is not a formal skeleton extracted from a completed sentence. It is an open structure that first acquires the capacity for growth during preverbal conceptual organization.</p>
+    <h2>Formation of the generative trunk</h2>
+    <p>Through macroplanning, the overarching intention diffuses into a <em>Subgoal Network</em>, whose linearization establishes a macroscopic path of advance. When processing reaches the current subgoal, relevant concepts form a <em>Local Conceptual Network</em> around the current conceptual focus. Functional orientation specifies the communicative function to be realized; perspective determines how experience is organized; information status constrains what must be made explicit; and minimal relational configuration organizes the participants, events, or states required for launch.</p>
+    <p>The local conceptual network need not be globally complete before linguistic encoding begins. The first open structure to reach a minimally sufficient state of organization, acquire linguistic encodability, and retain interfaces for subsequent conceptual nodes is the preverbal generative trunk.</p>
+    <h2>Trunkhood as a generative property</h2>
+    <p>The trunkhood of this structure is determined not by informational weight but by three generative properties: early formation, launch sufficiency, and capacity for continued growth. It may carry the principal propositional content, or it may function as an informationally light but generatively efficient scaffold. It need not contain all later information; it must only provide the minimal organization required to establish communicative direction, a local center, necessary conceptual relations, and an initial path of development. Unfinished content may enter incrementally after encoding begins and recursively establish new local organizations.</p>
+    <p>The generative trunk is therefore neither a fixed, universally pre-stored sentence template nor a frame selected in advance and subsequently filled. It is the real-time convergence of communicative and processing constraints. The same conceptual content may yield different generative points of departure under different intentions, perspectives, conceptual foci, and information states, and may consequently be realized in different syntactic forms.</p>
+    <h2>Two explanatory levels</h2>
+    <p>The traditional syntactic backbone and the preverbal generative trunk are not competing accounts. They belong to product analysis and process explanation respectively. The former identifies the core formal organization of a completed sentence; the latter explains which preverbal structure can first initiate linguistic encoding while global discourse planning remains incomplete and how speech can continue to grow from it.</p>
+    <blockquote>The preverbal generative trunk is the first open structure within a local conceptual network to acquire linguistic encodability through a minimally sufficient relational configuration. Its trunkhood derives not from carrying the core information, but from enabling timely launch and preserving interfaces for incremental and recursive growth.</blockquote>
+  </template>
+  <template id="note-trunk-zh">
+    <h2>结果性主干</h2>
+    <p class="lead">传统语法把一句话的主干理解为去除修饰成分后可以识别出的主谓、主谓宾或主系表结构。这是一种结果性主干：它从已经形成的句子中确定核心句法成分及其形式依存关系，回答完成句具有怎样的核心句法结构。</p>
+    <p>“主干”一词在日常语义中同时带有“主要”和“核心”的联想，因此在某些非专业理解或早期学习经验中，句法主干容易被进一步理解为一句话中意义最重要、信息含量最高的“主心骨”，而其他结构则被视为相对次要的附加成分。这并非传统语法必然包含的主张，而是形式核心、信息核心与生成核心之间可能发生的概念混同。</p>
+    <h2>生成中心并非信息中心</h2>
+    <p>句法中心、信息中心与生成起点属于不同维度。句法主干在完成句中具有形式组织地位，却不必承载最重要的信息；最先形成并启动语言编码的结构，也不必包含全部命题内容。真正复杂或重要的信息可以在后续结构中进入，而较早形成的结构只需建立语境连接、功能方向、观察视角或开放的关系接口。</p>
+    <p>在大树隐喻中，生成性主干不是从完成句中抽取的形式骨架，而是言语进入语言编码以前，在概念组织过程中率先获得生长能力的开放性结构。</p>
+    <h2>生成性主干的形成</h2>
+    <p>总意图经宏计划扩散为 <em>Subgoal Network</em>，线性化使子目标形成可推进的宏观路径。当加工进入当前子目标时，相关概念围绕当前概念焦点形成 <em>Local Conceptual Network</em>。功能定向规定当前表达准备实现的交际作用，观察视角确定经验的组织方式，信息状态约束哪些内容需要明确表达，最低关系配置则将当前启动所必需的参与者、事件或状态组织起来。</p>
+    <p>局部概念网络不需要整体完成以后才能进入语言编码。其中最先达到最低充分组织状态、最先获得语言化能力，并能够为后续概念节点保留扩展接口的开放性结构，就是前语言生成主干。</p>
+    <h2>主干性是一种生成属性</h2>
+    <p>生成性主干的“主干性”不取决于信息分量，而取决于三项生成属性：早于形成、足以启动、支持生长。它可以承载当前命题的主要内容，也可以只是信息负载较轻但生成效能较高的组织支架。它不必预先包含全部后续信息，只需形成足以确定交际方向、局部组织中心、必要概念关系及初步展开方向的最低结构。尚未完成的内容可以在语言编码启动以后通过增量进入，并通过递归形成新的局部组织。</p>
+    <p>生成性主干也不是固定、普遍预存的句子模板。同一概念内容可以在不同交际意图、观察视角、概念焦点和信息状态下形成不同的生成起点，并进一步实现为不同的句法形式。主干不是预先选定后等待填充的框架，而是多重交际与加工约束在实时运行中共同收敛的结果。</p>
+    <h2>两种解释层面</h2>
+    <p>传统句法主干与前语言生成主干并不相互否定，而是分别属于结果分析与过程解释。前者识别完成句的核心形式结构；后者解释在整体话语尚未完成规划时，何种前语言结构能够率先启动语言编码并继续生长。传统句法主干可以视为生成过程完成语言化以后呈现出的形式结构，而生成性主干则揭示这一形式得以发生的动态起点。</p>
+    <blockquote>前语言生成主干，是总意图经宏计划展开至当前子目标时，局部概念网络在功能定向、观察视角与信息状态的共同约束下，以当前概念焦点为组织中心，通过最低关系配置而率先获得语言化能力的开放性结构。它的主干地位不取决于是否承载核心信息，而取决于能否及时启动语言编码，并为后续概念节点的增量进入与递归扩展提供生长接口。</blockquote>
+  </template>
 </section>
 
 <section class="section" id="foundations">
@@ -916,6 +1212,11 @@ const bilingualContent={
     '#home .identity':'语言研究者&nbsp;&nbsp;|&nbsp;&nbsp;副教授<br>天津财经大学珠江学院<br>南开大学硕士',
     '#home .tags':'心理语言学 · 言语产出 · 在线加工',
     '#mechanism .section-title':'核心学术贡献',
+    '#notes .section-title':'研究札记',
+    '#notes .kicker':'思想正在发生',
+    '#notes .notes-heading h2':'研究中的一些思考',
+    '#notes .notes-heading>p':'记录研究过程中出现的隐喻、问题与修正；它们是开放的思考札记，不等同于已经定型的理论结论。',
+    '#notes .notes-browse-hint':'移动鼠标浏览 · 触屏拖动',
     '#foundations .section-title':'理论根基',
     '#foundations .foundation-thesis':'可操作机制以心理语言学言语产出理论为总体架构，深入概念形成器内部，整合工作记忆、概念结构、认知语法、系统功能语言学与认知流利等理论资源，阐明交际意图如何经由宏计划、线性化与微计划形成可启动的前语言信息，并将这一隐性的心理加工过程组织为支持二语口语顺利启动与持续推进的可操作路径。',
     '#foundations .foundation-guide':'点击学者肖像，查看相关理论如何进入本机制',
@@ -929,7 +1230,18 @@ const bilingualContent={
     '#timeline .section-title':'学术历程',
   },
   lists:{
-    'header nav a':['首页','机制','理论根基','研究','口语研究室','学术历程','联系'],
+    'header nav a':['首页','机制','札记','理论根基','研究','口语研究室','学术历程','联系'],
+    '#notes .notes-filter-label':['全部','开口启动','理论隐喻','概念化','在线加工'],
+    '#notes .note-status':['理论札记','理论札记'],
+    '#notes .note-meta time':['2026.08.09','2026.08.09'],
+    '#notes .note-card h3':['大树隐喻','从结果性主干到生成性主干'],
+    '#notes .note-title-zh':['The Tree Metaphor','From the Syntactic Backbone to the Generative Trunk'],
+    '#notes .note-card>p':[
+      '宏计划、微计划、阈值、增量与递归如何共同支撑言语的开放性生成。',
+      '区分完成句中可识别的核心形式结构，与话语启动前率先获得语言化和后续生长能力的前语言结构。'
+    ],
+    '#notes .note-tags span':['生成性生长','增量加工','递归','生成性主干','开口启动','概念化'],
+    '#notes .note-read':['展开札记&nbsp; ↓','展开札记&nbsp; ↓'],
     '#research .card h3':['研究','论著','项目','学术报告','获奖'],
     '#research .card p':[
       '聚焦二语英语口语产出中“知识可得而表达不畅”的核心矛盾，考察陈述性知识如何由交际意图出发，依次经由宏观内容规划、线性化、微计划组织与开口启动阈值而进入语言编码，由此解释学习者如何在实时压力下将既有语言知识转化为可顺利启动并持续推进的流利言语。',
@@ -1007,6 +1319,7 @@ function setLanguage(language){
   updateScholarLabels();
   const activeScholar=document.querySelector('.scholar.is-active')||document.querySelector('.scholar');
   if(activeScholar) renderScholar(activeScholar);
+  if(activeInlineNote) renderInlineNote();
 }
 const foundationDetail=document.querySelector('.foundation-detail');
 function updateScholarLabels(){
@@ -1059,6 +1372,211 @@ document.querySelectorAll('.scholar').forEach(scholar=>{
   scholar.addEventListener('mouseenter',()=>renderScholar(scholar));
   scholar.addEventListener('focus',()=>renderScholar(scholar));
 });
+
+const notesRail=document.getElementById('notesRail');
+const notesProgress=document.getElementById('notesProgress');
+const noteCards=[...document.querySelectorAll('#notes .note-card')];
+const noteFilters=[...document.querySelectorAll('#notes .notes-filter')];
+const noteInline=document.getElementById('noteInline');
+const noteInlineBody=document.getElementById('noteInlineBody');
+const noteInlineClose=document.getElementById('noteInlineClose');
+let activeInlineNote='';
+let notesOpenPageY=0;
+const inlineNoteTitles={
+  tree:{
+    en:['The Tree Metaphor','Threshold-Based Speech Launch and Recursive Growth'],
+    zh:['大树隐喻','言语的阈值启动与递归生长']
+  },
+  trunk:{
+    en:['From the Syntactic Backbone to the Generative Trunk','Reinterpreting the structure from which an utterance begins to grow'],
+    zh:['从结果性主干到生成性主干','重新解释一句话得以启动并继续生长的结构']
+  }
+};
+function renderInlineNote(){
+  if(!activeInlineNote||!noteInline||!noteInlineBody) return;
+  const language=document.documentElement.lang==='zh-CN'?'zh':'en';
+  const template=document.getElementById(`note-${activeInlineNote}-${language}`);
+  const titles=inlineNoteTitles[activeInlineNote]?.[language];
+  if(!template||!titles) return;
+  noteInline.querySelector('.notes-inline-kicker').textContent=language==='zh'?'研究札记':'Research Note';
+  noteInline.querySelector('.notes-inline-title').textContent=titles[0];
+  noteInline.querySelector('.notes-inline-subtitle').textContent=titles[1];
+  noteInlineClose.textContent=language==='zh'?'收起 ↑':'Collapse ↑';
+  noteInlineBody.replaceChildren(template.content.cloneNode(true));
+}
+function openInlineNote(card){
+  if(!card||!noteInline) return;
+  const wasOpen=noteInline.classList.contains('is-open');
+  if(!wasOpen) notesOpenPageY=window.scrollY;
+  activeInlineNote=card.dataset.noteId;
+  noteCards.forEach(item=>{
+    const active=item===card;
+    item.classList.toggle('is-open',active);
+    item.setAttribute('aria-expanded',active?'true':'false');
+  });
+  renderInlineNote();
+  noteInline.classList.add('is-open');
+  noteInline.setAttribute('aria-hidden','false');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>noteInline.scrollIntoView({behavior:'smooth',block:'start'})));
+}
+function closeInlineNote(restorePosition=true){
+  if(!noteInline?.classList.contains('is-open')) return;
+  const activeCard=noteCards.find(item=>item.dataset.noteId===activeInlineNote);
+  noteInline.classList.remove('is-open');
+  noteInline.setAttribute('aria-hidden','true');
+  noteCards.forEach(item=>{item.classList.remove('is-open');item.setAttribute('aria-expanded','false')});
+  activeInlineNote='';
+  if(restorePosition) window.setTimeout(()=>window.scrollTo({top:notesOpenPageY,left:0,behavior:'smooth'}),80);
+  activeCard?.focus({preventScroll:true});
+}
+const notesStateKey='lipeiResearchNotesPosition';
+const notesReturnKey='lipeiReturningFromNote';
+function updateNotesProgress(){
+  if(!notesRail||!notesProgress) return;
+  const maximum=Math.max(0,notesRail.scrollWidth-notesRail.clientWidth);
+  const progress=maximum?notesRail.scrollLeft/maximum:0;
+  const viewportShare=Math.min(1,notesRail.clientWidth/notesRail.scrollWidth);
+  notesProgress.style.width=`${Math.max(viewportShare,viewportShare+(1-viewportShare)*progress)*100}%`;
+}
+function saveNotesPosition(returnPending){
+  if(!notesRail) return;
+  try{
+    const previous=JSON.parse(sessionStorage.getItem(notesStateKey)||'null');
+    const pending=returnPending===undefined?Boolean(previous?.returnPending):Boolean(returnPending);
+    sessionStorage.setItem(notesStateKey,JSON.stringify({
+      pageY:window.scrollY,
+      railX:notesRail.scrollLeft,
+      returnPending:pending
+    }));
+  }catch(error){}
+}
+function restoreNotesPosition(){
+  if(!notesRail) return;
+  try{
+    const state=JSON.parse(sessionStorage.getItem(notesStateKey)||'null');
+    const returning=sessionStorage.getItem(notesReturnKey)==='1'||Boolean(state?.returnPending);
+    if(!returning) return;
+    document.getElementById('enter')?.classList.add('hidden');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      notesRail.scrollLeft=Number(state?.railX)||0;
+      const fallbackY=document.getElementById('notes')?.offsetTop||0;
+      window.scrollTo({top:Number(state?.pageY)||fallbackY,left:0,behavior:'instant'});
+      if(state){
+        state.returnPending=false;
+        sessionStorage.setItem(notesStateKey,JSON.stringify(state));
+      }
+      sessionStorage.removeItem(notesReturnKey);
+      updateNotesProgress();
+    }));
+  }catch(error){}
+}
+if(notesRail){
+  let dragging=false;
+  let dragged=false;
+  let pointerStart=0;
+  let scrollStart=0;
+  let hoverTarget=0;
+  let hoverFrame=0;
+  let hoverActive=false;
+  const syncNotesColumns=()=>{
+    const visibleCount=noteCards.filter(card=>!card.hidden).length;
+    notesRail.dataset.columns=String(Math.max(1,Math.min(3,visibleCount)));
+  };
+  const visibleCardStep=()=>{
+    const card=noteCards.find(item=>!item.hidden);
+    if(!card) return notesRail.clientWidth;
+    const gap=parseFloat(getComputedStyle(notesRail).columnGap)||0;
+    return card.getBoundingClientRect().width+gap;
+  };
+  const stopNotesGlide=()=>{
+    hoverActive=false;
+    if(hoverFrame) cancelAnimationFrame(hoverFrame);
+    hoverFrame=0;
+  };
+  const glideNotes=()=>{
+    hoverFrame=0;
+    if(!hoverActive||dragging) return;
+    const distance=hoverTarget-notesRail.scrollLeft;
+    if(Math.abs(distance)<.4) return;
+    notesRail.scrollLeft+=distance*.075;
+    hoverFrame=requestAnimationFrame(glideNotes);
+  };
+  noteFilters.forEach(button=>button.addEventListener('click',()=>{
+    closeInlineNote(false);
+    const filter=button.dataset.noteFilter;
+    stopNotesGlide();
+    noteFilters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+    noteCards.forEach(card=>{
+      const tags=(card.dataset.tags||'').split(/\s+/);
+      card.hidden=filter!=='all'&&!tags.includes(filter);
+    });
+    syncNotesColumns();
+    notesRail.scrollTo({left:0,behavior:'smooth'});
+    requestAnimationFrame(updateNotesProgress);
+  }));
+  notesRail.addEventListener('pointerdown',event=>{
+    if(event.pointerType!=='mouse'||event.button!==0) return;
+    stopNotesGlide();
+    // Keep a normal click on a note card available for inline expansion.
+    // Desktop dragging begins only from the rail's uncovered area.
+    if(event.target.closest('[data-note-link]')){
+      dragging=false;
+      dragged=false;
+      return;
+    }
+    dragging=true;dragged=false;pointerStart=event.clientX;scrollStart=notesRail.scrollLeft;
+    notesRail.setPointerCapture(event.pointerId);
+  });
+  notesRail.addEventListener('pointermove',event=>{
+    if(dragging){
+      const distance=event.clientX-pointerStart;
+      if(Math.abs(distance)>10) dragged=true;
+      notesRail.scrollLeft=scrollStart-distance;
+      return;
+    }
+    if(event.pointerType!=='mouse') return;
+    const maximum=Math.max(0,notesRail.scrollWidth-notesRail.clientWidth);
+    if(maximum<2) return;
+    const rect=notesRail.getBoundingClientRect();
+    const position=Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width));
+    hoverTarget=maximum*Math.max(0,Math.min(1,(position-.1)/.8));
+    hoverActive=true;
+    if(!hoverFrame) hoverFrame=requestAnimationFrame(glideNotes);
+  });
+  const releaseNotesDrag=event=>{
+    if(!dragging) return;
+    dragging=false;
+    if(notesRail.hasPointerCapture(event.pointerId)) notesRail.releasePointerCapture(event.pointerId);
+    window.setTimeout(()=>{dragged=false},0);
+  };
+  notesRail.addEventListener('pointerup',releaseNotesDrag);
+  notesRail.addEventListener('pointercancel',releaseNotesDrag);
+  notesRail.addEventListener('pointerleave',stopNotesGlide);
+  notesRail.addEventListener('scroll',()=>{updateNotesProgress();saveNotesPosition()},{passive:true});
+  notesRail.addEventListener('keydown',event=>{
+    if(event.key!=='ArrowLeft'&&event.key!=='ArrowRight') return;
+    event.preventDefault();
+    notesRail.scrollBy({left:(event.key==='ArrowRight'?1:-1)*visibleCardStep(),behavior:'smooth'});
+  });
+  document.querySelectorAll('[data-note-link]').forEach(link=>link.addEventListener('click',event=>{
+    if(dragged){event.preventDefault();return;}
+    event.preventDefault();
+    openInlineNote(link);
+  }));
+  noteInlineClose?.addEventListener('click',()=>closeInlineNote(true));
+  document.addEventListener('keydown',event=>{if(event.key==='Escape') closeInlineNote(true)});
+  document.getElementById('notesPrev')?.addEventListener('click',()=>notesRail.scrollBy({left:-visibleCardStep(),behavior:'smooth'}));
+  document.getElementById('notesNext')?.addEventListener('click',()=>notesRail.scrollBy({left:visibleCardStep(),behavior:'smooth'}));
+  window.addEventListener('resize',updateNotesProgress);
+  window.addEventListener('pageshow',()=>{
+    const storedLanguage=localStorage.getItem('siteLanguage');
+    if(storedLanguage&&storedLanguage!==document.documentElement.lang) setLanguage(storedLanguage);
+    restoreNotesPosition();
+  });
+  syncNotesColumns();
+  updateNotesProgress();
+  restoreNotesPosition();
+}
 const savedLanguage=localStorage.getItem('siteLanguage');
 if(savedLanguage==='zh-CN') setLanguage('zh-CN');
 document.getElementById('langBtn').addEventListener('click',()=>{
