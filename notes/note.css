@@ -1,4 +1,4 @@
-@font-face{font-family:"LiPei Serif SC";src:url("../assets/fonts/noto-serif-sc-site.woff2?v=2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"LiPei Serif SC";src:url("../assets/fonts/noto-serif-sc-site.woff2?v=3") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 :root{--bg:#050505;--gold:#d8aa4f;--gold2:#f3d27a;--gold3:#8d6424;--orange:#f7941d;--orange-soft:#f2a33a;--ivory:#f4ecdc;--muted:#aaa08e;--line:rgba(216,170,79,.38)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
