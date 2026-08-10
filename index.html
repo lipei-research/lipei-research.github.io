@@ -188,7 +188,7 @@ h1{
   box-shadow:0 0 24px rgba(240,185,67,.18),inset 0 0 18px rgba(216,170,79,.04);
   animation:float 6s ease-in-out infinite;
 }
-.handmark img{width:100%;height:100%;object-fit:cover}
+.handmark img{width:100%;height:100%;object-fit:cover;transform:translate(-1.85%,1.2%);transform-origin:center}
 .signature{
   font-family:"Brush Script MT","Segoe Script",cursive;
   font-size:42px;color:#f1eee6;transform:rotate(-5deg);text-shadow:0 0 15px rgba(255,255,255,.16)
@@ -598,6 +598,7 @@ footer strong{
 .enter-logo{
   display:block;
   width:min(290px,62vw);aspect-ratio:1;height:auto;max-height:58vh;border-radius:50%;object-fit:cover;
+  transform:translate(-1.85%,1.2%);transform-origin:center;
   border:1px solid rgba(216,170,79,.32);
   box-shadow:0 0 34px rgba(216,170,79,.16),inset 0 0 22px rgba(216,170,79,.05);
 }
@@ -733,7 +734,7 @@ footer strong{
 <div class="enter" id="enter">
   <div class="enter-box">
     <button class="enter-trigger" id="enterBtn" type="button" aria-label="Enter Li Pei's academic website">
-      <img class="enter-logo" src="assets/images/personal-logo.webp?v=3" alt="" fetchpriority="high">
+      <img class="enter-logo" src="assets/images/personal-logo-clean.svg?v=1" alt="" fetchpriority="high">
     </button>
   </div>
 </div>
@@ -772,7 +773,7 @@ footer strong{
     <div class="tags">PSYCHOLINGUISTICS · SPEECH PRODUCTION · ONLINE PROCESSING</div>
     <div class="personal">
       <div class="handmark" aria-label="Personal hand mark">
-        <img src="assets/images/personal-logo.webp?v=3" alt="PsylntSai personal hand mark and signature" decoding="async">
+        <img src="assets/images/personal-logo-clean.svg?v=1" alt="PsylntSai personal hand mark and signature" decoding="async">
       </div>
     </div>
   </div>
@@ -1107,7 +1108,7 @@ if(mechanismPoster){
 }
 const enterLogo=document.querySelector('.enter-logo');
 if(enterLogo){
-  enterLogo.src='assets/images/personal-logo.webp?v=3';
+  enterLogo.src='assets/images/personal-logo-clean.svg?v=1';
 }
 const soundtrack=new Audio();
 soundtrack.preload='none';
