@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Li Pei Research</title>
-<meta name="description" content="Psycholinguistics · Speech Production · Online Processing" />
+<meta name="description" content="L2 Speech Production · Conceptualization · Online Processing" />
 <meta name="theme-color" content="#050505" />
 <meta name="deployment-version" content="2026-07-29-stone-volume-01" />
 <link rel="icon" href="assets/images/personal-logo.webp?v=3" />
@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:url" content="https://www.lipeiresearch.com/" />
 <meta property="og:title" content="李沛学术研究" />
-<meta property="og:description" content="心理语言学 · 言语产出 · 在线加工" />
+<meta property="og:description" content="二语口语产出 · 概念化 · 在线加工" />
 <meta property="og:image" content="https://www.lipeiresearch.com/assets/images/share-card.jpg" />
 <meta property="og:image:secure_url" content="https://www.lipeiresearch.com/assets/images/share-card.jpg" />
 <meta property="og:image:type" content="image/jpeg" />
@@ -26,7 +26,7 @@
 <meta property="og:image:alt" content="李沛学术研究" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="李沛学术研究" />
-<meta name="twitter:description" content="心理语言学 · 言语产出 · 在线加工" />
+<meta name="twitter:description" content="二语口语产出 · 概念化 · 在线加工" />
 <meta name="twitter:image" content="https://www.lipeiresearch.com/assets/images/share-card.jpg" />
 <style>
 @font-face{
@@ -71,6 +71,11 @@ html[lang="zh-CN"] .section-title,
 html[lang="zh-CN"] .kicker,
 html[lang="zh-CN"] .tags,
 html[lang="zh-CN"] nav{letter-spacing:.08em;text-transform:none}
+html[lang="zh-CN"] .tags,
+html[lang="zh-CN"] .footer-fields{
+  font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+  font-synthesis:none;
+}
 html[lang="zh-CN"] h1{line-height:1.06;letter-spacing:.08em}
 html[lang="zh-CN"] .subtitle{letter-spacing:.06em}
 html[lang="zh-CN"] .hero-statement{width:min(720px,100%)}
@@ -798,7 +803,7 @@ footer strong{
       Tianjin University of Finance and Economics Pearl River College<br>
       M.A., Nankai University
     </div>
-    <div class="tags">PSYCHOLINGUISTICS · SPEECH PRODUCTION · ONLINE PROCESSING</div>
+    <div class="tags">L2 SPEECH PRODUCTION · CONCEPTUALIZATION · ONLINE PROCESSING</div>
     <div class="personal">
       <div class="handmark" aria-label="Personal hand mark">
         <img src="assets/images/personal-logo-aligned.svg?v=2" alt="PsylntSai personal hand mark and signature" decoding="async">
@@ -1117,7 +1122,7 @@ footer strong{
 
 <footer id="contact">
   <strong>LiPei Research</strong>
-  <div class="footer-fields">Psycholinguistics · Speech Production · Online Processing</div>
+  <div class="footer-fields">L2 Speech Production · Conceptualization · Online Processing</div>
   <div class="footer-mantra">“Progress, not perfection.”</div>
   <div class="footer-contact">
     <a class="contact-email" href="mailto:lipei@lipeiresearch.com">lipei@lipeiresearch.com</a>
@@ -1254,7 +1259,7 @@ const bilingualContent={
     '#home .hero-statement':'<span class="hero-line">本机制将开口前隐性的前语言心理加工显化为可操作步骤，</span><span class="hero-line">支持二语口语在实时压力下顺利启动、持续推进并实现更为流利的表达。</span>',
     '#home .name':'李 沛',
     '#home .identity':'语言研究者&nbsp;&nbsp;|&nbsp;&nbsp;副教授<br>天津财经大学珠江学院<br>南开大学硕士',
-    '#home .tags':'心理语言学 · 言语产出 · 在线加工',
+    '#home .tags':'二语口语产出 · 概念化 · 在线加工',
     '#mechanism .section-title':'核心学术贡献',
     '#notes .section-title':'研究札记',
     '#notes .notes-archive-kicker':'研究札记',
@@ -1276,7 +1281,7 @@ const bilingualContent={
     '#lab .cn':'English Speaking Lab',
     '#lab .lab-panel:nth-child(2)>p':'研究室以美语正音、美式语流、句构框架与流利机制为四个相互衔接的训练模块，形成从发音准确、语流自然、句构清晰到表达顺利启动并持续推进的系统化口语学习路径。',
     '#timeline .section-title':'学术历程',
-    '#contact .footer-fields':'心理语言学 · 言语产出 · 在线加工',
+    '#contact .footer-fields':'二语口语产出 · 概念化 · 在线加工',
     '#contact .footer-filing-label':'',
   },
   lists:{
@@ -1345,8 +1350,8 @@ function setLanguage(language){
   const chinese=language==='zh-CN';
   const pageTitle=chinese?'李沛学术研究':'Li Pei Research';
   const pageDescription=chinese
-    ?'心理语言学 · 言语产出 · 在线加工'
-    :'Psycholinguistics · Speech Production · Online Processing';
+    ?'二语口语产出 · 概念化 · 在线加工'
+    :'L2 Speech Production · Conceptualization · Online Processing';
   document.documentElement.lang=chinese?'zh-CN':'en';
   document.title=pageTitle;
   document.querySelector('meta[name="description"]').content=pageDescription;
