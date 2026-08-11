@@ -274,9 +274,9 @@ h1{
 }
 .notes-archive-identity{display:flex;align-items:baseline;gap:14px;min-width:0}
 .notes-archive-kicker{color:var(--orange);font-size:8px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
-.notes-archive-title{color:var(--gold2);font-size:17px;line-height:1.25;font-weight:600;letter-spacing:.025em}
+.notes-archive-title{color:var(--orange);font-size:17px;line-height:1.25;font-weight:600;letter-spacing:.025em}
 .notes-archive-summary{color:#837b70;font-size:9px;line-height:1.5;letter-spacing:.055em}
-.notes-archive-action{display:flex;align-items:center;gap:10px;color:#a58c61;font-size:8px;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap}
+.notes-archive-action{display:flex;align-items:center;gap:10px;color:var(--orange);font-size:8px;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap}
 .notes-archive-chevron{font-style:normal;font-size:15px;line-height:1;transition:transform .3s}
 .notes-section.is-open .notes-archive-chevron{transform:rotate(180deg)}
 .notes-archive-panel{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .46s cubic-bezier(.22,.8,.24,1),opacity .28s,margin-top .46s;margin-top:0}
@@ -288,7 +288,7 @@ h1{
 }
 .notes-heading .kicker{display:none}
 .notes-heading h2{
-  margin:0;color:var(--gold2);font-size:16px;
+  margin:0;color:var(--orange);font-size:16px;
   line-height:1.25;font-weight:600;letter-spacing:.045em;
 }
 .notes-heading>p{
@@ -354,7 +354,7 @@ a.note-card:hover,a.note-card:focus-visible{
 }
 .note-meta time{color:#6e675e;font-size:7px;letter-spacing:.07em;white-space:nowrap}
 .note-card h3{
-  grid-area:title;position:relative;z-index:1;margin:0;color:var(--gold2);
+  grid-area:title;position:relative;z-index:1;margin:0;color:var(--orange);
   font-size:13px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .note-card.is-thread h3{font-size:13px;margin:0}
@@ -419,7 +419,8 @@ a.note-card:hover,a.note-card:focus-visible{
 html[lang="zh-CN"] .notes-inline-title,
 html[lang="zh-CN"] .notes-inline-body h2{font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif}
 html[lang="zh-CN"] .notes-heading h2,
-html[lang="zh-CN"] .note-card h3{
+html[lang="zh-CN"] .note-card h3,
+html[lang="zh-CN"] .notes-archive-title{
   font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif;
   font-weight:600;
 }
@@ -581,7 +582,7 @@ footer strong{
 .footer-fields{font-size:11px;line-height:1.5;letter-spacing:.055em;color:#928a7e}
 .footer-mantra{margin-top:9px;font-size:10.5px;line-height:1.4;letter-spacing:.035em;color:#857e73}
 .contact-email{
-  display:inline-block;color:#9b9285;font-size:11px;letter-spacing:.045em;
+  display:inline-block;color:#9b9285;font-size:10px;letter-spacing:.035em;
   border-bottom:1px solid transparent;transition:color .2s,border-color .2s
 }
 .footer-contact{display:flex;align-items:center;justify-content:center;margin-top:12px}
