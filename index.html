@@ -3,34 +3,35 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LiPei Research · The Operable Mechanism</title>
-<meta name="description" content="Li Pei — Psycholinguistics, L2 speech production, English Speaking Lab." />
+<title>Li Pei Research</title>
+<meta name="description" content="Psycholinguistics · Speech Production · Online Processing" />
 <meta name="theme-color" content="#050505" />
 <meta name="deployment-version" content="2026-07-29-stone-volume-01" />
 <link rel="icon" href="assets/images/personal-logo.webp?v=3" />
 <link rel="preload" href="assets/images/personal-logo.webp?v=3" as="image" type="image/webp" fetchpriority="high" />
-<link rel="preload" href="assets/fonts/noto-serif-sc-site.woff2?v=3" as="font" type="font/woff2" crossorigin />
+<link rel="canonical" href="https://www.lipeiresearch.com/" />
+<link rel="preload" href="assets/fonts/noto-serif-sc-site-v4.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/audio/threshold-stone.mp3?v=2" as="audio" type="audio/mpeg" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="LiPei Research" />
 <meta property="og:locale" content="zh_CN" />
-<meta property="og:url" content="https://lipei-research.github.io/" />
-<meta property="og:title" content="李沛｜可操作性英语口语在线产出机制" />
+<meta property="og:url" content="https://www.lipeiresearch.com/" />
+<meta property="og:title" content="李沛学术研究" />
 <meta property="og:description" content="心理语言学 · 言语产出 · 在线加工" />
-<meta property="og:image" content="https://lipei-research.github.io/assets/images/share-card.jpg" />
-<meta property="og:image:secure_url" content="https://lipei-research.github.io/assets/images/share-card.jpg" />
+<meta property="og:image" content="https://www.lipeiresearch.com/assets/images/share-card.jpg" />
+<meta property="og:image:secure_url" content="https://www.lipeiresearch.com/assets/images/share-card.jpg" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="李沛｜可操作性英语口语在线产出机制" />
+<meta property="og:image:alt" content="李沛学术研究" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="李沛｜可操作性英语口语在线产出机制" />
+<meta name="twitter:title" content="李沛学术研究" />
 <meta name="twitter:description" content="心理语言学 · 言语产出 · 在线加工" />
-<meta name="twitter:image" content="https://lipei-research.github.io/assets/images/share-card.jpg" />
+<meta name="twitter:image" content="https://www.lipeiresearch.com/assets/images/share-card.jpg" />
 <style>
 @font-face{
   font-family:"LiPei Serif SC";
-  src:url("assets/fonts/noto-serif-sc-site.woff2?v=3") format("woff2");
+  src:url("assets/fonts/noto-serif-sc-site-v4.woff2") format("woff2");
   font-weight:100 900;
   font-style:normal;
   font-display:swap;
@@ -1342,11 +1343,25 @@ Object.keys(bilingualContent.lists).forEach(selector=>document.querySelectorAll(
 
 function setLanguage(language){
   const chinese=language==='zh-CN';
+  const pageTitle=chinese?'李沛学术研究':'Li Pei Research';
+  const pageDescription=chinese
+    ?'心理语言学 · 言语产出 · 在线加工'
+    :'Psycholinguistics · Speech Production · Online Processing';
   document.documentElement.lang=chinese?'zh-CN':'en';
-  document.title=chinese?'李沛学术研究 · 二语英语口语产出的在线加工机制':'LiPei Research · The Operable Mechanism';
-  document.querySelector('meta[name="description"]').content=chinese
-    ?'李沛个人学术网站：心理语言学、二语英语口语产出、在线加工与英语口语研究室。'
-    :'Li Pei — Psycholinguistics, L2 speech production, English Speaking Lab.';
+  document.title=pageTitle;
+  document.querySelector('meta[name="description"]').content=pageDescription;
+  const metadata={
+    'meta[property="og:title"]':pageTitle,
+    'meta[property="og:description"]':pageDescription,
+    'meta[property="og:locale"]':chinese?'zh_CN':'en_US',
+    'meta[property="og:image:alt"]':pageTitle,
+    'meta[name="twitter:title"]':pageTitle,
+    'meta[name="twitter:description"]':pageDescription
+  };
+  Object.entries(metadata).forEach(([selector,value])=>{
+    const element=document.querySelector(selector);
+    if(element) element.content=value;
+  });
   Object.entries(bilingualContent.single).forEach(([selector,chineseHTML])=>{
     const element=document.querySelector(selector);
     if(element) element.innerHTML=chinese?chineseHTML:originalContent.get(element);
