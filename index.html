@@ -188,7 +188,7 @@ h1{
   box-shadow:0 0 24px rgba(240,185,67,.18),inset 0 0 18px rgba(216,170,79,.04);
   animation:float 6s ease-in-out infinite;
 }
-.handmark img{width:100%;height:100%;object-fit:cover;transform:translate(-1.85%,1.2%);transform-origin:center}
+.handmark img{width:100%;height:100%;object-fit:cover;transform:translateY(1.2%);transform-origin:center}
 .signature{
   font-family:"Brush Script MT","Segoe Script",cursive;
   font-size:42px;color:#f1eee6;transform:rotate(-5deg);text-shadow:0 0 15px rgba(255,255,255,.16)
@@ -255,13 +255,33 @@ h1{
 .copy-support{left:34%;top:70%}
 .caption{text-align:center;color:var(--muted);margin:16px 0 0;font-size:13px;letter-spacing:.08em}
 .notes-section{
-  position:relative;overflow:hidden;
-  padding-top:46px;padding-bottom:48px;
+  position:relative;overflow:visible;
+  padding-top:18px;padding-bottom:18px;
   background:
-    radial-gradient(circle at 18% 26%,rgba(247,148,29,.055),transparent 30%),
-    linear-gradient(180deg,rgba(216,170,79,.018),transparent 72%);
+    radial-gradient(circle at 18% 26%,rgba(247,148,29,.028),transparent 30%),
+    linear-gradient(180deg,rgba(216,170,79,.012),transparent 72%);
 }
-.notes-section>.section-title{margin-bottom:22px}
+.notes-section>.section-title{display:none}
+.notes-archive-toggle{
+  width:100%;min-height:76px;padding:14px 18px;border:1px solid rgba(216,170,79,.22);border-radius:12px;
+  background:linear-gradient(90deg,rgba(216,170,79,.025),rgba(255,255,255,.006),rgba(216,170,79,.015));
+  display:grid;grid-template-columns:minmax(250px,1fr) minmax(260px,1.2fr) auto;gap:24px;align-items:center;
+  color:inherit;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,box-shadow .25s;
+}
+.notes-archive-toggle:hover,.notes-archive-toggle:focus-visible{
+  border-color:rgba(216,170,79,.46);background:linear-gradient(90deg,rgba(216,170,79,.042),rgba(255,255,255,.008),rgba(216,170,79,.02));
+  box-shadow:0 8px 28px rgba(0,0,0,.2);outline:none;
+}
+.notes-archive-identity{display:flex;align-items:baseline;gap:14px;min-width:0}
+.notes-archive-kicker{color:var(--orange);font-size:8px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+.notes-archive-title{color:var(--gold2);font-size:17px;line-height:1.25;font-weight:600;letter-spacing:.025em}
+.notes-archive-summary{color:#837b70;font-size:9px;line-height:1.5;letter-spacing:.055em}
+.notes-archive-action{display:flex;align-items:center;gap:10px;color:#a58c61;font-size:8px;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap}
+.notes-archive-chevron{font-style:normal;font-size:15px;line-height:1;transition:transform .3s}
+.notes-section.is-open .notes-archive-chevron{transform:rotate(180deg)}
+.notes-archive-panel{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .46s cubic-bezier(.22,.8,.24,1),opacity .28s,margin-top .46s;margin-top:0}
+.notes-section.is-open .notes-archive-panel{grid-template-rows:1fr;opacity:1;margin-top:18px}
+.notes-archive-clip{min-height:0;overflow:hidden}
 .notes-heading{
   display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.9fr) auto;
   gap:28px;align-items:center;margin:0 0 18px;
@@ -305,9 +325,9 @@ h1{
 .notes-rail:active{cursor:grabbing}
 .notes-rail::-webkit-scrollbar{display:none}
 .note-card{
-  flex:0 0 calc((100% - 14px)/2);min-width:0;height:252px;scroll-snap-align:start;
+  flex:0 0 calc((100% - 14px)/2);min-width:0;height:198px;scroll-snap-align:start;
   position:relative;overflow:hidden;border:1px solid rgba(216,170,79,.27);border-radius:14px;
-  padding:24px 22px 21px;background:
+  padding:18px 18px 16px;background:
     linear-gradient(145deg,rgba(216,170,79,.055),rgba(255,255,255,.007) 50%,rgba(247,148,29,.022));
   display:flex;flex-direction:column;transition:transform .28s,border-color .28s,box-shadow .28s;
 }
@@ -324,8 +344,8 @@ a.note-card:hover,a.note-card:focus-visible{
 }
 .note-card.is-thread{background:rgba(6,6,6,.78)}
 .note-index{
-  position:absolute;right:18px;top:13px;color:rgba(216,170,79,.1);
-  font-size:54px;line-height:1;font-variant-numeric:lining-nums;
+  position:absolute;right:16px;top:11px;color:rgba(216,170,79,.075);
+  font-size:42px;line-height:1;font-variant-numeric:lining-nums;
 }
 .note-meta{display:flex;align-items:center;gap:10px;position:relative;z-index:1}
 .note-status{
@@ -333,17 +353,17 @@ a.note-card:hover,a.note-card:focus-visible{
 }
 .note-meta time{color:#716a60;font-size:8px;letter-spacing:.08em}
 .note-card h3{
-  position:relative;z-index:1;margin:19px 42px 0 0;color:var(--gold2);
-  font-size:clamp(20px,1.65vw,27px);font-weight:500;line-height:1.16;
+  position:relative;z-index:1;margin:14px 38px 0 0;color:var(--gold2);
+  font-size:clamp(16px,1.25vw,20px);font-weight:500;line-height:1.2;
 }
-.note-card.is-thread h3{font-size:clamp(18px,1.5vw,24px);margin-right:34px}
+.note-card.is-thread h3{font-size:clamp(15px,1.2vw,19px);margin-right:34px}
 .note-title-zh{
-  margin-top:7px;color:var(--orange-soft);font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif;
-  font-size:12px;line-height:1.35;letter-spacing:.055em;
+  margin-top:5px;color:var(--orange-soft);font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC",SimSun,serif;
+  font-size:10px;line-height:1.35;letter-spacing:.05em;
 }
 .note-card>p{
-  position:relative;z-index:1;margin:13px 0 0;color:#aaa093;
-  font-size:10px;line-height:1.58;
+  position:relative;z-index:1;margin:9px 0 0;color:#9d9488;
+  font-size:8.5px;line-height:1.52;
 }
 .note-card.is-thread>p{font-size:10px;color:#958c80}
 .note-footer{margin-top:auto;padding-top:14px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
@@ -563,10 +583,15 @@ footer strong{
 .footer-fields{font-size:11px;line-height:1.5;letter-spacing:.055em;color:#928a7e}
 .footer-mantra{margin-top:9px;font-size:10.5px;line-height:1.4;letter-spacing:.035em;color:#857e73}
 .contact-email{
-  display:inline-block;margin-top:12px;color:#8e867a;font-size:11px;letter-spacing:.045em;
+  display:inline-block;color:#9b9285;font-size:11px;letter-spacing:.045em;
   border-bottom:1px solid transparent;transition:color .2s,border-color .2s
 }
-.contact-email:hover,.contact-email:focus-visible{color:#c7b89f;border-color:rgba(216,170,79,.45)}
+.footer-contact{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:12px;color:#514c45;font-size:10px}
+.footer-site{color:#8e867a;font-size:11px;letter-spacing:.035em;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.contact-email:hover,.contact-email:focus-visible,.footer-site:hover,.footer-site:focus-visible{color:#c7b89f;border-color:rgba(216,170,79,.45)}
+.footer-compliance{margin-top:10px;font-size:9px;letter-spacing:.035em}
+.footer-compliance a{color:#6f695f;transition:color .2s}
+.footer-compliance a:hover,.footer-compliance a:focus-visible{color:#a69c8e}
 .footer-copyright{margin-top:12px;font-size:10px;letter-spacing:.035em;color:#6f695f}
 .enter{
   position:fixed;inset:0;z-index:100;background:
@@ -598,7 +623,7 @@ footer strong{
 .enter-logo{
   display:block;
   width:min(290px,62vw);aspect-ratio:1;height:auto;max-height:58vh;border-radius:50%;object-fit:cover;
-  transform:translate(-1.85%,1.2%);transform-origin:center;
+  transform:translateY(1.2%);transform-origin:center;
   border:1px solid rgba(216,170,79,.32);
   box-shadow:0 0 34px rgba(216,170,79,.16),inset 0 0 22px rgba(216,170,79,.05);
 }
@@ -636,6 +661,7 @@ footer strong{
   .scholar-portrait{width:min(128px,80%)}
   .lab{display:flex;flex-direction:column}
   .notes-heading{grid-template-columns:1fr auto;gap:13px}.notes-heading>p{grid-column:1 / -1;grid-row:2}
+  .notes-archive-toggle{grid-template-columns:minmax(220px,1fr) auto;gap:12px}.notes-archive-summary{display:none}
   .notes-rail[data-columns="3"] .note-card{flex-basis:calc((100% - 14px)/2)}
 }
 @media(max-width:620px){
@@ -660,17 +686,20 @@ footer strong{
   .identity{font-size:9px;line-height:1.45}.tags{font-size:7px;line-height:1.5;margin-top:9px}
   .mantra{font-size:7px;line-height:1.4}
   .section{padding:38px 12px}.section-title{font-size:14px;gap:9px;margin-bottom:18px}
-  .notes-section{padding-top:32px;padding-bottom:34px}.notes-section>.section-title{margin-bottom:15px}
+  .notes-section{padding-top:10px;padding-bottom:10px}.notes-section>.section-title{display:none}
+  .notes-archive-toggle{min-height:66px;padding:11px 12px;grid-template-columns:1fr auto;border-radius:10px}
+  .notes-archive-identity{display:block}.notes-archive-kicker{display:block;font-size:6px;margin-bottom:4px}.notes-archive-title{font-size:14px}
+  .notes-archive-action{font-size:6px;gap:6px}.notes-section.is-open .notes-archive-panel{margin-top:13px}
   .notes-heading{grid-template-columns:1fr auto;gap:9px;margin-bottom:12px}
   .notes-heading h2{font-size:21px;margin-top:4px;line-height:1.14}.notes-heading>p{font-size:8px;line-height:1.5}
   .notes-controls{gap:5px}.notes-control{width:29px;height:29px;font-size:17px}
   .notes-toolbar{margin-bottom:7px}.notes-filters{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:2px;scrollbar-width:none}.notes-filters::-webkit-scrollbar{display:none}
   .notes-filter{flex:0 0 auto;padding:4px 7px;font-size:6px}.notes-browse-hint{display:none}
   .notes-rail{gap:10px;padding:3px 1px 11px}
-  .notes-rail[data-columns] .note-card,.note-card.is-thread{flex-basis:calc(100vw - 50px);height:250px;padding:19px 17px 17px;border-radius:12px}
+  .notes-rail[data-columns] .note-card,.note-card.is-thread{flex-basis:calc(100vw - 50px);height:205px;padding:16px 15px 14px;border-radius:12px}
   .note-index{right:14px;top:12px;font-size:42px}
   .note-status{font-size:6.5px}.note-meta time{font-size:7px}
-  .note-card h3,.note-card.is-thread h3{font-size:19px;margin:17px 34px 0 0;line-height:1.17}
+  .note-card h3,.note-card.is-thread h3{font-size:16px;margin:12px 34px 0 0;line-height:1.2}
   .note-title-zh{font-size:10px;margin-top:6px}.note-card>p,.note-card.is-thread>p{font-size:8px;line-height:1.55;margin-top:11px}
   .note-footer{padding-top:11px;align-items:flex-end}.note-tags{gap:4px}.note-tags span{font-size:5px;padding:3px 5px}
   .note-read{font-size:6px}.thread-pulse{font-size:5px}
@@ -734,7 +763,7 @@ footer strong{
 <div class="enter" id="enter">
   <div class="enter-box">
     <button class="enter-trigger" id="enterBtn" type="button" aria-label="Enter Li Pei's academic website">
-      <img class="enter-logo" src="assets/images/personal-logo-clean.svg?v=1" alt="" fetchpriority="high">
+      <img class="enter-logo" src="assets/images/personal-logo-aligned.svg?v=2" alt="" fetchpriority="high">
     </button>
   </div>
 </div>
@@ -773,7 +802,7 @@ footer strong{
     <div class="tags">PSYCHOLINGUISTICS · SPEECH PRODUCTION · ONLINE PROCESSING</div>
     <div class="personal">
       <div class="handmark" aria-label="Personal hand mark">
-        <img src="assets/images/personal-logo-clean.svg?v=1" alt="PsylntSai personal hand mark and signature" decoding="async">
+        <img src="assets/images/personal-logo-aligned.svg?v=2" alt="PsylntSai personal hand mark and signature" decoding="async">
       </div>
     </div>
   </div>
@@ -788,6 +817,16 @@ footer strong{
 
 <section class="section notes-section" id="notes">
   <div class="section-title">Research Notes</div>
+  <button class="notes-archive-toggle" id="notesArchiveToggle" type="button" aria-expanded="false" aria-controls="notesArchivePanel">
+    <span class="notes-archive-identity">
+      <span class="notes-archive-kicker">Research Notes</span>
+      <strong class="notes-archive-title">A Working Thought Archive</strong>
+    </span>
+    <span class="notes-archive-summary">2 notes · metaphors, questions, and revisions</span>
+    <span class="notes-archive-action"><span class="notes-archive-action-label">Browse archive</span><i class="notes-archive-chevron" aria-hidden="true">⌄</i></span>
+  </button>
+  <div class="notes-archive-panel" id="notesArchivePanel" aria-hidden="true" inert>
+  <div class="notes-archive-clip">
   <div class="notes-heading">
     <div>
       <div class="kicker">Ideas in Motion</div>
@@ -844,6 +883,8 @@ footer strong{
         <div class="notes-inline-body" id="noteInlineBody"></div>
       </article>
     </div>
+  </div>
+  </div>
   </div>
 
   <template id="note-tree-en">
@@ -1079,7 +1120,12 @@ footer strong{
   <strong>LiPei Research</strong>
   <div class="footer-fields">Psycholinguistics · Speech Production · Online Processing</div>
   <div class="footer-mantra">“Progress, not perfection.”</div>
-  <a class="contact-email" href="mailto:alexanderlp@qq.com">alexanderlp@qq.com</a>
+  <div class="footer-contact">
+    <a class="contact-email" href="mailto:lipei@lipeiresearch.com">lipei@lipeiresearch.com</a>
+    <span aria-hidden="true">·</span>
+    <a class="footer-site" href="https://www.lipeiresearch.com/">www.lipeiresearch.com</a>
+  </div>
+  <div class="footer-compliance"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener"><span class="footer-filing-label">ICP Filing</span> · 津ICP备2026010748号</a></div>
   <div class="footer-copyright">© 2026 LiPei Research</div>
 </footer>
 </div>
@@ -1108,7 +1154,7 @@ if(mechanismPoster){
 }
 const enterLogo=document.querySelector('.enter-logo');
 if(enterLogo){
-  enterLogo.src='assets/images/personal-logo-clean.svg?v=1';
+  enterLogo.src='assets/images/personal-logo-aligned.svg?v=2';
 }
 const soundtrack=new Audio();
 soundtrack.preload='none';
@@ -1214,8 +1260,12 @@ const bilingualContent={
     '#home .tags':'心理语言学 · 言语产出 · 在线加工',
     '#mechanism .section-title':'核心学术贡献',
     '#notes .section-title':'研究札记',
+    '#notes .notes-archive-kicker':'研究札记',
+    '#notes .notes-archive-title':'思想档案库',
+    '#notes .notes-archive-summary':'2 篇札记 · 隐喻、问题与修正',
+    '#notes .notes-archive-action-label':'展开档案',
     '#notes .kicker':'思想正在发生',
-    '#notes .notes-heading h2':'研究中的一些思考',
+    '#notes .notes-heading h2':'札记目录',
     '#notes .notes-heading>p':'记录研究过程中出现的隐喻、问题与修正；它们是开放的思考札记，不等同于已经定型的理论结论。',
     '#notes .notes-browse-hint':'移动鼠标浏览 · 触屏拖动',
     '#foundations .section-title':'理论根基',
@@ -1229,6 +1279,8 @@ const bilingualContent={
     '#lab .cn':'English Speaking Lab',
     '#lab .lab-panel:nth-child(2)>p':'研究室以美语正音、美式语流、句构框架与流利机制为四个相互衔接的训练模块，形成从发音准确、语流自然、句构清晰到表达顺利启动并持续推进的系统化口语学习路径。',
     '#timeline .section-title':'学术历程',
+    '#contact .footer-fields':'心理语言学 · 言语产出 · 在线加工',
+    '#contact .footer-filing-label':'ICP备案',
   },
   lists:{
     'header nav a':['首页','机制','札记','理论根基','研究','口语研究室','学术历程','联系'],
@@ -1281,11 +1333,6 @@ const bilingualContent={
       '2024年获批第十二批中国外语教育基金项目“可操作性英语口语在线加工机制模型构建研究”，推动机制由理论路径走向形式化模型建构；同期以ChatGPT语音对话为基础，构建面向口语学习的智能语音助理与教学智能体，将机制嵌入口语练习、即时反馈与教学设计，探索其由理论模型向智能交互训练系统的转化。',
       '《可操作性英语口语在线产出机制研究》的发表推动机制获得系统的学术表达；同年，以该机制为核心的参赛作品<em>How to Speak English Fluently?</em>获第十届全国高等院校英语教师教学基本功大赛全国特等奖，并获第十六届“外教社杯”全国高校外语教学大赛（天津赛区）决赛一等奖，标志着心理语言学建模、视觉化阐释与课堂实践开始汇聚为研究驱动的口语教学体系。',
       '2026年，赴北京外国语大学参加“中国认知科学学会生物语言学专业委员会成立会议暨2026第五届生物语言学·语言习得国际研讨会”，并作题为<em>Online Cognitive Processing in L2 Speech Production: An Operable Mechanism from Communicative Intention to Articulation Onset</em>的学术报告；同期，研究从整体机制中进一步析出开口启动阈值，将功能定向、概念焦点与最低关系配置界定为当前最小表达意图进入语言编码的核心前语言准备条件，并以概念焦点扩散、新焦点生成与局部再触发解释言语启动后的持续推进。'
-    ],
-    'footer>div':[
-      '心理语言学 · 言语产出 · 在线加工',
-      '“Progress, not perfection.”',
-      '© 2026 LiPei Research'
     ]
   }
 };
@@ -1321,6 +1368,7 @@ function setLanguage(language){
   const activeScholar=document.querySelector('.scholar.is-active')||document.querySelector('.scholar');
   if(activeScholar) renderScholar(activeScholar);
   if(activeInlineNote) renderInlineNote();
+  updateNotesArchiveLabel();
 }
 const foundationDetail=document.querySelector('.foundation-detail');
 function updateScholarLabels(){
@@ -1373,6 +1421,27 @@ document.querySelectorAll('.scholar').forEach(scholar=>{
   scholar.addEventListener('mouseenter',()=>renderScholar(scholar));
   scholar.addEventListener('focus',()=>renderScholar(scholar));
 });
+
+const notesSection=document.getElementById('notes');
+const notesArchiveToggle=document.getElementById('notesArchiveToggle');
+const notesArchivePanel=document.getElementById('notesArchivePanel');
+function updateNotesArchiveLabel(){
+  const label=notesArchiveToggle?.querySelector('.notes-archive-action-label');
+  if(!label) return;
+  const open=notesSection?.classList.contains('is-open');
+  const chinese=document.documentElement.lang==='zh-CN';
+  label.textContent=open?(chinese?'收起档案':'Close archive'):(chinese?'展开档案':'Browse archive');
+}
+function setNotesArchive(open){
+  notesSection?.classList.toggle('is-open',open);
+  notesArchiveToggle?.setAttribute('aria-expanded',open?'true':'false');
+  notesArchivePanel?.setAttribute('aria-hidden',open?'false':'true');
+  if(open) notesArchivePanel?.removeAttribute('inert');
+  else notesArchivePanel?.setAttribute('inert','');
+  updateNotesArchiveLabel();
+  if(open) window.setTimeout(updateNotesProgress,470);
+}
+notesArchiveToggle?.addEventListener('click',()=>setNotesArchive(!notesSection.classList.contains('is-open')));
 
 const notesRail=document.getElementById('notesRail');
 const notesProgress=document.getElementById('notesProgress');
