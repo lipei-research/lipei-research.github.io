@@ -7,9 +7,9 @@
 <meta name="copyright" content="© 2026 李沛. All rights reserved.">
 <meta name="description" content="现代语言研究总地图：从构成、动态、解释、探究与实践四个入口进入语言研究。© 2026 李沛。">
 <title>现代语言研究总地图</title>
-<link rel="preload" href="assets/fonts/noto-serif-sc-site-v4.woff2?v=20260818-3" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/noto-serif-sc-site-v4.woff2?v=20260818-4" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/noto-serif-sc-site-v4.woff2?v=20260818-3") format("woff2");font-weight:100 900;font-style:normal;font-display:block}
+@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/noto-serif-sc-site-v4.woff2?v=20260818-4") format("woff2");font-weight:100 900;font-style:normal;font-display:block}
 :root{--bg:#050505;--panel:#0a0a0a;--panel2:#10100f;--gold:#d8aa4f;--gold2:#8d6424;--gold3:#f3d27a;--orange:#f7941d;--orange-soft:#f2a33a;--text:#f4ecdc;--muted:#aaa08e;--line:rgba(216,170,79,.42);--line2:rgba(216,170,79,.14);--red:#a65146;--font-map-title:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;--font-map-body:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;--font-map-en:Georgia,"Times New Roman",serif}
 *{box-sizing:border-box} html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;font-synthesis:none;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility} button,input{font:inherit}
 body{background:radial-gradient(circle at 50% 12%,rgba(216,170,79,.08),transparent 28%),linear-gradient(180deg,#030303,#070707 50%,#020202);overflow:hidden}
@@ -1218,7 +1218,23 @@ let currentFacet="1",TREE=FACETS["1"].tree,DETAIL=FACETS["1"].detail;
 let columns=[],pathNodes=[],zoom=1,terminalWrap=null;
 const canvas=document.getElementById("canvas"),viewport=document.getElementById("viewport");
 let restoringLink=false,toastTimer=null;
-function buildSearchIndex(){const out=[];Object.entries(FACETS).forEach(([facet,f])=>{function walk(node,ancestors=[]){const path=[...ancestors,node];if(node.id!=="root")out.push({facet,id:node.id,zh:node.zh||"",en:node.en||"",pathIds:path.slice(1).map(x=>x.id),pathText:path.slice(1).map(x=>x.zh).join(" → ")});(node.children||[]).forEach(ch=>walk(ch,path))}walk(f.tree,[])});return out}
+const SEARCH_ALIASES={
+ llm_interface:"大模型 语言大模型 大语言模型 LLM LLMs 人工智能 AI 生成式人工智能",
+ computational_linguistics_interface:"计算语言学 自然语言处理 NLP",
+ cs_ai_interface:"人工智能 AI 计算语言学 自然语言处理 NLP 语言模型 大模型"
+};
+function buildSearchIndex(){
+ const out=[];
+ Object.entries(FACETS).forEach(([facet,f])=>{
+  function walk(node,ancestors=[]){
+   const path=[...ancestors,node],raw=node.detail||f.detail[node.id]||{},detail=Array.isArray(raw)?raw.join(" "):Object.values(raw).flat().join(" "),aliases=SEARCH_ALIASES[node.id]||"";
+   if(node.id!=="root")out.push({facet,id:node.id,zh:node.zh||"",en:node.en||"",pathIds:path.slice(1).map(x=>x.id),pathText:path.slice(1).map(x=>x.zh).join(" → "),searchText:`${node.zh||""} ${node.en||""} ${path.map(x=>x.zh||"").join(" ")} ${detail} ${aliases}`.toLocaleLowerCase()});
+   (node.children||[]).forEach(ch=>walk(ch,path));
+  }
+  walk(f.tree,[]);
+ });
+ return out;
+}
 const SEARCH_INDEX=buildSearchIndex();
 function showToast(message){const el=document.getElementById("liveNote");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),1800)}
 async function copyText(value,message){try{await navigator.clipboard.writeText(value);showToast(message)}catch(_){window.prompt("请复制以下内容：",value)}}
@@ -1227,7 +1243,7 @@ function navigateToPath(facet,ids){navigateEntryPath(facet,ids)}
 function restoreFromHash(){const raw=location.hash.replace(/^#/,"");if(!raw)return false;const params=new URLSearchParams(raw),facet=params.get("f");if(!FACETS[facet])return false;const ids=(params.get("p")||"").split("/").filter(Boolean).map(decodeURIComponent);navigateToPath(facet,ids);return true}
 function closeOverlays(){document.querySelectorAll(".overlay.show").forEach(x=>x.classList.remove("show"))}
 function openOverlay(id){closeOverlays();const el=document.getElementById(id);el.classList.add("show");const focus=el.querySelector("input,button");if(focus)setTimeout(()=>focus.focus(),20)}
-function renderSearch(query){const q=query.trim().toLocaleLowerCase(),results=document.getElementById("searchResults"),meta=document.getElementById("searchMeta");results.innerHTML="";if(!q){meta.textContent=`共收录 ${SEARCH_INDEX.length} 个可导航节点`;return}const principleNames={"1":"构成","2":"动态","3":"解释","4":"探究与实践"};const principleFor=f=>f==="1"?"1":f==="2"?"2":(f==="3"||f==="5")?"3":"4";const found=SEARCH_INDEX.filter(x=>(`${x.zh} ${x.en} ${x.pathText}`).toLocaleLowerCase().includes(q)).sort((a,b)=>{const an=(`${a.zh} ${a.en}`).toLocaleLowerCase().includes(q)?0:1,bn=(`${b.zh} ${b.en}`).toLocaleLowerCase().includes(q)?0:1;return an-bn||a.pathIds.length-b.pathIds.length}).slice(0,60);meta.textContent=found.length?`找到 ${found.length}${found.length===60?"+":""} 个结果`:`没有找到“${query}”`;found.forEach(item=>{const b=document.createElement("button"),title=document.createElement("b"),path=document.createElement("span"),principle=principleFor(item.facet);b.className="searchResult";title.textContent=`${item.zh}${item.en?" · "+item.en:""}`;path.textContent=`${principleNames[principle]} → ${item.pathText}`;b.append(title,path);b.onclick=()=>{closeOverlays();navigateEntryPath(item.facet,item.pathIds)};results.appendChild(b)});if(!found.length){const e=document.createElement("div");e.className="emptyState";e.textContent="可尝试更短的中文或英文关键词。";results.appendChild(e)}}
+function renderSearch(query){const q=query.trim().toLocaleLowerCase(),results=document.getElementById("searchResults"),meta=document.getElementById("searchMeta");results.innerHTML="";if(!q){meta.textContent=`共收录 ${SEARCH_INDEX.length} 个可导航节点`;return}const principleNames={"1":"构成","2":"动态","3":"解释","4":"探究与实践"};const principleFor=f=>f==="1"?"1":f==="2"?"2":(f==="3"||f==="5")?"3":"4";const found=SEARCH_INDEX.filter(x=>x.searchText.includes(q)).sort((a,b)=>{const an=(`${a.zh} ${a.en} ${SEARCH_ALIASES[a.id]||""}`).toLocaleLowerCase().includes(q)?0:1,bn=(`${b.zh} ${b.en} ${SEARCH_ALIASES[b.id]||""}`).toLocaleLowerCase().includes(q)?0:1;return an-bn||a.pathIds.length-b.pathIds.length}).slice(0,60);meta.textContent=found.length?`找到 ${found.length}${found.length===60?"+":""} 个结果`:`没有找到“${query}”`;found.forEach(item=>{const b=document.createElement("button"),title=document.createElement("b"),path=document.createElement("span"),principle=principleFor(item.facet);b.className="searchResult";title.textContent=`${item.zh}${item.en?" · "+item.en:""}`;path.textContent=`${principleNames[principle]} → ${item.pathText}`;b.append(title,path);b.onclick=()=>{closeOverlays();navigateEntryPath(item.facet,item.pathIds)};results.appendChild(b)});if(!found.length){const e=document.createElement("div");e.className="emptyState";e.textContent="可尝试更短的中文或英文关键词。";results.appendChild(e)}}
 function bindEnhancedUI(){document.querySelectorAll("[data-open-meta]").forEach(b=>b.onclick=()=>openOverlay("metaOverlay"));document.querySelectorAll("[data-open-search]").forEach(b=>b.onclick=()=>{openOverlay("searchOverlay");renderSearch(document.getElementById("globalSearch").value)});document.querySelectorAll("[data-close-overlay]").forEach(b=>b.onclick=closeOverlays);document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("mousedown",e=>{if(e.target===o)closeOverlays()}));document.getElementById("globalSearch").addEventListener("input",e=>renderSearch(e.target.value));document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();openOverlay("searchOverlay");document.getElementById("globalSearch").focus()}else if(e.key==="Escape"&&document.querySelector(".overlay.show")){closeOverlays()}});window.addEventListener("hashchange",()=>{if(!restoringLink)restoreFromHash()})}
 
 function updateHeader(){
