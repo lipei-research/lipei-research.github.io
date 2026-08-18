@@ -294,7 +294,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 .mmLevel:before{content:"";position:absolute;top:50%;width:33px;height:1px;background:var(--gold2)}
 .entryStage.explore-1 .mmLevel:before{right:-33px}.entryStage:not(.explore-1) .mmLevel:before{left:-33px}.mmLevel:first-child:before{display:none}
 .mmHead{text-align:center;padding:4px 30px 9px;border-bottom:1px solid var(--line2);margin-bottom:8px}.mmHead b{display:block;color:var(--gold3);font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-size:16px}.mmHead span{display:block;color:var(--muted);font-family:Georgia,serif;font-size:9px;margin-top:2px}
-.mmNode{width:100%;display:flex;align-items:center;gap:9px;border:1px solid rgba(212,168,77,.23);border-radius:11px;background:rgba(8,7,5,.82);color:var(--text);padding:9px 10px;margin:7px 0;text-align:left;cursor:pointer;font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif}.mmNode:hover,.mmNode.active{border-color:var(--gold3);background:rgba(68,52,20,.45)}.mmNode .mi{width:22px;height:22px;flex:0 0 22px;border:1px solid var(--line);border-radius:7px;display:grid;place-items:center;color:var(--gold3);font-size:11px}.mmNode b{display:block;font-size:12px}.mmNode small{display:block;color:var(--muted);font-family:Georgia,serif;font-size:8.5px;margin-top:2px}.mmNode .ma{margin-left:auto;color:var(--gold3)}
+.mmNode{width:100%;display:flex;align-items:center;gap:9px;border:1px solid rgba(212,168,77,.23);border-radius:11px;background:rgba(8,7,5,.82);color:var(--text);padding:9px 10px;margin:7px 0;text-align:left;cursor:pointer;font-family:var(--font-map-body)}.mmNode:hover,.mmNode.active{border-color:var(--gold3);background:rgba(68,52,20,.45)}.mmNode .mi{width:22px;height:22px;flex:0 0 22px;border:1px solid var(--line);border-radius:7px;display:grid;place-items:center;color:var(--gold3);font-size:11px}.mmNode b{display:block;font-size:12px}.mmNode small{display:block;color:var(--muted);font-family:Georgia,serif;font-size:8.5px;margin-top:2px}.mmNode .ma{margin-left:auto;color:var(--gold3)}
 .mmTerminal{width:330px;flex-basis:330px;padding:15px}.mmTerminal h3{margin:3px 26px 3px 0;color:var(--gold3);font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-size:20px}.mmTerminal .mmen{color:var(--muted);font-family:Georgia,serif;font-size:10px}.mmTerminal p{color:#ddd2bf;font-size:10.5px;line-height:1.68}.mmClose{position:absolute;right:9px;top:9px;border:1px solid var(--line);border-radius:50%;width:25px;height:25px;background:transparent;color:var(--gold3);cursor:pointer}.mmExit{position:absolute;right:8px;top:8px;z-index:40;border:1px solid var(--line);border-radius:999px;background:#0b0a08;color:var(--muted);padding:7px 10px;font-size:9px;pointer-events:auto;cursor:pointer}.mmExit:hover{color:var(--text);border-color:var(--gold3)}
 @keyframes mmGrow{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
 
@@ -335,7 +335,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 .entryMindmap>.mmLevel.mmFocused{opacity:1;filter:none;transform:translateY(-3px);box-shadow:0 20px 55px rgba(0,0,0,.58),0 0 0 1px rgba(240,208,129,.12)}
 /* Explicit typography roles; do not depend on per-tree font fallback. */
 .mmHead b,.mmInlineDetail h3{font-family:var(--font-map-title)!important;font-weight:700!important}
-.mmNode b,.mmInlineDetail section>b{font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif!important;font-weight:700!important}
+.mmNode b,.mmInlineDetail section>b{font-family:var(--font-map-title)!important;font-weight:700!important}
 .mmHead span,.mmNode small,.mmInlineDetail .mmen{font-family:Georgia,"Times New Roman",serif!important}
 /* Complete typography coverage for the explanation/inquiry choosers. */
 .principleChooser h4,.chooserBtn span{font-family:var(--font-map-title)!important;font-weight:700!important}
@@ -345,7 +345,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 .principleChooser .chooserBtn.mmNode{display:flex;width:100%;min-height:45px;margin:5px 0;padding:7px 8px;border-radius:11px;font-family:var(--font-map-body);color:var(--text)}
 .principleChooser .chooserBtn.mmNode>span{margin:0;color:inherit}
 .principleChooser .chooserBtn.mmNode .mi{color:var(--gold3);font-family:Georgia,"Times New Roman",serif;font-size:10px;font-weight:400}
-.principleChooser .chooserBtn.mmNode b{display:block;color:var(--text);font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif!important;font-size:11px!important;font-weight:700!important;line-height:1.25}
+.principleChooser .chooserBtn.mmNode b{display:block;color:var(--text);font-family:var(--font-map-title)!important;font-size:11px!important;font-weight:700!important;line-height:1.25}
 .principleChooser .chooserBtn.mmNode small{display:block;color:var(--muted);font-family:Georgia,"Times New Roman",serif!important;font-size:7.5px!important;font-weight:400;line-height:1.2;margin-top:2px}
 .principleChooser .chooserBtn.mmNode .ma{margin-left:auto;color:var(--gold3);font-size:14px}
 /* Quiet central mark: one ring, no diagrammatic crosshair. */
@@ -397,7 +397,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 .principle .qe{display:block!important;margin-top:7px!important;line-height:1.35!important}
 .principle .qeZh{display:block;font-family:var(--font-map-title)!important;font-size:12px!important;font-weight:400!important;line-height:1.45!important;letter-spacing:.02em!important}
 .principle .qeEn{display:block;margin-top:2px;font-family:Georgia,"Times New Roman",serif!important;font-size:11.5px!important;font-weight:400!important;line-height:1.35!important;letter-spacing:0!important}
-.principle .maps{font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif!important;font-size:9px!important;font-weight:400!important;line-height:1.35!important}
+.principle .maps{font-family:var(--font-map-body)!important;font-size:9px!important;font-weight:400!important;line-height:1.35!important}
 @keyframes mmDealRight{from{opacity:0;transform:translateX(-24px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes mmDealLeft{from{opacity:0;transform:translateX(24px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes mmDealDown{from{opacity:0;transform:translateY(-20px) scale(.96)}to{opacity:1;transform:none}}
@@ -414,27 +414,29 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
  .entryFacets{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:720px){
+ html,body{width:100%;max-width:100%;overflow-x:hidden!important;overscroll-behavior-x:none;touch-action:pan-y}
+ .entry{width:100%;max-width:100vw;overflow-x:hidden!important;overflow-y:auto;overscroll-behavior-x:none;touch-action:pan-y}
  .siteBack{left:9px;top:9px;padding:7px 9px}.siteBack span{display:none}
  :root{--font-map-title:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;--font-map-body:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC",serif;--font-map-en:Georgia,"Times New Roman",serif}
- .entryInner{padding:16px 12px 12px;display:block}
- .entryTitle{font-size:31px}
+ .entryInner{width:100%;max-width:100vw;padding:14px 12px 12px;display:block;overflow-x:hidden}
+ .entryKicker{display:none}.entryTitle{font-size:27px;line-height:1.18;letter-spacing:.015em}
  .entryStage{
   min-height:auto;display:flex;flex-direction:column;gap:9px;margin:18px auto 14px
  }
  .entryCenter{
   position:relative;left:auto;top:auto;transform:none;
-  width:180px;height:180px;margin:0 auto 8px
+  width:150px;height:150px;margin:2px auto 9px
  }
- .entryCenter .big{max-width:150px;white-space:nowrap;font-size:15px;letter-spacing:.035em}.entryCenter .small{font-size:12px}.centerSearchIcon{position:relative;width:33px;height:33px;margin:8px 0 1px;font-size:0}.centerSearchIcon:before{content:"";width:10px;height:10px;border:2px solid currentColor;border-radius:50%;transform:translate(-1px,-1px)}.centerSearchIcon:after{content:"";position:absolute;width:7px;height:2px;background:currentColor;transform:translate(6px,6px) rotate(-45deg);border-radius:2px}.centerSearchHint{font-size:7px}
+ .entryCenter .big{max-width:132px;white-space:nowrap;font-size:14px;letter-spacing:.025em}.entryCenter .small{font-size:11px}.centerSearchIcon{position:relative;width:31px;height:31px;margin:6px 0 1px;font-size:0}.centerSearchIcon:before{content:"";position:absolute;width:10px;height:10px;left:7px;top:6px;border:2px solid currentColor;border-radius:50%}.centerSearchIcon:after{content:"";position:absolute;width:8px;height:2px;left:17px;top:18px;background:currentColor;transform:rotate(45deg);transform-origin:left center;border-radius:2px}.centerSearchHint{font-size:7px}
  .entryArrow{display:none}
  .principle{
   position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
   transform:none!important;width:100%!important;min-height:98px
  }
- .principle.p1,.principle.p2,.principle.p3,.principle.p4{height:auto;min-height:118px;padding:19px 18px 16px}
- .principle.p1 .q,.principle.p2 .q,.principle.p3 .q,.principle.p4 .q{font-family:var(--font-map-title)!important;font-size:22px!important;line-height:1.2!important}
+ .principle.p1,.principle.p2,.principle.p3,.principle.p4{height:auto;min-height:96px;padding:15px 16px 13px;background:linear-gradient(180deg,rgba(17,14,9,.98),rgba(8,7,5,.99));border-color:rgba(216,170,79,.46);box-shadow:inset 0 0 22px rgba(216,170,79,.025),0 8px 22px rgba(0,0,0,.26)}
+ .principle.p1 .q,.principle.p2 .q,.principle.p3 .q,.principle.p4 .q{font-family:var(--font-map-title)!important;font-size:19px!important;line-height:1.2!important}
  .principle.p1 .num,.principle.p2 .num,.principle.p3 .num,.principle.p4 .num{font-family:Georgia,"Times New Roman",serif!important;font-size:18px!important;left:16px;top:14px}
- .principle .qeZh{font-family:var(--font-map-title)!important;font-size:12px!important}.principle .qeEn{font-family:var(--font-map-en)!important;font-size:10.5px!important}.principle .maps{font-family:var(--font-map-body)!important;font-size:9px!important}
+ .principle .qe{margin-top:5px!important}.principle .qeZh{font-family:var(--font-map-body)!important;font-size:10.5px!important}.principle .qeEn{font-family:var(--font-map-en)!important;font-size:9px!important}.principle .maps{font-family:var(--font-map-body)!important;font-size:8px!important}
  .principle:hover{transform:translateY(-2px)!important}
  .entryFacets{grid-template-columns:repeat(2,1fr)}
  .principleChooser{
@@ -443,12 +445,12 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
  .axioms{grid-template-columns:1fr}.dialog{padding:18px}.tools{width:100%;justify-content:flex-start}.tool{padding:8px 10px}
  .canvas{padding:18px 12px 64px;gap:32px}.columnWrap{width:calc(100vw - 28px)}.colBody{grid-template-columns:1fr}.connector{height:32px;top:-32px}
  .entryStage.exploring{min-height:auto}.entryStage.exploring .principle{display:none}.entryStage.exploring .principle.mmActive{display:block;order:1}
- .entryStage.exploring .entryMindmap{position:relative!important;inset:auto!important;transform:none!important;width:100%;max-width:100%;overflow:visible;flex-direction:column!important;order:2;padding:10px 0 72px;align-items:stretch;gap:7px}
+ .entryStage.exploring .entryMindmap{position:relative!important;inset:auto!important;transform:none!important;width:100%;max-width:100%;min-width:0;overflow:visible;flex-direction:column!important;order:2;padding:10px 0 72px;align-items:stretch;gap:7px}
  .mmLevel{width:100%;flex:0 0 auto;max-height:55px!important;overflow:hidden!important;border-radius:13px;opacity:.48;scroll-margin-top:74px;transition:max-height .34s cubic-bezier(.2,.78,.24,1),opacity .25s ease,transform .25s ease;background:#0b0906}
  .mmLevel.mmFocused{max-height:min(62vh,540px)!important;overflow-y:auto!important;opacity:1;transform:none}
  .mmLevel.mmCovered{cursor:pointer}.mmLevel.mmCovered .mmHead{border-bottom:0;margin-bottom:0}.mmLevel.mmCovered>.mmNode,.mmLevel.mmCovered>.mmInlineDetail{pointer-events:none}
  .mmHead{min-height:45px;padding:7px 28px 8px;margin-bottom:5px}.mmHead b{font-family:var(--font-map-title)!important;font-size:14px!important}.mmHead span{font-family:var(--font-map-en)!important;font-size:8px!important}
- .mmNode{font-family:var(--font-map-body)!important}.mmNode b{font-family:var(--font-map-title)!important;font-size:12px!important}.mmNode small{font-family:var(--font-map-en)!important;font-size:8px!important}
+ .mmNode{font-family:var(--font-map-body)!important;min-width:0}.mmNode b{font-family:var(--font-map-title)!important;font-size:12px!important}.mmNode small{font-family:var(--font-map-en)!important;font-size:8px!important;overflow-wrap:anywhere}
  .mmLevel:before{display:none}.mmExit{position:fixed;right:12px;top:12px}.mmTrail{top:52px;max-width:calc(100vw - 24px)}
  .mmDrawer{left:8px;right:8px;top:auto;bottom:8px;width:auto;max-height:72vh;border-radius:18px;padding:18px}.mmDrawer h3{font-size:22px}
  .mmInlineDetail{width:100%;flex-basis:auto;padding:16px}.mmInlineDetail h3{font-family:var(--font-map-title)!important;font-size:20px}.mmInlineDetail p,.mmInlineDetail section>b{font-family:var(--font-map-body)!important}.mmInlineDetail .mmen{font-family:var(--font-map-en)!important}
@@ -457,13 +459,22 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
  .entryArrow{display:none!important}
 }
 
-/* WebView-safe controls: no emoji/system-glyph dependency. */
+/* WebView-safe geometric icon system: varied shapes, no emoji dependency. */
 .mmNode .mi{position:relative;font-size:0!important;line-height:0!important}
 .mmNode .mi:before{content:"";display:block;width:8px;height:8px;border:1.5px solid currentColor;transform:rotate(45deg);border-radius:1px}
+.mmNode .mi.shape-circle:before{border-radius:50%;transform:none}
+.mmNode .mi.shape-square:before{border-radius:1px;transform:none}
+.mmNode .mi.shape-bars:before{width:10px;height:7px;border:0;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:none;box-shadow:inset 0 2.5px 0 -1.5px currentColor}
+.mmNode .mi.shape-arrow:before{width:8px;height:8px;border-width:1.5px 1.5px 0 0;transform:rotate(45deg);border-radius:0}
+.mmNode .mi.shape-split:before{width:10px;height:6px;border:0;border-left:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:none}
 .mmNode.active .mi:before{border-radius:50%;transform:none;background:currentColor;box-shadow:0 0 0 3px rgba(216,170,79,.12)}
 .dialogClose,.mmDrawerClose,.closeTerm{display:grid!important;place-items:center!important;padding:0!important;font-size:0!important;line-height:0!important}
 .dialogClose:before,.dialogClose:after,.mmDrawerClose:before,.mmDrawerClose:after,.closeTerm:before,.closeTerm:after{content:"";position:absolute;width:12px;height:1.5px;border-radius:2px;background:currentColor;left:50%;top:50%;transform:translate(-50%,-50%) rotate(45deg)}
 .dialogClose:after,.mmDrawerClose:after,.closeTerm:after{transform:translate(-50%,-50%) rotate(-45deg)}
+.dialog h2,.colHead h2,.termHead h2,.summary{font-family:var(--font-map-title)!important}
+.entryCopyright{width:100%;max-width:100%;padding:10px 8px 4px;text-align:center;line-height:1.55;overflow-wrap:anywhere}
+.entryCopyright strong,.entryCopyright .en{display:block;margin:0 auto;text-align:center}
+.entryCopyright .en{margin-top:3px}
 
 </style>
 </head>
@@ -538,7 +549,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 
   <div class="entryCopyright">
    <strong>© 2026 李沛 · 现代语言研究元分类体系</strong>
-   <span class="en">Modern Linguistics Meta-Classification Framework · Classification Framework & Interactive Presentation · All rights reserved.</span>
+   <span class="en">Modern Linguistics Meta-Classification · Interactive Presentation · All rights reserved.</span>
   </div>
  </div>
 </div>
@@ -835,7 +846,7 @@ const TREE2 = {
         {id:"predictive_processing",zh:"预测加工",en:"Predictive processing",icon:"↗"},
         {id:"interactive_processing",zh:"并行 / 互动加工",en:"Parallel / interactive processing",icon:"∞"}
       ]},
-      {id:"modality_link_comp",zh:"处理模态（跨分面链接）",en:"Processing modality · cross-facet link",icon:"↗",cross:true,children:[
+      {id:"modality_link_comp",zh:"理解模态",en:"Comprehension modalities",icon:"↗",cross:true,children:[
         {id:"spoken_comp",zh:"口语理解",en:"Spoken comprehension",icon:"◉"},
         {id:"reading",zh:"阅读",en:"Reading",icon:"▦"},
         {id:"sign_comp",zh:"手语理解",en:"Sign comprehension",icon:"✋"}
@@ -860,7 +871,7 @@ const TREE2 = {
         {id:"cascade_feedback",zh:"级联 / 反馈 / 互动",en:"Cascading / feedback / interactivity",icon:"∞"},
         {id:"planning_scope",zh:"计划范围",en:"Planning scope",icon:"↔"}
       ]},
-      {id:"modality_link_prod",zh:"产出模态（跨分面链接）",en:"Production modality · cross-facet link",icon:"↗",cross:true,children:[
+      {id:"modality_link_prod",zh:"产出模态",en:"Production modalities",icon:"↗",cross:true,children:[
         {id:"speech_prod",zh:"口语产出",en:"Speech production",icon:"◉"},
         {id:"writing_prod",zh:"书写产出",en:"Written production",icon:"✎"},
         {id:"sign_prod",zh:"手语产出",en:"Sign production",icon:"✋"}
@@ -885,7 +896,7 @@ const TREE2 = {
       {id:"automatization",zh:"自动化 / 程序化",en:"Automatization / proceduralization",icon:"→"},
       {id:"attrition",zh:"磨蚀 / 衰退",en:"Attrition / loss",icon:"↓"}
     ]},
-    {id:"dev_scope",zh:"发展人群 / 范围（跨分面链接）",en:"Population / scope · cross-facet link",icon:"↗",cross:true,children:[
+    {id:"dev_scope",zh:"发展人群与范围",en:"Populations & developmental scope",icon:"↗",cross:true,children:[
       {id:"l1_dev",zh:"L1 发展",en:"First-language development",icon:"①"},
       {id:"l2_dev",zh:"L2 / 多语发展",en:"L2 / multilingual development",icon:"②"},
       {id:"literacy_dev",zh:"读写发展",en:"Literacy development",icon:"▦"}
@@ -1222,7 +1233,7 @@ function addColumn(node,depth){
  (node.children||[]).forEach(ch=>{
    const leaf=!(ch.children&&ch.children.length);const b=document.createElement("button");
    b.className="item "+(leaf?"leaf ":"")+(ch.cross?"cross ":"")+(ch.boundary?"boundary ":"");b.dataset.id=ch.id;
-   b.innerHTML=`<div class="icon">${ch.icon||"•"}</div><div><div class="zh">${ch.zh}</div><div class="en">${ch.en||""}</div></div>${ch.cross?'<div class="badge">bridge / cross</div>':''}<div class="arrow">${leaf?"→":"›"}</div>`;
+   b.innerHTML=`<div class="icon">${ch.icon||"•"}</div><div><div class="zh">${ch.zh}</div><div class="en">${ch.en||""}</div></div><div class="arrow">${leaf?"→":"›"}</div>`;
    b.onclick=()=>selectNode(depth,ch.id);body.appendChild(b);
  });
  if(node.note){const n=document.createElement("div");n.className="colNote";n.textContent=node.note;body.appendChild(n)}
@@ -1308,8 +1319,17 @@ function focusMmPanel(panel){
  const panels=[...document.querySelectorAll("#entryMindmap>.mmLevel")];
  panels.forEach((p,i)=>{p.classList.toggle("mmFocused",p===panel);p.classList.toggle("mmCovered",p!==panel);p.style.zIndex=p===panel?"60":String(10+i)});
  if(matchMedia("(max-width:720px)").matches){
-  window.setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"start",inline:"nearest"}),90);
+  window.setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"center",inline:"nearest"}),90);
  }
+}
+function safeIconClass(icon){
+ const value=String(icon||"");
+ if(/[→↗↘↔↕⇄⇆⇣]/.test(value))return "shape-arrow";
+ if(/[◉◎◌◔◐◍⊚]/.test(value))return "shape-circle";
+ if(/[▦▣▤▧⊞⌘☰☷]/.test(value))return "shape-square";
+ if(/[∿≋⌁⋯⋮]/.test(value))return "shape-bars";
+ if(/[∞↺⟲]/.test(value))return "shape-split";
+ return "shape-diamond";
 }
 function bindMmPanelFocus(panel){
  panel.addEventListener("click",e=>{if(!panel.classList.contains("mmFocused")){e.preventDefault();e.stopPropagation();focusMmPanel(panel)}},true);
@@ -1337,7 +1357,7 @@ function renderMmMap(){
   const parent=mmPath[i],level=document.createElement("section");level.className="mmLevel";
   level.innerHTML=`<div class="mmHead">${i===start&&start>0?'<button class="mmBack" aria-label="返回上一级">‹</button>':''}<b>${parent.zh}</b><span>${parent.en||""}</span></div>`;
   const back=level.querySelector(".mmBack");if(back)back.onclick=e=>{e.stopPropagation();mmPath=mmPath.slice(0,start);closeMmDrawer();renderMmMap()};
-  (parent.children||[]).forEach(ch=>{const leaf=!(ch.children&&ch.children.length),selected=(mmPath[i+1]&&mmPath[i+1].id===ch.id)||(mmLeaf&&mmLeaf.id===ch.id),b=document.createElement("button");b.className="mmNode"+(selected?" active":"");b.innerHTML=`<span class="mi">${ch.icon||"•"}</span><span><b>${ch.zh}</b><small>${ch.en||""}</small></span><span class="ma">${leaf?"＋":"›"}</span>`;b.onclick=e=>{e.stopPropagation();selectMmNode(i,ch)};level.appendChild(b)});level.style.animationDelay=`${Math.min(i,5)*35}ms`;bindMmPanelFocus(level);map.appendChild(level);
+  (parent.children||[]).forEach(ch=>{const leaf=!(ch.children&&ch.children.length),selected=(mmPath[i+1]&&mmPath[i+1].id===ch.id)||(mmLeaf&&mmLeaf.id===ch.id),b=document.createElement("button");b.className="mmNode"+(selected?" active":"");b.innerHTML=`<span class="mi ${safeIconClass(ch.icon)}" aria-hidden="true"></span><span><b>${ch.zh}</b><small>${ch.en||""}</small></span><span class="ma">${leaf?"＋":"›"}</span>`;b.onclick=e=>{e.stopPropagation();selectMmNode(i,ch)};level.appendChild(b)});level.style.animationDelay=`${Math.min(i,5)*35}ms`;bindMmPanelFocus(level);map.appendChild(level);
  }
  const panels=[...map.querySelectorAll(":scope>.mmLevel")];if(panels.length)focusMmPanel(panels[panels.length-1]);
 }
