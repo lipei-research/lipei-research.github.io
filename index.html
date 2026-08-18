@@ -56,7 +56,7 @@
   --glow:0 0 25px rgba(216,170,79,.18);
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html{-webkit-text-size-adjust:none;text-size-adjust:none}
 html{scroll-behavior:smooth}
 body{
   margin:0;
@@ -208,6 +208,21 @@ h1{
 .section-title{display:flex;align-items:center;gap:20px;color:var(--orange-soft);font-size:21px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:30px}
 .section-title::before,.section-title::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold3))}
 .section-title::after{transform:scaleX(-1)}
+.map-gateway-section{padding-top:18px;padding-bottom:18px}
+.map-gateway{
+  position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:32px;
+  padding:22px 26px;border:1px solid rgba(216,170,79,.42);border-radius:16px;overflow:hidden;
+  background:linear-gradient(135deg,rgba(216,170,79,.028),rgba(255,255,255,.006));
+  box-shadow:inset 0 0 38px rgba(216,170,79,.025);transition:border-color .25s,transform .25s,box-shadow .25s;
+}
+.map-gateway:hover,.map-gateway:focus-visible{border-color:var(--gold);transform:translateY(-2px);box-shadow:inset 0 0 38px rgba(216,170,79,.04),var(--glow);outline:none}
+.map-gateway-copy,.map-gateway-action{position:relative;z-index:1}
+.map-gateway h2{margin:0 0 5px;color:var(--orange);font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.25;font-weight:600;letter-spacing:.025em}
+.map-gateway p{max-width:900px;margin:0;color:#a99f8f;font-size:10.5px;line-height:1.65;letter-spacing:.02em}
+.map-gateway-paths{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.map-gateway-paths span{padding:5px 9px;border:1px solid rgba(216,170,79,.2);border-radius:999px;color:#cda654;font-size:8px;letter-spacing:.08em}
+.map-gateway-action{display:flex;align-items:center;gap:11px;color:var(--orange);font-size:9px;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}
+.map-gateway-arrow{font-size:20px;line-height:1;transition:transform .25s}.map-gateway:hover .map-gateway-arrow{transform:translateX(4px)}
 .mechanism-shell{
   border:1px solid var(--line);padding:18px;border-radius:18px;position:relative;overflow:hidden;
   background:linear-gradient(180deg,rgba(216,170,79,.035),rgba(255,255,255,.008));
@@ -681,19 +696,23 @@ footer strong{
     min-height:calc(100svh - 80px);padding:20px 12px;
     display:flex;align-items:center;justify-content:center;
   }
+  .hero-main{width:100%;min-width:0;margin-inline:auto;text-align:center}
   .coin-wrap,.personal{width:100%;min-width:0}
   .coin-wrap{display:flex;justify-content:center;margin-bottom:9px}
   .personal{justify-content:center;margin-top:12px}
   .coin{width:82px;max-width:82px;flex:0 0 auto}
   .handmark{width:58px;max-width:58px;flex:0 0 auto}
   .hero-main .kicker{font-size:7px;letter-spacing:.12em}
-  h1{width:100%;max-width:520px;margin:8px auto 5px;transform:none;text-align:center;font-size:clamp(25px,8vw,38px)}
+  h1{width:100%;max-width:100%;margin:8px auto 5px;transform:none;text-align:center;font-size:clamp(25px,8vw,38px)}
+  html[lang="zh-CN"] #home h1{width:100%;max-width:100%;padding-inline:0;font-size:clamp(16px,5.35vw,24px);line-height:1.18;letter-spacing:0;white-space:nowrap;overflow:visible;text-align:center}
   .subtitle{font-size:9px;line-height:1.35}
   .hero-statement{font-size:7px;line-height:1.45;margin-top:7px;width:100%}
   .rule{margin:13px auto}.name{font-size:19px;margin-top:10px}
   .identity{font-size:9px;line-height:1.45}.tags{font-size:7px;line-height:1.5;margin-top:9px}
   .mantra{font-size:7px;line-height:1.4}
   .section{padding:38px 12px}.section-title{font-size:14px;gap:9px;margin-bottom:18px}
+  .map-gateway-section{padding-top:9px;padding-bottom:9px}.map-gateway{display:block;padding:17px 15px;border-radius:12px}.map-gateway h2{font-size:14px;line-height:1.25;margin:0 0 5px;color:var(--orange)}.map-gateway p{font-size:8px;line-height:1.6;max-width:100%}.map-gateway-paths{gap:4px;margin-top:9px}.map-gateway-paths span{padding:4px 6px;font-size:6px}.map-gateway-action{margin-top:13px;font-size:7px}.map-gateway-arrow{font-size:16px}
+  html[lang="zh-CN"] .map-gateway h2,html[lang="zh-CN"] .map-gateway p,html[lang="zh-CN"] .map-gateway-paths,html[lang="zh-CN"] .map-gateway-action{font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;font-synthesis:none}
   .notes-section{padding-top:10px;padding-bottom:10px}.notes-section>.section-title{display:none}
   .notes-archive-toggle{min-height:66px;padding:11px 12px;grid-template-columns:1fr auto;border-radius:10px}
   .notes-archive-identity{display:block}.notes-archive-kicker{display:block;font-size:6px;margin-bottom:4px}.notes-archive-title{font-size:14px}
@@ -782,7 +801,7 @@ footer strong{
     <span class="brand-wordmark">LiPei Research</span>
   </div>
   <nav>
-    <a href="#home">Home</a><a href="#mechanism">Mechanism</a><a href="#notes">Notes</a><a href="#foundations">Foundations</a><a href="#research">Research</a>
+    <a href="#home">Home</a><a href="#mechanism">Mechanism</a><a href="linguistics-map.html" target="_blank" rel="noopener">Research Map</a><a href="#notes">Notes</a><a href="#foundations">Foundations</a><a href="#research">Research</a>
     <a href="#lab">English Speaking Lab</a><a href="#timeline">Journey</a><a href="#contact">Contact</a>
   </nav>
   <div class="tools">
@@ -821,6 +840,17 @@ footer strong{
   <div class="mechanism-shell">
     <img class="mechanism-img" src="assets/images/mechanism-poster-orange.webp?v=1" alt="The Operable Mechanism model">
   </div>
+</section>
+
+<section class="section map-gateway-section" id="research-map">
+  <a class="map-gateway" href="linguistics-map.html" target="_blank" rel="noopener" aria-label="Open the Modern Linguistics Research Map">
+    <div class="map-gateway-copy">
+      <h2>Modern Linguistics Research Map</h2>
+      <p>Enter the landscape of linguistic research through four fundamental questions, from linguistic structure and dynamics to explanation, inquiry, and practice.</p>
+      <div class="map-gateway-paths"><span>Constitution</span><span>Dynamics</span><span>Explanation</span><span>Inquiry &amp; Practice</span></div>
+    </div>
+    <span class="map-gateway-action">Enter the map <i class="map-gateway-arrow" aria-hidden="true">→</i></span>
+  </a>
 </section>
 
 <section class="section notes-section" id="notes">
@@ -1265,6 +1295,9 @@ const bilingualContent={
     '#home .identity':'副教授&nbsp;&nbsp;·&nbsp;&nbsp;二语口语产出研究者<br>天津财经大学珠江学院<br>南开大学硕士',
     '#home .tags':'二语口语产出 · 概念化 · 在线加工',
     '#mechanism .section-title':'核心学术贡献',
+    '#research-map .map-gateway h2':'现代语言研究总地图',
+    '#research-map .map-gateway p':'从构成、动态、解释、探究与实践四个基本问题进入语言研究，在传统学科、理论框架与具体研究节点之间建立清晰路径。',
+    '#research-map .map-gateway-action':'进入研究地图 <i class="map-gateway-arrow" aria-hidden="true">→</i>',
     '#notes .section-title':'研究札记',
     '#notes .notes-archive-kicker':'研究札记',
     '#notes .notes-archive-title':'思想档案库',
@@ -1289,7 +1322,8 @@ const bilingualContent={
     '#contact .footer-filing-label':'',
   },
   lists:{
-    'header nav a':['首页','机制','札记','理论根基','研究','口语研究室','学术历程','联系'],
+    'header nav a':['首页','机制','研究地图','札记','理论根基','研究','口语研究室','学术历程','联系'],
+    '#research-map .map-gateway-paths span':['构成','动态','解释','探究与实践'],
     '#notes .notes-filter-label':['全部','开口启动','理论隐喻','概念化','在线加工'],
     '#notes .note-status':['理论札记','理论札记'],
     '#notes .note-meta time':['2026.08.09','2026.08.09'],
