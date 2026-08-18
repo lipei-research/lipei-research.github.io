@@ -329,8 +329,8 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 .entryMindmap>.mmLevel{transition:opacity .2s ease,filter .2s ease,transform .22s ease,box-shadow .22s ease}
 .entryMindmap>.mmLevel+.mmLevel{margin-left:-142px}
 .entryStage.explore-1 .entryMindmap>.mmLevel+.mmLevel{margin-left:0;margin-right:-142px}
-.entryMindmap>.mmLevel.mmCovered{opacity:.38;filter:saturate(.42) brightness(.72);cursor:pointer;transform:scale(.985)}
-.entryMindmap>.mmLevel.mmFocused{opacity:1;filter:none;transform:translateY(-3px);box-shadow:0 20px 55px rgba(0,0,0,.58),0 0 0 1px rgba(240,208,129,.12)}
+.entryMindmap>.mmLevel.mmCovered{opacity:.38;filter:saturate(.42) brightness(.72);cursor:pointer;transform:none}
+.entryMindmap>.mmLevel.mmFocused{opacity:1;filter:none;transform:none;box-shadow:0 20px 55px rgba(0,0,0,.58),0 0 0 1px rgba(240,208,129,.12)}
 /* Explicit typography roles; do not depend on per-tree font fallback. */
 .mmHead b,.mmInlineDetail h3{font-family:var(--font-map-title)!important;font-weight:700!important}
 .mmNode b,.mmInlineDetail section>b{font-family:var(--font-map-title)!important;font-weight:700!important}
