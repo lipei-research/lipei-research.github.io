@@ -8,7 +8,9 @@
 <meta name="description" content="现代语言研究总地图：以第一性问题进入九分面语言学知识体系。© 2026 李沛。">
 <title>现代语言研究元分类体系 · 九分面完整交互版</title>
 <style>
-@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/noto-serif-sc-site-v4.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/lipei-serif-sc-regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/lipei-serif-sc-semibold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/lipei-serif-sc-bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
 :root{--bg:#050505;--panel:#0a0a0a;--panel2:#10100f;--gold:#d8aa4f;--gold2:#8d6424;--gold3:#f3d27a;--orange:#f7941d;--orange-soft:#f2a33a;--text:#f4ecdc;--muted:#aaa08e;--line:rgba(216,170,79,.42);--line2:rgba(216,170,79,.14);--red:#a65146}
 *{box-sizing:border-box} html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;font-synthesis:none} button{font:inherit}
 body{background:radial-gradient(circle at 50% 12%,rgba(216,170,79,.08),transparent 28%),linear-gradient(180deg,#030303,#070707 50%,#020202);overflow:hidden}
@@ -423,8 +425,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
   position:relative;left:auto;top:auto;transform:none;
   width:180px;height:180px;margin:0 auto 8px
  }
- .entryCenter .big{font-size:22px}.entryCenter .small{font-size:14px}
- .entryCenter .big{font-size:18px}.entryCenter .small{font-size:12px}.centerSearchIcon{width:33px;height:33px;margin:8px 0 1px;font-size:18px}.centerSearchHint{font-size:7px}
+ .entryCenter .big{max-width:150px;white-space:nowrap;font-size:15px;letter-spacing:.035em}.entryCenter .small{font-size:12px}.centerSearchIcon{position:relative;width:33px;height:33px;margin:8px 0 1px;font-size:0}.centerSearchIcon:before{content:"";width:10px;height:10px;border:2px solid currentColor;border-radius:50%;transform:translate(-1px,-1px)}.centerSearchIcon:after{content:"";position:absolute;width:7px;height:2px;background:currentColor;transform:translate(6px,6px) rotate(-45deg);border-radius:2px}.centerSearchHint{font-size:7px}
  .entryArrow{display:none}
  .principle{
   position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
@@ -443,7 +444,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
  .canvas{padding:18px 12px 64px;gap:32px}.columnWrap{width:calc(100vw - 28px)}.colBody{grid-template-columns:1fr}.connector{height:32px;top:-32px}
  .entryStage.exploring{min-height:auto}.entryStage.exploring .principle{display:none}.entryStage.exploring .principle.mmActive{display:block;order:1}
  .entryStage.exploring .entryMindmap{position:relative!important;inset:auto!important;transform:none!important;width:100%;max-width:100%;overflow:visible;flex-direction:column!important;order:2;padding:10px 0 72px;align-items:stretch;gap:7px}
- .mmLevel{width:100%;flex:0 0 auto;max-height:55px!important;overflow:hidden!important;border-radius:13px;opacity:.48;transition:max-height .34s cubic-bezier(.2,.78,.24,1),opacity .25s ease,transform .25s ease;background:#0b0906}
+ .mmLevel{width:100%;flex:0 0 auto;max-height:55px!important;overflow:hidden!important;border-radius:13px;opacity:.48;scroll-margin-top:74px;transition:max-height .34s cubic-bezier(.2,.78,.24,1),opacity .25s ease,transform .25s ease;background:#0b0906}
  .mmLevel.mmFocused{max-height:min(62vh,540px)!important;overflow-y:auto!important;opacity:1;transform:none}
  .mmLevel.mmCovered{cursor:pointer}.mmLevel.mmCovered .mmHead{border-bottom:0;margin-bottom:0}.mmLevel.mmCovered>.mmNode,.mmLevel.mmCovered>.mmInlineDetail{pointer-events:none}
  .mmHead{min-height:45px;padding:7px 28px 8px;margin-bottom:5px}.mmHead b{font-family:var(--font-map-title)!important;font-size:14px!important}.mmHead span{font-family:var(--font-map-en)!important;font-size:8px!important}
@@ -455,6 +456,14 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
  .entryMindmap>.mmLevel.mmFocused{transform:none}
  .entryArrow{display:none!important}
 }
+
+/* WebView-safe controls: no emoji/system-glyph dependency. */
+.mmNode .mi{position:relative;font-size:0!important;line-height:0!important}
+.mmNode .mi:before{content:"";display:block;width:8px;height:8px;border:1.5px solid currentColor;transform:rotate(45deg);border-radius:1px}
+.mmNode.active .mi:before{border-radius:50%;transform:none;background:currentColor;box-shadow:0 0 0 3px rgba(216,170,79,.12)}
+.dialogClose,.mmDrawerClose,.closeTerm{display:grid!important;place-items:center!important;padding:0!important;font-size:0!important;line-height:0!important}
+.dialogClose:before,.dialogClose:after,.mmDrawerClose:before,.mmDrawerClose:after,.closeTerm:before,.closeTerm:after{content:"";position:absolute;width:12px;height:1.5px;border-radius:2px;background:currentColor;left:50%;top:50%;transform:translate(-50%,-50%) rotate(45deg)}
+.dialogClose:after,.mmDrawerClose:after,.closeTerm:after{transform:translate(-50%,-50%) rotate(-45deg)}
 
 </style>
 </head>
@@ -1298,6 +1307,9 @@ let mmFacet=null,mmPrinciple=null,mmPath=[],mmLeaf=null;
 function focusMmPanel(panel){
  const panels=[...document.querySelectorAll("#entryMindmap>.mmLevel")];
  panels.forEach((p,i)=>{p.classList.toggle("mmFocused",p===panel);p.classList.toggle("mmCovered",p!==panel);p.style.zIndex=p===panel?"60":String(10+i)});
+ if(matchMedia("(max-width:720px)").matches){
+  window.setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"start",inline:"nearest"}),90);
+ }
 }
 function bindMmPanelFocus(panel){
  panel.addEventListener("click",e=>{if(!panel.classList.contains("mmFocused")){e.preventDefault();e.stopPropagation();focusMmPanel(panel)}},true);

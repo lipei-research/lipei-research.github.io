@@ -11,7 +11,7 @@
 <link rel="preload" href="assets/images/personal-logo.webp?v=3" as="image" type="image/webp" fetchpriority="high" />
 <link rel="canonical" href="https://www.lipeiresearch.com/" />
 <link rel="image_src" href="https://www.lipeiresearch.com/assets/images/lipei-research-wechat-square-logo-20260811-v3.jpg" />
-<link rel="preload" href="assets/fonts/noto-serif-sc-site-v4.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/lipei-serif-sc-regular.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="assets/audio/threshold-stone.mp3?v=2" as="audio" type="audio/mpeg" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="LiPei Research" />
@@ -35,11 +35,13 @@
 <style>
 @font-face{
   font-family:"LiPei Serif SC";
-  src:url("assets/fonts/noto-serif-sc-site-v4.woff2") format("woff2");
-  font-weight:100 900;
+  src:url("assets/fonts/lipei-serif-sc-regular.ttf") format("truetype");
+  font-weight:400;
   font-style:normal;
   font-display:swap;
 }
+@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/lipei-serif-sc-semibold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/lipei-serif-sc-bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
 :root {
   --bg:#050505;
   --panel:#0a0a0a;
@@ -148,6 +150,15 @@ nav{display:flex;gap:28px;font-size:13px;letter-spacing:.1em;text-transform:uppe
 nav a{color:#d9d2c5;position:relative}
 nav a::after{content:"";position:absolute;left:50%;right:50%;bottom:-12px;height:1px;background:var(--gold2);transition:.25s}
 nav a:hover::after{left:0;right:0}
+.mobile-nav{display:none;position:relative;justify-self:end}
+.mobile-nav summary{list-style:none;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--orange);cursor:pointer;font-size:0;position:relative}
+.mobile-nav summary::-webkit-details-marker{display:none}
+.mobile-nav summary:before,.mobile-nav summary:after,.mobile-nav summary span{content:"";display:block;width:14px;height:1px;background:currentColor;position:absolute;left:50%;top:50%;margin-left:-7px;transition:.2s}
+.mobile-nav summary:before{transform:translateY(-4px)}.mobile-nav summary:after{transform:translateY(4px)}
+.mobile-nav[open] summary span{opacity:0}.mobile-nav[open] summary:before{transform:rotate(45deg)}.mobile-nav[open] summary:after{transform:rotate(-45deg)}
+.mobile-nav-links{position:absolute;right:0;top:43px;width:min(270px,calc(100vw - 24px));padding:8px;border:1px solid var(--line);border-radius:13px;background:rgba(6,6,6,.98);box-shadow:0 18px 48px rgba(0,0,0,.72);display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.mobile-nav-links a{padding:10px 9px;border-radius:8px;color:#d9d2c5;font-size:9px;letter-spacing:.06em;text-transform:uppercase}
+.mobile-nav-links a:hover,.mobile-nav-links a:focus-visible{background:rgba(247,148,29,.08);color:var(--orange)}
 .tools{justify-self:end;display:flex;gap:10px}
 .iconbtn{
   width:36px;height:36px;border-radius:50%;border:1px solid var(--line);
@@ -674,7 +685,7 @@ footer strong{
   .scholar-name{min-height:38px}
 }
 @media(max-width:1000px){
-  .site-header{grid-template-columns:1fr auto} nav{display:none}
+  .site-header{grid-template-columns:1fr auto auto;gap:8px}.site-nav{display:none}.mobile-nav{display:block}
   .hero{padding:32px 24px 84px;text-align:center}
   .coin{width:128px}.handmark{width:84px}.signature{display:none}
   .modules{grid-template-columns:repeat(2,1fr)}
@@ -800,10 +811,16 @@ footer strong{
   <div class="brand" aria-label="LiPei Research">
     <span class="brand-wordmark">LiPei Research</span>
   </div>
-  <nav>
+  <nav class="site-nav">
     <a href="#home">Home</a><a href="#mechanism">Mechanism</a><a href="linguistics-map.html" target="_blank" rel="noopener">Research Map</a><a href="#notes">Notes</a><a href="#foundations">Foundations</a><a href="#research">Research</a>
     <a href="#lab">English Speaking Lab</a><a href="#timeline">Journey</a><a href="#contact">Contact</a>
   </nav>
+  <details class="mobile-nav">
+    <summary aria-label="Open navigation"><span></span></summary>
+    <nav class="mobile-nav-links">
+      <a href="#home">Home</a><a href="#mechanism">Mechanism</a><a href="linguistics-map.html" target="_blank" rel="noopener">Research Map</a><a href="#notes">Notes</a><a href="#foundations">Foundations</a><a href="#research">Research</a><a href="#lab">English Speaking Lab</a><a href="#timeline">Journey</a><a href="#contact">Contact</a>
+    </nav>
+  </details>
   <div class="tools">
     <button class="iconbtn is-paused" id="soundBtn" title="Music paused — tap to play" aria-label="Music paused — tap to play" aria-pressed="false"><span class="sound-glyph" aria-hidden="true">♪</span></button>
     <button class="iconbtn" id="langBtn" title="Language">中</button>
@@ -1322,7 +1339,8 @@ const bilingualContent={
     '#contact .footer-filing-label':'',
   },
   lists:{
-    'header nav a':['首页','机制','研究地图','札记','理论根基','研究','口语研究室','学术历程','联系'],
+    '.site-nav a':['首页','机制','研究地图','札记','理论根基','研究','口语研究室','学术历程','联系'],
+    '.mobile-nav-links a':['首页','机制','研究地图','札记','理论根基','研究','口语研究室','学术历程','联系'],
     '#research-map .map-gateway-paths span':['构成','动态','解释','探究与实践'],
     '#notes .notes-filter-label':['全部','开口启动','理论隐喻','概念化','在线加工'],
     '#notes .note-status':['理论札记','理论札记'],
