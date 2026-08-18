@@ -7,10 +7,11 @@
 <meta name="copyright" content="© 2026 李沛. All rights reserved.">
 <meta name="description" content="现代语言研究总地图：以第一性问题进入九分面语言学知识体系。© 2026 李沛。">
 <title>现代语言研究元分类体系 · 九分面完整交互版</title>
+<link rel="preload" href="assets/fonts/noto-serif-sc-site-v4.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/noto-serif-sc-site-v4.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
-:root{--bg:#050505;--panel:#0a0a0a;--panel2:#10100f;--gold:#d8aa4f;--gold2:#8d6424;--gold3:#f3d27a;--orange:#f7941d;--orange-soft:#f2a33a;--text:#f4ecdc;--muted:#aaa08e;--line:rgba(216,170,79,.42);--line2:rgba(216,170,79,.14);--red:#a65146}
-*{box-sizing:border-box} html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;font-synthesis:none} button{font:inherit}
+@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/noto-serif-sc-site-v4.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:block}
+:root{--bg:#050505;--panel:#0a0a0a;--panel2:#10100f;--gold:#d8aa4f;--gold2:#8d6424;--gold3:#f3d27a;--orange:#f7941d;--orange-soft:#f2a33a;--text:#f4ecdc;--muted:#aaa08e;--line:rgba(216,170,79,.42);--line2:rgba(216,170,79,.14);--red:#a65146;--font-map-title:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;--font-map-body:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;--font-map-en:Georgia,"Times New Roman",serif}
+*{box-sizing:border-box} html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;font-synthesis:none;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility} button,input{font:inherit}
 body{background:radial-gradient(circle at 50% 12%,rgba(216,170,79,.08),transparent 28%),linear-gradient(180deg,#030303,#070707 50%,#020202);overflow:hidden}
 .siteBack{position:fixed;left:16px;top:15px;z-index:170;display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border:1px solid rgba(247,148,29,.72);border-radius:999px;background:rgba(25,16,5,.94);backdrop-filter:blur(9px);color:var(--orange);font-family:Georgia,"Times New Roman",serif;font-size:9.5px;font-weight:600;letter-spacing:.05em;text-decoration:none;box-shadow:0 0 18px rgba(247,148,29,.12);transition:.18s}
 .siteBack:hover,.siteBack:focus-visible{color:var(--gold3);border-color:var(--gold3);outline:none}
@@ -48,7 +49,7 @@ footer{border-top:1px solid var(--line2);background:rgba(7,6,5,.96);z-index:20}.
 }
 .entryTitle{
  margin:5px 0 0;
- font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+ font-family:var(--font-map-title);
  color:var(--orange-soft);
  font-size:clamp(30px,4vw,58px);
  font-weight:700;letter-spacing:.035em
@@ -89,7 +90,7 @@ footer{border-top:1px solid var(--line2);background:rgba(7,6,5,.96);z-index:20}.
 .entryCenter .small{
  margin-top:8px;
  color:#d6c7a7;
- font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+ font-family:var(--font-map-title);
  font-size:17px
 }
 /* explicitly suppress old decorative center dot if inherited */
@@ -151,7 +152,7 @@ footer{border-top:1px solid var(--line2);background:rgba(7,6,5,.96);z-index:20}.
  margin-right:8px;vertical-align:middle
 }
 .principle .q{
- font-family:"Noto Serif SC","Songti SC",Georgia,serif;
+ font-family:var(--font-map-title);
  color:#f0e5d0;font-size:21px;font-weight:700;vertical-align:middle
 }
 .principle .qe{
@@ -210,7 +211,7 @@ footer{border-top:1px solid var(--line2);background:rgba(7,6,5,.96);z-index:20}.
 }
 .entryFacetsTitle{
  text-align:center;color:#c9a85e;
- font-family:"Noto Serif SC","Songti SC",serif;
+ font-family:var(--font-map-title);
  font-size:15px;letter-spacing:.16em;margin-bottom:8px
 }
 .entryFacets{
@@ -246,7 +247,7 @@ body.inFacet .backOverview{display:inline-block}
 .metaBtn:hover,.searchBtn:hover{border-color:var(--gold3);color:var(--text)}
 .overlay{position:fixed;inset:0;z-index:120;background:rgba(3,3,2,.82);backdrop-filter:blur(9px);display:none;align-items:center;justify-content:center;padding:22px}
 .overlay.show{display:flex}.dialog{width:min(900px,96vw);max-height:88vh;overflow:auto;border:1px solid rgba(240,208,129,.55);border-radius:20px;background:#0c0a07;box-shadow:0 24px 80px #000;padding:22px;position:relative}
-.dialog h2{margin:0 40px 5px 0;color:var(--gold3);font-family:Georgia,"Noto Serif SC",serif;font-size:25px}.dialogLead{color:var(--muted);font-size:12px;line-height:1.7;margin:0 0 16px}.dialogClose{position:absolute;right:15px;top:15px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--gold3);cursor:pointer}
+.dialog h2{margin:0 40px 5px 0;color:var(--gold3);font-family:var(--font-map-title);font-size:25px}.dialogLead{color:var(--muted);font-family:var(--font-map-body);font-size:12px;line-height:1.7;margin:0 0 16px}.dialogClose{position:absolute;right:15px;top:15px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--gold3);cursor:pointer}
 .axioms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.axiom{border:1px solid var(--line2);border-radius:13px;padding:12px;background:rgba(212,168,77,.025)}.axiom b{display:block;color:var(--gold3);font-size:11px;margin-bottom:5px}.axiom p{margin:0;color:#d8cdb8;font-size:11px;line-height:1.62}
 .examplePath{margin-top:13px;border-left:2px solid var(--red);padding:10px 12px;background:rgba(166,81,70,.05);color:#d9cfbd;font-size:11px;line-height:1.7}.examplePath strong{color:#e7b0a8}
 .searchInput{width:100%;border:1px solid var(--line);border-radius:12px;background:#070605;color:var(--text);padding:12px 14px;font-size:14px;outline:none}.searchInput:focus{border-color:var(--gold3)}
@@ -269,7 +270,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 
 /* Optical centering for the four first-principles numerals */
 .principle .num{display:inline-grid;place-items:center;line-height:1;vertical-align:middle;padding:0 0 1px;font-variant-numeric:lining-nums tabular-nums}
-.principle .qe{font-family:Georgia,"Noto Serif SC","Songti SC",serif;line-height:1.45}
+.principle .qe{font-family:var(--font-map-body);line-height:1.45}
 
 /* ===== In-place first-principles mind map ===== */
 .entryStage{transition:min-height .3s ease}
@@ -426,7 +427,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
   position:relative;left:auto;top:auto;transform:none;
   width:auto;height:auto;min-width:0;margin:7px auto 13px;padding:9px 12px 5px;border:0!important;border-radius:0;background:none!important;background-image:none!important;box-shadow:none!important;outline:0!important
  }
- .entryCenter .big{order:1;max-width:none;white-space:nowrap;font-size:17px;letter-spacing:.055em}.entryCenter .small{order:2;margin-top:4px;font-family:var(--font-map-title)!important;font-size:12px;font-weight:600}.centerSearchIcon{display:none!important}.centerSearchHint{order:3;position:relative;margin-top:9px;padding:6px 11px 6px 27px;border:1px solid rgba(247,148,29,.38);border-radius:999px;background:rgba(247,148,29,.035);color:#a99573;font-family:var(--font-map-body)!important;font-size:7.5px;letter-spacing:.08em}.centerSearchHint:before{content:"";position:absolute;left:11px;top:50%;width:7px;height:7px;border:1.4px solid var(--orange);border-radius:50%;transform:translateY(-62%)}.centerSearchHint:after{content:"";position:absolute;left:18px;top:54%;width:5px;height:1.3px;background:var(--orange);border-radius:2px;transform:rotate(45deg);transform-origin:left center}
+ .entryCenter .big{order:1;max-width:none;white-space:nowrap;font-size:17px;letter-spacing:.055em}.entryCenter .small{order:2;margin-top:4px;font-family:var(--font-map-title)!important;font-size:12px;font-weight:600}.centerSearchIcon{display:none!important}.centerSearchHint{order:3;position:relative;margin-top:9px;padding:6px 11px 6px 27px;border:1px solid rgba(247,148,29,.38);border-radius:999px;background:rgba(247,148,29,.035);color:#a99573;font-family:var(--font-map-title)!important;font-size:7.5px;font-weight:500;letter-spacing:.08em}.centerSearchHint:before{content:"";position:absolute;left:11px;top:50%;width:7px;height:7px;border:1.4px solid var(--orange);border-radius:50%;transform:translateY(-62%)}.centerSearchHint:after{content:"";position:absolute;left:18px;top:54%;width:5px;height:1.3px;background:var(--orange);border-radius:2px;transform:rotate(45deg);transform-origin:left center}
  .entryArrow{display:none}
  .principle{
   position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
@@ -475,6 +476,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 #searchOverlay .dialog h2{font-family:var(--font-map-title)!important;font-size:21px;font-weight:600;letter-spacing:.02em}
 #searchOverlay .dialogLead{font-size:10.5px;line-height:1.65}
 #searchOverlay .searchInput{font-size:11px;line-height:1.45}
+#searchOverlay .searchInput::placeholder{font-family:var(--font-map-body)!important;font-weight:400}
 #searchOverlay .searchMeta{font-size:9px}
 #searchOverlay .searchResult b{font-family:var(--font-map-title)!important;font-size:11px;font-weight:600}
 #searchOverlay .searchResult span{font-family:var(--font-map-body)!important;font-size:9px}
