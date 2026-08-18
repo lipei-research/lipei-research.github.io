@@ -331,6 +331,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 .entryStage.explore-1 .entryMindmap>.mmLevel+.mmLevel{margin-left:0;margin-right:-142px}
 .entryMindmap>.mmLevel.mmCovered{opacity:.38;filter:saturate(.42) brightness(.72);cursor:pointer;transform:none}
 .entryMindmap>.mmLevel.mmFocused{opacity:1;filter:none;transform:none;box-shadow:0 20px 55px rgba(0,0,0,.58),0 0 0 1px rgba(240,208,129,.12)}
+.entryMindmap>.mmLevel.mmCovered{animation:none!important}
 /* Explicit typography roles; do not depend on per-tree font fallback. */
 .mmHead b,.mmInlineDetail h3{font-family:var(--font-map-title)!important;font-weight:700!important}
 .mmNode b,.mmInlineDetail section>b{font-family:var(--font-map-title)!important;font-weight:700!important}
@@ -470,6 +471,13 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 .dialogClose:before,.dialogClose:after,.mmDrawerClose:before,.mmDrawerClose:after,.closeTerm:before,.closeTerm:after{content:"";position:absolute;width:12px;height:1.5px;border-radius:2px;background:currentColor;left:50%;top:50%;transform:translate(-50%,-50%) rotate(45deg)}
 .dialogClose:after,.mmDrawerClose:after,.closeTerm:after{transform:translate(-50%,-50%) rotate(-45deg)}
 .dialog h2,.colHead h2,.termHead h2,.summary{font-family:var(--font-map-title)!important}
+#searchOverlay .dialog,#searchOverlay .dialogLead,#searchOverlay .searchInput,#searchOverlay .searchMeta,#searchOverlay .searchResult,#searchOverlay .emptyState{font-family:var(--font-map-body)!important;font-synthesis:none}
+#searchOverlay .dialog h2{font-family:var(--font-map-title)!important;font-size:21px;font-weight:600;letter-spacing:.02em}
+#searchOverlay .dialogLead{font-size:10.5px;line-height:1.65}
+#searchOverlay .searchInput{font-size:11px;line-height:1.45}
+#searchOverlay .searchMeta{font-size:9px}
+#searchOverlay .searchResult b{font-family:var(--font-map-title)!important;font-size:11px;font-weight:600}
+#searchOverlay .searchResult span{font-family:var(--font-map-body)!important;font-size:9px}
 .entryStage.explore-4 .mmHead b,.entryStage.explore-4 .mmNode b,.entryStage.explore-4 .mmInlineDetail h3,.entryStage.explore-4 .mmInlineDetail section>b,.principleChooser .chooserBtn b{font-family:var(--font-map-title)!important}
 .entryStage.explore-4 .mmInlineDetail p,.entryStage.explore-4 .mmSummary,.entryStage.explore-4 .mmNode,.principleChooser .chooserBtn{font-family:var(--font-map-body)!important}
 .entryCopyright{width:100%;max-width:100%;padding:10px 8px 4px;text-align:center;line-height:1.55;overflow-wrap:anywhere}
@@ -1349,7 +1357,7 @@ function renderMmMap(){
   const parent=mmPath[i],level=document.createElement("section");level.className="mmLevel";
   level.innerHTML=`<div class="mmHead">${i===start&&start>0?'<button class="mmBack" aria-label="返回上一级">‹</button>':''}<b>${parent.zh}</b><span>${parent.en||""}</span></div>`;
   const back=level.querySelector(".mmBack");if(back)back.onclick=e=>{e.stopPropagation();mmPath=mmPath.slice(0,start);closeMmDrawer();renderMmMap()};
-  (parent.children||[]).forEach(ch=>{const leaf=!(ch.children&&ch.children.length),selected=(mmPath[i+1]&&mmPath[i+1].id===ch.id)||(mmLeaf&&mmLeaf.id===ch.id),b=document.createElement("button");b.className="mmNode"+(selected?" active":"");b.innerHTML=`<span class="mi ${safeIconClass(ch.icon)}" aria-hidden="true"></span><span><b>${ch.zh}</b><small>${ch.en||""}</small></span><span class="ma">${leaf?"＋":"›"}</span>`;b.onclick=e=>{e.stopPropagation();selectMmNode(i,ch)};level.appendChild(b)});level.style.animationDelay=`${Math.min(i,5)*35}ms`;bindMmPanelFocus(level);map.appendChild(level);
+  (parent.children||[]).forEach(ch=>{const leaf=!(ch.children&&ch.children.length),selected=(mmPath[i+1]&&mmPath[i+1].id===ch.id)||(mmLeaf&&mmLeaf.id===ch.id),b=document.createElement("button");b.className="mmNode"+(selected?" active":"");b.innerHTML=`<span class="mi ${safeIconClass(ch.icon)}" aria-hidden="true"></span><span><b>${ch.zh}</b><small>${ch.en||""}</small></span><span class="ma">${leaf?"＋":"›"}</span>`;b.onclick=e=>{e.stopPropagation();selectMmNode(i,ch)};level.appendChild(b)});level.style.animationDelay="0ms";bindMmPanelFocus(level);map.appendChild(level);
  }
  const panels=[...map.querySelectorAll(":scope>.mmLevel")];if(panels.length)focusMmPanel(panels[panels.length-1]);
 }
