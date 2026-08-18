@@ -11,7 +11,7 @@
 <link rel="preload" href="assets/images/personal-logo.webp?v=3" as="image" type="image/webp" fetchpriority="high" />
 <link rel="canonical" href="https://www.lipeiresearch.com/" />
 <link rel="image_src" href="https://www.lipeiresearch.com/assets/images/lipei-research-wechat-square-logo-20260811-v3.jpg" />
-<link rel="preload" href="assets/fonts/lipei-serif-sc-regular.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="assets/fonts/noto-serif-sc-site-v4.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="assets/audio/threshold-stone.mp3?v=2" as="audio" type="audio/mpeg" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="LiPei Research" />
@@ -35,13 +35,11 @@
 <style>
 @font-face{
   font-family:"LiPei Serif SC";
-  src:url("assets/fonts/lipei-serif-sc-regular.ttf") format("truetype");
-  font-weight:400;
+  src:url("assets/fonts/noto-serif-sc-site-v4.woff2") format("woff2");
+  font-weight:100 900;
   font-style:normal;
   font-display:swap;
 }
-@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/lipei-serif-sc-semibold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/lipei-serif-sc-bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
 :root {
   --bg:#050505;
   --panel:#0a0a0a;
@@ -685,7 +683,7 @@ footer strong{
   .scholar-name{min-height:38px}
 }
 @media(max-width:1000px){
-  .site-header{grid-template-columns:1fr auto auto;gap:8px}.site-nav{display:none}.mobile-nav{display:block}
+  .site-header{grid-template-columns:1fr auto;gap:8px}.site-nav{display:none}.mobile-nav{display:none!important}
   .hero{padding:32px 24px 84px;text-align:center}
   .coin{width:128px}.handmark{width:84px}.signature{display:none}
   .modules{grid-template-columns:repeat(2,1fr)}
@@ -715,7 +713,7 @@ footer strong{
   .handmark{width:58px;max-width:58px;flex:0 0 auto}
   .hero-main .kicker{font-size:7px;letter-spacing:.12em}
   h1{width:100%;max-width:100%;margin:8px auto 5px;transform:none;text-align:center;font-size:clamp(25px,8vw,38px)}
-  html[lang="zh-CN"] #home h1{width:100%;max-width:100%;padding-inline:0;font-size:clamp(16px,5.35vw,24px);line-height:1.18;letter-spacing:0;white-space:nowrap;overflow:visible;text-align:center}
+  html[lang="zh-CN"] #home h1{width:100%;max-width:100%;padding-inline:0;font-size:clamp(15px,4.7vw,21px);line-height:1.18;letter-spacing:-.015em;white-space:nowrap;overflow:visible;text-align:center}
   .subtitle{font-size:9px;line-height:1.35}
   .hero-statement{font-size:7px;line-height:1.45;margin-top:7px;width:100%}
   .rule{margin:13px auto}.name{font-size:19px;margin-top:10px}

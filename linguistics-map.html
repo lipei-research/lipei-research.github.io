@@ -8,13 +8,11 @@
 <meta name="description" content="现代语言研究总地图：以第一性问题进入九分面语言学知识体系。© 2026 李沛。">
 <title>现代语言研究元分类体系 · 九分面完整交互版</title>
 <style>
-@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/lipei-serif-sc-regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/lipei-serif-sc-semibold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/lipei-serif-sc-bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"LiPei Serif SC";src:url("assets/fonts/noto-serif-sc-site-v4.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 :root{--bg:#050505;--panel:#0a0a0a;--panel2:#10100f;--gold:#d8aa4f;--gold2:#8d6424;--gold3:#f3d27a;--orange:#f7941d;--orange-soft:#f2a33a;--text:#f4ecdc;--muted:#aaa08e;--line:rgba(216,170,79,.42);--line2:rgba(216,170,79,.14);--red:#a65146}
 *{box-sizing:border-box} html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:"LiPei Serif SC","Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;font-synthesis:none} button{font:inherit}
 body{background:radial-gradient(circle at 50% 12%,rgba(216,170,79,.08),transparent 28%),linear-gradient(180deg,#030303,#070707 50%,#020202);overflow:hidden}
-.siteBack{position:fixed;left:16px;top:15px;z-index:170;display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid rgba(212,168,77,.28);border-radius:999px;background:rgba(7,6,5,.88);backdrop-filter:blur(9px);color:#bda46e;font-family:Georgia,"Times New Roman",serif;font-size:9px;letter-spacing:.05em;text-decoration:none;transition:.18s}
+.siteBack{position:fixed;left:16px;top:15px;z-index:170;display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border:1px solid rgba(247,148,29,.72);border-radius:999px;background:rgba(25,16,5,.94);backdrop-filter:blur(9px);color:var(--orange);font-family:Georgia,"Times New Roman",serif;font-size:9.5px;font-weight:600;letter-spacing:.05em;text-decoration:none;box-shadow:0 0 18px rgba(247,148,29,.12);transition:.18s}
 .siteBack:hover,.siteBack:focus-visible{color:var(--gold3);border-color:var(--gold3);outline:none}
 .app{height:100vh;display:grid;grid-template-rows:auto 1fr auto}
 header{padding:14px 18px 10px;border-bottom:1px solid var(--line2);background:rgba(7,6,5,.94);backdrop-filter:blur(10px);z-index:20;display:flex;align-items:end;justify-content:space-between;gap:16px}
@@ -1322,15 +1320,7 @@ function focusMmPanel(panel){
   window.setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"center",inline:"nearest"}),90);
  }
 }
-function safeIconClass(icon){
- const value=String(icon||"");
- if(/[→↗↘↔↕⇄⇆⇣]/.test(value))return "shape-arrow";
- if(/[◉◎◌◔◐◍⊚]/.test(value))return "shape-circle";
- if(/[▦▣▤▧⊞⌘☰☷]/.test(value))return "shape-square";
- if(/[∿≋⌁⋯⋮]/.test(value))return "shape-bars";
- if(/[∞↺⟲]/.test(value))return "shape-split";
- return "shape-diamond";
-}
+function safeIconClass(){return "shape-diamond"}
 function bindMmPanelFocus(panel){
  panel.addEventListener("click",e=>{if(!panel.classList.contains("mmFocused")){e.preventDefault();e.stopPropagation();focusMmPanel(panel)}},true);
 }
