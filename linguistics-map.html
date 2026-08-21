@@ -294,6 +294,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
 .entryStage.explore-1 .mmLevel:before{right:-33px}.entryStage:not(.explore-1) .mmLevel:before{left:-33px}.mmLevel:first-child:before{display:none}
 .mmHead{text-align:center;padding:4px 30px 9px;border-bottom:1px solid var(--line2);margin-bottom:8px}.mmHead b{display:block;color:var(--gold3);font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-size:16px}.mmHead span{display:block;color:var(--muted);font-family:Georgia,serif;font-size:9px;margin-top:2px}
 .mmNode{width:100%;display:flex;align-items:center;gap:9px;border:1px solid rgba(212,168,77,.23);border-radius:11px;background:rgba(8,7,5,.82);color:var(--text);padding:9px 10px;margin:7px 0;text-align:left;cursor:pointer;font-family:var(--font-map-body)}.mmNode:hover,.mmNode.active{border-color:var(--gold3);background:rgba(68,52,20,.45)}.mmNode .mi{width:22px;height:22px;flex:0 0 22px;border:1px solid var(--line);border-radius:7px;display:grid;place-items:center;color:var(--gold3);font-size:11px}.mmNode b{display:block;font-size:12px}.mmNode small{display:block;color:var(--muted);font-family:Georgia,serif;font-size:8.5px;margin-top:2px}.mmNode .ma{margin-left:auto;color:var(--gold3)}
+.mmNode>span:nth-child(2){min-width:0;flex:1}.mmNode b,.mmNode small{overflow-wrap:anywhere}
 .mmTerminal{width:330px;flex-basis:330px;padding:15px}.mmTerminal h3{margin:3px 26px 3px 0;color:var(--gold3);font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-size:20px}.mmTerminal .mmen{color:var(--muted);font-family:Georgia,serif;font-size:10px}.mmTerminal p{color:#ddd2bf;font-size:10.5px;line-height:1.68}.mmClose{position:absolute;right:9px;top:9px;border:1px solid var(--line);border-radius:50%;width:25px;height:25px;background:transparent;color:var(--gold3);cursor:pointer}.mmExit{position:absolute;right:8px;top:8px;z-index:40;border:1px solid var(--line);border-radius:999px;background:#0b0a08;color:var(--muted);padding:7px 10px;font-size:9px;pointer-events:auto;cursor:pointer}.mmExit:hover{color:var(--text);border-color:var(--gold3)}
 @keyframes mmGrow{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
 
@@ -437,6 +438,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--gold3);outline-
  .principle.p1 .q,.principle.p2 .q,.principle.p3 .q,.principle.p4 .q{font-family:var(--font-map-title)!important;font-size:19px!important;line-height:1.2!important}
  .principle.p1 .num,.principle.p2 .num,.principle.p3 .num,.principle.p4 .num{font-family:Georgia,"Times New Roman",serif!important;font-size:18px!important;left:16px;top:14px}
  .principle .qe{margin-top:5px!important}.principle .qeZh{font-family:var(--font-map-body)!important;font-size:10.5px!important}.principle .qeEn{font-family:var(--font-map-en)!important;font-size:9px!important}.principle .maps{font-family:var(--font-map-body)!important;font-size:8px!important}
+ .mmNode b{font-family:var(--font-map-title)!important;font-size:11px!important;line-height:1.35}.mmNode small{font-family:var(--font-map-en)!important;line-height:1.3}
  .principle:hover{transform:translateY(-2px)!important}
  .entryFacets{grid-template-columns:repeat(2,1fr)}
  .principleChooser{
@@ -1228,6 +1230,29 @@ TREE5.children.push({id:"machine_human_language_comparison",zh:"机器语言模�
  {id:"human_model_comparison",zh:"人类—模型语言能力比较",en:"Human–Model Language Comparison",icon:"◇",detail:{kind:"COMPARATIVE EXPLANATION",summary:"在相同或可比任务中比较人类与语言模型的表现、错误类型、泛化和表征。",what:"behavioral alignment、error patterns、generalization、processing signatures。",theory:"Cognitive modeling；model-based comparison。",people:"相关研究横跨计算语言学、心理语言学和认知科学。",boundary:"相似输出不必然意味着相同内部机制；差异也需考虑训练经验与任务条件。",tags:["human-model comparison","人机比较","认知建模"]}},
  {id:"llm_explanatory_boundary",zh:"大模型的解释边界",en:"Explanatory Limits of LLMs",icon:"◇",detail:{kind:"META-THEORETICAL BOUNDARY",summary:"检验大模型在何种意义上能够描述、预测或解释自然语言及人类语言行为。",what:"competence/performance、prediction/explanation、grounding、causal mechanism。",theory:"Philosophy of modeling；computational cognitive science。",people:"相关讨论仍在发展。",boundary:"必须区分工程预测、形式拟合、行为模拟与人类认知机制解释。",tags:["explanation","LLM limits","解释边界"]}}
 ]});
+
+/* High-value cross-cutting fields: kept shallow to preserve the map's navigation logic. */
+const lexicalUnits=findTreeNode(TREE1,"lexical_units");
+if(lexicalUnits)lexicalUnits.children.push({id:"formulaic_language",zh:"程式语与多词单位",en:"Formulaic Language & Multiword Expressions",icon:"⌬",detail:{kind:"LEXICAL / PROCESSING DOMAIN",summary:"研究搭配、词块、词汇束、习语和其他多词表达如何被储存、提取、加工与习得。",what:"formulaic sequences、collocations、lexical bundles、idioms、multiword expressions。",theory:"Formulaic Language Research；usage-based and psycholinguistic accounts。",people:"Alison Wray；Norbert Schmitt；Diane Van Lancker Sidtis。",boundary:"程式语跨越词汇构成、在线加工与语言习得；它不是一种独立语法理论，也不能与所有高频词串画等号。",tags:["formulaic language","multiword expressions","程式语","词块","搭配","词汇束"]}});
+
+const onlineProcessing=findTreeNode(TREE2,"online");
+if(onlineProcessing)onlineProcessing.children.push({id:"multilingual_processing",zh:"双语与多语加工",en:"Bilingual & Multilingual Processing",icon:"⇄",detail:{kind:"PSYCHOLINGUISTIC RESEARCH DOMAIN",summary:"研究两个或多个语言系统如何共同激活、竞争、选择并受到认知控制。",what:"cross-linguistic activation、lexical access、language control、code-switching、transfer、L3 processing。",theory:"Bilingual Interactive Activation；Inhibitory Control Model；multilingual processing accounts。",people:"David Green；Judith Kroll；Annette de Groot；François Grosjean。",boundary:"多语者是研究人群；这里关注的是实时加工机制，不能与社会语言接触或长期习得完全等同。",tags:["bilingual processing","multilingual processing","双语加工","多语加工","语言控制","语码转换","跨语言影响"]}});
+
+const productionNode=findTreeNode(TREE2,"production");
+if(productionNode)productionNode.children.push({id:"l2_speech_fluency",zh:"二语言语流利度",en:"L2 Speech Fluency",icon:"→",detail:{kind:"L2 SPEECH / PROCESSING DOMAIN",summary:"研究二语说话者如何在实时压力下高效组织并持续产出言语，以及内部加工效率如何表现为可观察、可感知的流利程度。",what:"认知流利、话语流利、感知流利；加工速度与稳定性；自动化、注意控制、语速、停顿与修正。",theory:"Segalowitz’s cognitive–utterance–perceived fluency framework；L2 speech-production and automatization accounts。",people:"Norman Segalowitz；Peter Skehan；Judit Kormos；Tavakoli 等。",boundary:"认知流利不等于单纯说得快；二语言语流利度也应与口吃等临床流畅障碍区分。",tags:["L2 fluency","cognitive fluency","utterance fluency","perceived fluency","二语流利度","认知流利","话语流利","感知流利","Segalowitz"]}});
+
+const developmentNode=findTreeNode(TREE2,"development");
+if(developmentNode)developmentNode.children.push({id:"learner_individual_differences",zh:"学习者个体差异与情感",en:"Learner Individual Differences & Affect",icon:"◐",detail:{kind:"ACQUISITION / LEARNER DOMAIN",summary:"研究学习者在认知能力、情感状态、动机和自我调节方面的差异如何影响语言学习与使用。",what:"language aptitude、working memory、motivation、anxiety、willingness to communicate、self-efficacy、learning strategies。",theory:"Individual Differences in SLA；L2 Motivational Self System；Willingness to Communicate。",people:"Zoltán Dörnyei；Peter Skehan；Peter MacIntyre；Richard Sparks。",boundary:"个体差异不是把学习成败归因于固定人格；具体变量、情境与发展过程需要分别检验。",tags:["individual differences","affect","motivation","anxiety","aptitude","个体差异","学习动机","外语焦虑","语言天赋","交际意愿"]}});
+
+const clinicalNode=findTreeNode(TREE9,"clinical_linguistics_interface");
+if(clinicalNode)clinicalNode.children=[
+ {id:"developmental_language_disorders",zh:"发展性语言与读写障碍",en:"Developmental Language & Literacy Disorders",icon:"+",detail:{kind:"CLINICAL RESEARCH DOMAIN",summary:"研究儿童语言与读写能力发展中的持续困难及其评估和干预。",what:"developmental language disorder、dyslexia、speech-sound and social-communication difficulties。",theory:"Clinical Linguistics；developmental psycholinguistics；language and literacy intervention。",people:"Dorothy Bishop；Maggie Snowling 等。",boundary:"语言差异、多语发展或方言差异本身不是障碍；诊断需结合发展、教育与文化语言背景。",tags:["DLD","dyslexia","发展性语言障碍","阅读障碍","读写障碍"]}},
+ {id:"acquired_language_disorders",zh:"获得性语言与认知沟通障碍",en:"Acquired Language & Cognitive-Communication Disorders",icon:"+",detail:{kind:"CLINICAL RESEARCH DOMAIN",summary:"研究脑损伤或神经退行性变化后出现的语言与认知沟通困难。",what:"aphasia、traumatic brain injury、dementia-related language change、assessment and rehabilitation。",theory:"Aphasiology；cognitive neuropsychology；neurorehabilitation。",people:"Paul Broca；Carl Wernicke；Harold Goodglass 等历史与现代传统。",boundary:"临床症状不能直接等同于单一脑区或单一语言模块受损。",tags:["aphasia","失语症","认知沟通障碍","神经语言障碍"]}},
+ {id:"speech_fluency_disorders",zh:"言语、嗓音与流畅障碍",en:"Speech, Voice & Fluency Disorders",icon:"∿",detail:{kind:"CLINICAL RESEARCH DOMAIN",summary:"研究构音、运动性言语、嗓音以及口吃和言语急促等流畅障碍。",what:"articulation、dysarthria、apraxia of speech、voice disorders、stuttering、cluttering。",theory:"Speech-language pathology；speech motor control；fluency-disorder research。",people:"相关研究跨语音科学、运动控制和临床康复。",boundary:"这里的 fluency disorders 是临床流畅障碍，不等于二语学习中的 speech fluency。",tags:["stuttering","cluttering","口吃","言语流畅障碍","嗓音障碍","运动性言语障碍"]}}
+];
+
+const measurementNode=findTreeNode(TREE7,"measurement");
+if(measurementNode)measurementNode.children.push({id:"language_performance_constructs",zh:"语言表现与口语测量构念",en:"Language Performance & Speech Constructs",icon:"✓",detail:{kind:"MEASUREMENT CONSTRUCTS",summary:"界定语言表现研究与测评中究竟测量哪些能力或表现维度。",what:"complexity、accuracy、fluency（CAF）；intelligibility、comprehensibility、accentedness；interactional competence。",theory:"L2 performance research；language assessment；speech and pronunciation assessment。",people:"Peter Skehan；Lyle Bachman；Tracey Derwing；Murray Munro 等。",boundary:"构念不是原始数据：语速、停顿、错误率或评分只有在明确理论定义和效度证据后才能代表目标能力。",tags:["CAF","complexity accuracy fluency","intelligibility","comprehensibility","accentedness","复杂度","准确度","流利度","可懂度","可理解度","口音度"]}});
 const FACETS={
  "1":{tree:TREE1,detail:DETAIL1,title:"① 构成 · 语言如何组织？",sub:"Linguistic Organization · 语言的实现形式、核心组织域与跨域接口。"},
  "2":{tree:TREE2,detail:DETAIL2,title:"② 语言怎样运行与变化？",sub:"Language Dynamics · 实时个体加工、互动、个体发展与群体/历史变化。"},
@@ -1246,7 +1271,13 @@ let restoringLink=false,toastTimer=null;
 const SEARCH_ALIASES={
  llm_interface:"大模型 语言大模型 大语言模型 LLM LLMs 人工智能 AI 生成式人工智能",
  computational_linguistics_interface:"计算语言学 自然语言处理 NLP",
- cs_ai_interface:"人工智能 AI 计算语言学 自然语言处理 NLP 语言模型 大模型"
+ cs_ai_interface:"人工智能 AI 计算语言学 自然语言处理 NLP 语言模型 大模型",
+ formulaic_language:"程式语 公式语 词块 搭配 词汇束 多词单位 多词表达 formulaic sequence lexical bundle collocation MWE",
+ multilingual_processing:"双语加工 多语加工 语言控制 语码转换 跨语言影响 语言迁移 bilingual multilingual code switching transfer",
+ l2_speech_fluency:"二语流利度 口语流利度 认知流利 加工效率 话语流利 感知流利 Segalowitz fluency",
+ learner_individual_differences:"个体差异 情感 动机 焦虑 语言天赋 交际意愿 自我效能 学习策略 aptitude motivation anxiety WTC",
+ clinical_linguistics_interface:"临床语言学 语言障碍 言语障碍 读写障碍 失语 口吃 language disorder speech disorder aphasia stuttering",
+ language_performance_constructs:"复杂度 准确度 流利度 可懂度 可理解度 口音度 CAF intelligibility comprehensibility accentedness"
 };
 function buildSearchIndex(){
  const out=[];
