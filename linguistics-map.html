@@ -738,18 +738,13 @@ const TREE1 = {
     {id:"info_structure",zh:"信息结构",en:"Information structure",icon:"◐"},
     {id:"interaction_open",zh:"向互动系统开放",en:"Opening toward interaction",icon:"↗"}
   ]},
-  {id:"interfaces",zh:"跨层接口与共享资源",en:"Cross-level Interfaces & Shared Resources",icon:"∞",note:"这不是与语音、句法或语义并列的新构成部件，而是说明不同语言层级如何衔接，以及哪些组织资源横跨多个层级。",
+  {id:"interfaces",zh:"跨层接口",en:"Cross-level Interfaces",icon:"∞",note:"这不是与语音、句法或语义并列的新构成部件，而是集中说明相邻语言层级之间如何映射、相互制约并协同组织。",
    children:[
-    {id:"adjacent_if",zh:"相邻层级的接口",en:"Interfaces between adjacent levels",icon:"⇄",children:[
-      {id:"ph_ph",zh:"语音—音系",en:"Phonetics–phonology",icon:"∞"},
-      {id:"ph_morph",zh:"音系—形态",en:"Phonology–morphology",icon:"∞"},
-      {id:"morph_syn2",zh:"形态—句法",en:"Morphology–syntax",icon:"∞"},
-      {id:"syn_sem2",zh:"句法—语义",en:"Syntax–semantics",icon:"∞"},
-      {id:"sem_prag",zh:"语义—语用",en:"Semantics–pragmatics",icon:"∞"}
-    ]},
-    {id:"prosody_node",zh:"韵律",en:"Prosody",icon:"∿"},
-    {id:"information_structure",zh:"信息结构",en:"Information structure",icon:"◐"},
-    {id:"lexicon_resource",zh:"词汇资源",en:"Lexicon as cross-domain resource",icon:"⌬"}
+    {id:"ph_ph",zh:"语音—音系",en:"Phonetics–phonology",icon:"∞"},
+    {id:"ph_morph",zh:"音系—形态",en:"Phonology–morphology",icon:"∞"},
+    {id:"morph_syn2",zh:"形态—句法",en:"Morphology–syntax",icon:"∞"},
+    {id:"syn_sem2",zh:"句法—语义",en:"Syntax–semantics",icon:"∞"},
+    {id:"sem_prag",zh:"语义—语用",en:"Semantics–pragmatics",icon:"∞"}
   ]}
  ]
 };;
@@ -835,9 +830,6 @@ const DETAIL1 = {
   morph_syn2:{kind:"INTERFACE",summary:"研究形态结构和句法结构之间的边界与映射。",what:"case、agreement、wordhood、morphosyntax。",theory:"Lexicalism；Distributed Morphology。",people:"Morris Halle；Alec Marantz。",boundary:"不存在一个对所有理论都固定不变的 morph–syntax 切线。",tags:["morphology","syntax"]},
   syn_sem2:{kind:"INTERFACE",summary:"研究句法组织如何进入意义组合与解释。",what:"composition、scope、argument interpretation。",theory:"Formal Semantics；syntax–semantics interface。",people:"Richard Montague；Barbara Partee。",boundary:"接口不是第七个普通句法“部件”。",tags:["syntax","semantics"]},
   sem_prag:{kind:"INTERFACE",summary:"研究编码意义与语境推理之间的边界与互动。",what:"implicature、presupposition、context dependence、enrichment。",theory:"Gricean Pragmatics；Relevance Theory；Dynamic Semantics / contextualist approaches。",people:"H. P. Grice；Sperber & Wilson；Robert Stalnaker。",boundary:"这是长期争论边界，不假装存在唯一切线。",tags:["semantics","pragmatics"]},
-  prosody_node:{kind:"MULTI-DOMAIN INTERFACE",summary:"研究音高、时长、重音和韵律层级如何连接声音、句法、焦点和篇章。",what:"intonation、phrasing、focus prominence、boundary marking。",theory:"Prosodic Phonology；Intonational Phonology。",people:"Elisabeth Selkirk；Janet Pierrehumbert。",boundary:"韵律不能被强迫只属于 phonology。",tags:["prosody","intonation"]},
-  information_structure:{kind:"MULTI-DOMAIN INTERFACE",summary:"研究话语信息状态如何在句法、语义、韵律和语用间实现。",what:"topic/focus、given/new、contrast。",theory:"Information Structure；Alternative Semantics；functional accounts。",people:"Manfred Krifka；Mats Rooth；Knud Lambrecht。",boundary:"跨多个组织域，是接口而非单一结构层。",tags:["information structure"]},
-  lexicon_resource:{kind:"CROSS-DOMAIN RESOURCE",summary:"把词汇知识视为连接形式、形态、句法和意义的资源网络。",what:"一个 lexical entry 是否储存 phonology、syntax、semantics、frequency、usage information。",theory:"Lexicalism；Parallel Architecture；usage-based lexicon；Distributed Morphology。",people:"Ray Jackendoff；Joan Bybee；Alec Marantz。",boundary:"Lexicon 不适合画成严格线性层级中的普通一格。",tags:["lexicon","resource"]}
 };;
 const TREE2 = {
  id:"root",zh:"语言的运行、发展与变化",en:"Language dynamics, development & change",
