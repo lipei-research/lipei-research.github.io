@@ -608,6 +608,28 @@ html[lang="zh-CN"] .note-title-zh{font-family:Georgia,"Times New Roman",serif;fo
 .event-body::before{content:"";position:absolute;left:-55px;top:24px;width:11px;height:11px;border-radius:50%;background:var(--gold2);box-shadow:0 0 14px rgba(216,170,79,.8)}
 .event-body h4{margin:0 0 6px;color:var(--orange-soft)}
 .event-body p{margin:0;color:#bcb3a5;line-height:1.55}
+.archive-links{display:grid;gap:7px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(216,170,79,.13)}
+.archive-link{display:flex;align-items:center;gap:8px;width:fit-content;max-width:100%;padding:0;border:0;background:none;color:#bda56f;font:inherit;font-size:11px;line-height:1.45;letter-spacing:.025em;text-align:left;cursor:pointer}
+.archive-link::before{content:"";width:4px;height:4px;flex:0 0 auto;border:1px solid rgba(216,170,79,.72);transform:rotate(45deg)}
+.archive-link:hover,.archive-link:focus-visible{color:var(--orange-soft);outline:none}
+.archive-link:focus-visible{box-shadow:0 1px 0 var(--orange-soft)}
+.archive-photo{display:block;width:min(390px,100%);margin:14px 0 0;padding:0;border:1px solid rgba(216,170,79,.2);border-radius:8px;overflow:hidden;background:#050505;cursor:pointer}
+.archive-photo img{display:block;width:100%;height:auto;object-fit:contain}
+.archive-photo:focus-visible{outline:1px solid var(--orange-soft);outline-offset:3px}
+.archive-caption{display:block;padding:9px 11px;color:#a99f8f;font-size:10px;line-height:1.45;text-align:left}
+body.media-open{overflow:hidden}
+.media-lightbox[hidden]{display:none}
+.media-lightbox{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:28px;background:rgba(0,0,0,.84);backdrop-filter:blur(3px);animation:mediaFadeIn .16s ease-out}
+@keyframes mediaFadeIn{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.media-lightbox{animation:none}}
+.media-dialog{position:relative;width:min(1080px,100%);max-height:calc(100vh - 56px);display:flex;flex-direction:column;gap:12px;padding:18px;border:1px solid rgba(216,170,79,.32);border-radius:12px;background:#080808;box-shadow:0 24px 80px rgba(0,0,0,.75)}
+.media-dialog-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.media-dialog-title{margin:0;color:var(--orange-soft);font-size:15px;font-weight:500;line-height:1.4}
+.media-close{width:30px;height:30px;flex:0 0 auto;border:1px solid rgba(216,170,79,.28);border-radius:50%;background:#0b0b0b;color:#c8b783;font-size:20px;line-height:1;cursor:pointer}
+.media-close:hover,.media-close:focus-visible{border-color:var(--gold);color:var(--orange-soft);outline:none}
+.media-stage{min-height:0;display:grid;place-items:center}
+.media-stage video{display:block;width:100%;max-height:calc(100vh - 145px);background:#000}
+.media-stage img{display:block;max-width:100%;max-height:calc(100vh - 145px);width:auto;height:auto;object-fit:contain}
 footer{padding:34px;text-align:center;border-top:1px solid var(--line);color:#9c9487}
 footer strong{
   display:block;margin-bottom:11px;color:var(--orange-soft);font-size:18px;
@@ -784,6 +806,7 @@ footer strong{
   .timeline::before{left:70px}.event{grid-template-columns:56px 1fr;gap:30px;margin-bottom:12px}
   .year{font-size:11px}.event-body{padding:10px 12px}.event-body h4{font-size:12px}
   .event-body p{font-size:9px}.event-body::before{left:-36px;top:15px}
+  .archive-link{font-size:9px}.archive-caption{font-size:8.5px}.media-lightbox{padding:10px}.media-dialog{max-height:calc(100vh - 20px);padding:12px}.media-dialog-title{font-size:12px}.media-stage video,.media-stage img{max-height:calc(100vh - 100px)}
   html[lang="zh-CN"] h1{font-size:clamp(18px,5.3vw,22px);letter-spacing:.012em;position:relative;z-index:3}
   html[lang="zh-CN"] .subtitle{font-size:10px}
   html[lang="zh-CN"] .hero-statement{font-size:7.5px;line-height:1.55;width:100%}
@@ -1158,14 +1181,14 @@ footer strong{
   <div class="timeline">
     <div class="event"><div class="year">2008–2010</div><div class="event-body"><h4>Systematic Formal Knowledge and the Problem of Real-Time Generation</h4><p>Between 2008 and 2010, systematic work on American pronunciation produced an integrated training system, while sustained study of traditional grammar, psycholinguistics, and philosophy of language yielded an explanatory framework for English syntax. Yet extensive formal knowledge and practice did not translate naturally into fluent speech, establishing the enduring question of how declarative linguistic knowledge becomes usable in real time.</p></div></div>
     <div class="event"><div class="year">2011–2013</div><div class="event-body"><h4>Functional Expansion of the Syntax Framework and the Pursuit of Fluency</h4><p>During M.A. study at Nankai University, continued American-pronunciation training and teaching were accompanied by the integration of systemic functional linguistics into the established syntax framework, with the aim of promoting fluency through more systematic and functionally organized sentence generation; the continuing difficulty of real-time production showed that syntactic refinement alone could not resolve the problem.</p></div></div>
-    <div class="event"><div class="year">2014–2016</div><div class="event-body"><h4>Pedagogical Translation of the Pronunciation and Syntax Systems</h4><p>Following the appointment at Tianjin University of Finance and Economics Pearl River College in 2014, the established pronunciation and syntax systems were translated into explicit instructional practice. Their presentation won first prize in the 2015 FLTRP “Star Teacher” National Final; a subsequent account of American English sound-change patterns won first prize in the 2016 Second China Foreign Language Micro-Lecture Competition National Final.</p></div></div>
+    <div class="event"><div class="year">2014–2016</div><div class="event-body"><h4>Pedagogical Translation of the Pronunciation and Syntax Systems</h4><p>Following the appointment at Tianjin University of Finance and Economics Pearl River College in 2014, the established pronunciation and syntax systems were translated into explicit instructional practice. Their presentation won first prize in the 2015 FLTRP “Star Teacher” National Final; a subsequent account of American English sound-change patterns won first prize in the 2016 Second China Foreign Language Micro-Lecture Competition National Final.</p><div class="archive-links" aria-label="Video archive"><button class="archive-link" type="button" data-media="video" data-src="https://media.lipeiresearch.com/Videos/introduction-to-american-pronunciation.mp4" data-title-en="Introduction to American Pronunciation" data-title-zh="Introduction to American Pronunciation" data-label-en="2015 · Introduction to American Pronunciation · Watch video" data-label-zh="2015 · Introduction to American Pronunciation · 观看视频">2015 · Introduction to American Pronunciation · Watch video</button><button class="archive-link" type="button" data-media="video" data-src="https://media.lipeiresearch.com/Videos/sound-change.mp4" data-title-en="Sound Change" data-title-zh="Sound Change" data-label-en="2016 · Sound Change · Watch video" data-label-zh="2016 · Sound Change · 观看视频">2016 · Sound Change · Watch video</button></div></div></div>
     <div class="event"><div class="year">2017–2020</div><div class="event-body"><h4>The Persistent Fluency Problem and the Turn to Attentional Resources</h4><p>Continued difficulty in sustaining spontaneous speech despite substantial linguistic knowledge exposed the divide between knowledge availability and online usability, gradually reframing the problem in terms of attentional limits, monitoring load, working memory, and real-time processing pressure.</p></div></div>
     <div class="event"><div class="year">2021</div><div class="event-body"><h4>Attentional-Resource Expansion Strategies</h4><p>Drawing on Segalowitz’s cognitive account of L2 fluency, an institutional key project on speech-rate reduction and pause extension developed temporal-support strategies intended to release attentional resources and create conditions for conceptual organization and linguistic encoding during online production.</p></div></div>
     <div class="event"><div class="year">2022</div><div class="event-body"><h4>Initial Construction of the Operable Online Production Mechanism</h4><p>A Tianjin Municipal Education Commission project shifted the inquiry from how processing time might be secured to how speech is organized within that time. Macroplan decomposition and linearization, preverbal organization in microplanning, and the Speech-Onset Timing Hypothesis together established an initial operable pathway from communicative intention to speech initiation.</p></div></div>
     <div class="event"><div class="year">2023</div><div class="event-body"><h4>Theoretical Development Inside the Conceptualizer</h4><p>The inquiry then moved inside the Conceptualizer through an integrated examination of cognitive science, conceptual semantics, cognitive grammar, working memory, and L2 speech-production models, extending the mechanism’s account of how communicative intention is formed and declarative knowledge converges into preverbal information.</p></div></div>
     <div class="event"><div class="year">2024</div><div class="event-body"><h4>Formal Model Construction and Intelligent Applications</h4><p>The twelfth China Foreign Language Education Fund project advanced the mechanism from a theoretical pathway toward formal model construction; in parallel, ChatGPT voice interaction supported the development of intelligent speaking assistants and pedagogical agents that embed the mechanism in spoken practice, immediate feedback, and instructional design.</p></div></div>
-    <div class="event"><div class="year">2025</div><div class="event-body"><h4>Reciprocal Integration of Research and Teaching</h4><p>Publication of the operable online-production mechanism gave the framework a systematic scholarly account. In the same year, <em>How to Speak English Fluently?</em>, a teaching presentation centered on the mechanism, received the National Grand Prize in the Tenth National College English Teachers’ Basic Teaching Skills Competition, followed by first prize in the Tianjin Final of the Sixteenth SFLEP National Foreign Language Teaching Contest.</p></div></div>
-    <div class="event"><div class="year">2026.07</div><div class="event-body"><h4>The Speech Launch Threshold and International Scholarly Presentation</h4><p>The paper <em>Online Cognitive Processing in L2 Speech Production: An Operable Mechanism from Communicative Intention to Articulation Onset</em> was presented at Beijing Foreign Studies University during the Inaugural Conference of the Division of Biolinguistics, Chinese Society for Cognitive Science, and the Fifth International Conference on Biolinguistics and Language Acquisition. The research isolated the Speech Launch Threshold and specified functional orientation, conceptual focus, and minimal relational configuration as the core preverbal conditions for speech initiation and continued progression.</p></div></div>
+    <div class="event"><div class="year">2025</div><div class="event-body"><h4>Reciprocal Integration of Research and Teaching</h4><p>Publication of the operable online-production mechanism gave the framework a systematic scholarly account. In the same year, <em>How to Speak English Fluently?</em>, a teaching presentation centered on the mechanism, received the National Grand Prize in the Tenth National College English Teachers’ Basic Teaching Skills Competition, followed by first prize in the Tianjin Final of the Sixteenth SFLEP National Foreign Language Teaching Contest.</p><div class="archive-links" aria-label="Video archive"><button class="archive-link" type="button" data-media="video" data-src="https://media.lipeiresearch.com/Videos/how-to-speak-english-fluently.mp4" data-title-en="How to Speak English Fluently?" data-title-zh="How to Speak English Fluently?" data-label-en="How to Speak English Fluently? · Watch video" data-label-zh="How to Speak English Fluently? · 观看视频">How to Speak English Fluently? · Watch video</button></div></div></div>
+    <div class="event"><div class="year">2026.07</div><div class="event-body"><h4>The Speech Launch Threshold and International Scholarly Presentation</h4><p>The paper <em>Online Cognitive Processing in L2 Speech Production: An Operable Mechanism from Communicative Intention to Articulation Onset</em> was presented at Beijing Foreign Studies University during the Inaugural Conference of the Division of Biolinguistics, Chinese Society for Cognitive Science, and the Fifth International Conference on Biolinguistics and Language Acquisition. The research isolated the Speech Launch Threshold and specified functional orientation, conceptual focus, and minimal relational configuration as the core preverbal conditions for speech initiation and continued progression.</p><button class="archive-photo" type="button" data-media="image" data-src="assets/images/bfsu-international-conference-2026.jpg" data-title-en="Academic presentation at Beijing Foreign Studies University" data-title-zh="北京外国语大学国际会议学术报告现场"><img src="assets/images/bfsu-international-conference-2026.jpg" alt="Li Pei presenting at an international conference at Beijing Foreign Studies University" loading="lazy" decoding="async"><span class="archive-caption" data-label-en="Conference archive · Beijing Foreign Studies University · View photograph" data-label-zh="会议档案 · 北京外国语大学 · 查看照片">Conference archive · Beijing Foreign Studies University · View photograph</span></button></div></div>
     <div class="event"><div class="year">2026.08</div><div class="event-body"><h4>Building a Personal Academic Knowledge Infrastructure</h4><p>The LiPei Research website and the <em>Grand Map of Modern Linguistic Research</em> were developed to organize traditional disciplines, theoretical frameworks, research methods, and emerging fields through four fundamental questions: constitution, dynamics, explanation, and inquiry and practice. This work brings previously dispersed research, theoretical reflection, and methodological resources into a searchable and expandable academic knowledge system, while locating the operable mechanism of online speech production within a broader landscape of language science.</p></div></div>
   </div>
 </section>
@@ -1184,6 +1207,13 @@ footer strong{
   </div>
   <div class="footer-copyright">© 2026 LiPei Research</div>
 </footer>
+</div>
+
+<div class="media-lightbox" id="mediaLightbox" hidden aria-hidden="true">
+  <div class="media-dialog" role="dialog" aria-modal="true" aria-labelledby="mediaDialogTitle">
+    <div class="media-dialog-header"><h2 class="media-dialog-title" id="mediaDialogTitle"></h2><button class="media-close" id="mediaClose" type="button" aria-label="Close media viewer" title="Close">×</button></div>
+    <div class="media-stage" id="mediaStage"></div>
+  </div>
 </div>
 
 <script>
@@ -1448,6 +1478,14 @@ function setLanguage(language){
   if(activeScholar) renderScholar(activeScholar);
   if(activeInlineNote) renderInlineNote();
   updateNotesArchiveLabel();
+  updateArchiveLabels();
+}
+function updateArchiveLabels(){
+  const chinese=document.documentElement.lang==='zh-CN';
+  document.querySelectorAll('[data-label-en]').forEach(element=>{element.textContent=element.dataset[chinese?'labelZh':'labelEn']});
+  document.querySelectorAll('.archive-links').forEach(element=>element.setAttribute('aria-label',chinese?'视频档案':'Video archive'));
+  const close=document.getElementById('mediaClose');
+  if(close){close.setAttribute('aria-label',chinese?'关闭媒体查看器':'Close media viewer');close.title=chinese?'关闭':'Close'}
 }
 const foundationDetail=document.querySelector('.foundation-detail');
 function updateScholarLabels(){
@@ -1731,6 +1769,53 @@ if(savedLanguage==='zh-CN') setLanguage('zh-CN');
 document.getElementById('langBtn').addEventListener('click',()=>{
   setLanguage(document.documentElement.lang==='zh-CN'?'en':'zh-CN');
 });
+
+const mediaLightbox=document.getElementById('mediaLightbox');
+const mediaStage=document.getElementById('mediaStage');
+const mediaDialogTitle=document.getElementById('mediaDialogTitle');
+const mediaClose=document.getElementById('mediaClose');
+let mediaReturnTarget=null;
+function openMedia(trigger){
+  const chinese=document.documentElement.lang==='zh-CN';
+  mediaReturnTarget=trigger;
+  mediaDialogTitle.textContent=trigger.dataset[chinese?'titleZh':'titleEn'];
+  mediaStage.replaceChildren();
+  if(trigger.dataset.media==='video'){
+    const video=document.createElement('video');
+    video.controls=true;
+    video.preload='metadata';
+    video.playsInline=true;
+    video.src=trigger.dataset.src;
+    video.setAttribute('aria-label',mediaDialogTitle.textContent);
+    mediaStage.append(video);
+  }else{
+    const image=document.createElement('img');
+    image.src=trigger.dataset.src;
+    image.alt=mediaDialogTitle.textContent;
+    mediaStage.append(image);
+  }
+  mediaLightbox.hidden=false;
+  mediaLightbox.setAttribute('aria-hidden','false');
+  document.body.classList.add('media-open');
+  mediaClose.focus();
+}
+function closeMedia(){
+  if(mediaLightbox.hidden) return;
+  const video=mediaStage.querySelector('video');
+  if(video){video.pause();video.removeAttribute('src');video.load()}
+  mediaStage.replaceChildren();
+  mediaLightbox.hidden=true;
+  mediaLightbox.setAttribute('aria-hidden','true');
+  document.body.classList.remove('media-open');
+  mediaReturnTarget?.focus({preventScroll:true});
+}
+document.querySelectorAll('[data-media]').forEach(trigger=>trigger.addEventListener('click',()=>openMedia(trigger)));
+mediaClose.addEventListener('click',closeMedia);
+mediaLightbox.addEventListener('click',event=>{if(event.target===mediaLightbox) closeMedia()});
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&!mediaLightbox.hidden){event.preventDefault();closeMedia()}
+});
+updateArchiveLabels();
 </script>
 </body>
 </html>
