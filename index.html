@@ -827,7 +827,6 @@ footer strong{
 .threshold-film video.is-ready{opacity:1}
 .threshold-bottom{display:flex;align-items:center;justify-content:space-between;padding:5px 28px 20px;color:#80745e;font-size:10px;letter-spacing:.06em;gap:15px}
 .threshold-bottom a{color:#bda577;text-decoration:none}
-.threshold-toggle{font:inherit;letter-spacing:inherit;color:#bda577;background:transparent;border:1px solid #655139;border-radius:20px;padding:7px 13px;cursor:pointer;min-width:34px;min-height:34px}
 .threshold-credit{margin:0;line-height:1.6}
 @media(max-width:640px){.threshold-scene{margin-bottom:35px}.threshold-copy{padding:28px 18px 12px}.threshold-copy h2{font-size:23px;letter-spacing:.04em}.threshold-copy p{font-size:11px}.threshold-film{aspect-ratio:32/9}.threshold-bottom{padding:5px 17px 17px;font-size:9px}.threshold-credit{max-width:230px}}
 @media(prefers-reduced-motion:reduce){.threshold-film video{transition:none}}
@@ -893,11 +892,10 @@ footer strong{
 <section class="threshold-scene" id="blackhole-decoration" aria-label="黑洞动态装饰">
   <figure class="threshold-film">
     <picture><source media="(max-width:640px)" srcset="assets/images/blackhole-mobile-v1.webp"><img src="assets/images/blackhole-desktop-v1.webp" alt="暖金色吸积盘环绕黑洞，光环在黑暗中勾勒出一道边界" loading="lazy" width="1920" height="540"></picture>
-    <video id="threshold-video" muted loop playsinline preload="none" aria-label="黑洞吸积盘缓慢流动的无声画面"></video>
+    <video id="threshold-video" muted autoplay loop playsinline webkit-playsinline preload="none" aria-label="黑洞吸积盘缓慢流动的无声画面"></video>
   </figure>
   <div class="threshold-bottom">
     <p class="threshold-credit">Visual by Li Pei</p>
-    <button class="threshold-toggle" type="button" aria-controls="threshold-video" aria-pressed="false" aria-label="播放黑洞动画">▶</button>
   </div>
 </section>
 
@@ -1847,22 +1845,24 @@ updateArchiveLabels();
 
 <script>
 (() => {
- const video=document.querySelector('#threshold-video'), scene=video.closest('section'), toggle=scene.querySelector('button');
+ const video=document.querySelector('#threshold-video'), scene=video.closest('section');
  const reduce=matchMedia('(prefers-reduced-motion: reduce)'), mobile=matchMedia('(max-width:640px)');
- const connection=navigator.connection;
- let optedIn=false,paused=false,visible=false,loaded=false;
- const paint=()=>{toggle.textContent=video.paused?'▶':'Ⅱ';toggle.setAttribute('aria-label',video.paused?'播放黑洞动画':'暂停黑洞动画');toggle.setAttribute('aria-pressed',String(!video.paused));};
+ let visible=false,loaded=false;
+ video.muted=true;
+ video.defaultMuted=true;
  async function play(){
    if(!loaded){video.src=mobile.matches?'assets/video/blackhole-mobile-v1.mp4':'assets/video/blackhole-desktop-v1.mp4';loaded=true;}
-   try{await video.play();}catch(e){paint();}
+   try{await video.play();if(!visible||document.hidden||reduce.matches)video.pause();}catch(e){}
  }
- function sync(){if(visible&&!document.hidden&&!paused&&(optedIn||(!reduce.matches&&!connection?.saveData)))play();else video.pause();}
- video.addEventListener('playing',()=>{video.classList.add('is-ready');paint();});
- video.addEventListener('pause',paint);
- video.addEventListener('error',()=>{video.classList.remove('is-ready');toggle.textContent='▶';toggle.setAttribute('aria-label','动态暂不可用');toggle.disabled=true;});
- toggle.addEventListener('click',()=>{if(video.paused){optedIn=true;paused=false;play();}else{paused=true;video.pause();}});
+ function sync(){if(visible&&!document.hidden&&!reduce.matches)play();else video.pause();}
+ video.addEventListener('playing',()=>video.classList.add('is-ready'));
+ video.addEventListener('error',()=>video.classList.remove('is-ready'));
  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.15}).observe(scene);
- document.addEventListener('visibilitychange',sync);reduce.addEventListener('change',sync);
+ document.addEventListener('visibilitychange',sync);
+ reduce.addEventListener('change',sync);
+ // Retry inline playback after browser interaction or WeChat's bridge initialization.
+ document.addEventListener('pointerup',sync,{passive:true});
+ document.addEventListener('WeixinJSBridgeReady',sync);
 })();
 </script>
 
